@@ -2,11 +2,13 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
 from django.db import models
 
 from vlasom.common.utils import birth_year, birth_month, birth_day, join_channel, gender_choice, profile_image_upload_to
 
+@python_2_unicode_compatible
 class User(AbstractUser):
 
     # First Name and Last Name do not cover name patterns
