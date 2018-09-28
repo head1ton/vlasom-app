@@ -10,13 +10,16 @@ User = get_user_model()
 #user와 연결하기
 @python_2_unicode_compatible
 class Image(TimeStampedModel):
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'images')
     image = models.ImageField('Image', upload_to = 'images/')
     location = models.CharField('Locaction', max_length = 140)
     description = models.TextField('Description', blank = True, null = True)
 
     def __str__(self):
         return '{}-{}'.format(self.location, self.description)
+    
+    class Meta:
+        ordering = ['-created_at']
 
 
 #user와 연결하기
