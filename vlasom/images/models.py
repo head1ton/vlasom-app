@@ -23,7 +23,7 @@ class Image(TimeStampedModel):
 @python_2_unicode_compatible
 class Comment(TimeStampedModel):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    image = models.ForeignKey(Image, on_delete = models.CASCADE)
+    image = models.ForeignKey(Image, on_delete = models.CASCADE, related_name = 'comments')
     message = models.TextField('Comment Message')
 
     def __str__(self):
@@ -33,7 +33,7 @@ class Comment(TimeStampedModel):
 @python_2_unicode_compatible
 class Like(TimeStampedModel):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    image = models.ForeignKey(Image, on_delete = models.CASCADE)
+    image = models.ForeignKey(Image, on_delete = models.CASCADE, related_name = 'likes')
 
     def __str__(self):
         return '{}-{}'.format(self.user.nickname, self.image.description)
