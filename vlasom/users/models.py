@@ -23,8 +23,8 @@ class User(AbstractUser):
     is_verified = models.BooleanField(_('Is Verified'), default=False, help_text='사용자의 이메일 인증 여부를 나타냅니다.')
     profile_image = models.ImageField(_('Profile Image'), upload_to = profile_image_upload_to, blank = True, null = True)
     join_channel = models.CharField(_('Join Channel'), max_length = 10,choices = join_channel, default = 'WEB')
-    follower = models.ManyToManyField('self')
-    following = models.ManyToManyField('self')
+    follower = models.ManyToManyField('self', blank = True, null = True)
+    following = models.ManyToManyField('self', blank = True, null = True)
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})

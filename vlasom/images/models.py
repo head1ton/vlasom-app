@@ -15,6 +15,10 @@ class Image(TimeStampedModel):
     location = models.CharField('Locaction', max_length = 140)
     description = models.TextField('Description', blank = True, null = True)
 
+    @property
+    def like_count(self):
+        return self.likes.all().count()
+
     def __str__(self):
         return '{}-{}'.format(self.location, self.description)
     
