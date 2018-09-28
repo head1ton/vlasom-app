@@ -9,10 +9,10 @@ class FeedUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'profile_image']
-        
+
 
 class CommentSerializer(serializers.ModelSerializer):
-    user = FeedUserSerializer()
+    user = FeedUserSerializer(read_only = True)
 
     class Meta:
         model = models.Comment
