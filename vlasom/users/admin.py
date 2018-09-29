@@ -23,6 +23,7 @@ class UserAdmin(auth_admin.UserAdmin):
             'username',
             'name',
             'nickname',
+            'description',
             'profile_image',
             'email',
             'join_channel',

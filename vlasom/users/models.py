@@ -15,6 +15,7 @@ class User(AbstractUser):
     # around the globe.
     name = CharField(_("Name of User"), max_length=255)
     nickname = models.CharField(_('Nickname'), max_length=50, unique = True)
+    description = models.CharField(_('Short Description'), max_length = 200, blank = True, null = True)
     email = models.EmailField(_('email address'), unique=True)
     gender = models.CharField(_('Gender'), max_length=2, choices = gender_choice)
     birth_year = models.PositiveIntegerField(_('Birth Year'), choices = birth_year, default = int(timezone.now().strftime("%Y")))
@@ -26,5 +27,17 @@ class User(AbstractUser):
     follower = models.ManyToManyField('self', blank = True, null = True)
     following = models.ManyToManyField('self', blank = True, null = True)
 
-    def get_absolute_url(self):
-        return reverse("users:detail", kwargs={"username": self.username})
+    def __str__(self):
+        return self.username
+
+    @property
+    def post_count(self):
+        return self.images.all().count()
+    
+    @property
+    def follower_count(self):
+        return self.follower.all().count()
+
+    @property
+    def following_count(self):
+        return self.following.all().count()
