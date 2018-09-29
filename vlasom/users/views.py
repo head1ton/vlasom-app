@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import get_user_model
 from . import models, serializers
+from vlasom.notifications.views import create_notification
 
 User = get_user_model()
 
@@ -27,6 +28,8 @@ class FollowUser(APIView):
         
         user.following.add(user_to_follow)
         user.save()
+
+        create_notification(user, user_to_follow, 'follow')
         return Response(status = status.HTTP_200_OK)
 
 

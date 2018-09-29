@@ -5,6 +5,12 @@ from . import models
 User = get_user_model()
 
 
+class SmallImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Image
+        fields = ['image']
+
+
 class CountImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Image

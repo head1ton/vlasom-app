@@ -22,7 +22,9 @@ urlpatterns = [
     path(
         'images/',
         include('vlasom.images.urls', namespace='images'),
-    ), 
+    ),
+    path('notifications/',
+        include('vlasom.notifications.urls', namespace = 'notifications')), 
     path("accounts/", include("allauth.urls")), 
     # Your stuff: custom urls includes go here
 ] + static(
