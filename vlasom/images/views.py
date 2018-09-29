@@ -1,8 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.contrib.auth import get_user_model
 from . import models, serializers
 from vlasom.notifications.views import create_notification
+from vlasom.users.serializers import ListUserSerializer
+
+User = get_user_model()
 
 class Feed(APIView):
     def get(self, request, format = None):
@@ -29,6 +33,16 @@ class Feed(APIView):
 
 
 class LikeImage(APIView):
+    def get(self, request, image_id, format = None):
+        likes = models.Like.objects.filter(image__id = image_id)
+
+        like_users_ids = likes.values('user_id')
+
+        users = User.objects.filter(id__in = like_users_ids)
+        serializer = ListUserSerializer(users, many = True)
+
+        return Response(data = serializer.data, status = status.HTTP_200_OK)
+
     def post(self, request, image_id, format = None):
 
         try:
@@ -121,7 +135,7 @@ class ModerateComment(APIView):
 
 
 class ImageDetail(APIView):
-    def get(slef, request, iamge_id, format = None):
+    def get(slef, request, image_id, format = None):
 
         try:
             image = models.Image.objects.get(id = image_id)
