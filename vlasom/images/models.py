@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.encoding import python_2_unicode_compatible
+from taggit.managers import TaggableManager
 
 from vlasom.common.models import TimeStampedModel
 from vlasom.common.utils import get_image_filename
@@ -14,6 +15,7 @@ class Image(TimeStampedModel):
     image = models.ImageField('Image', upload_to = 'images/')
     location = models.CharField('Locaction', max_length = 140)
     description = models.TextField('Description', blank = True, null = True)
+    tags = TaggableManager()
 
     @property
     def like_count(self):

@@ -5,7 +5,7 @@ from . import models
 User = get_user_model()
 
 
-class UserProfileImageSerializer(serializers.ModelSerializer):
+class CountImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Image
         fields = ['id', 'image','comment_count', 'like_count']
