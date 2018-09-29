@@ -46,3 +46,9 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Image
         fields = ['id', 'user', 'image', 'location', 'description', 'comments', 'like_count', 'created_at']
+
+
+class InputImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Image
+        fields = ['image', 'location', 'description']
