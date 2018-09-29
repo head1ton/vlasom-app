@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:image_id>/comments/', views.CommentOnImage.as_view(), name = 'comment_image'),
     path('comments/<int:comment_id>/', views.Comment.as_view(), name = 'comment'),
     path('search/', views.Search.as_view(), name = 'tag_search'),
+    path('<int:image_id>/comments/<int:comment_id>/', views.ModerateComment.as_view(), name = 'moderate_comment'),
 ]
