@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from taggit_serializer.serializers import (TagListSerializerField,
+                                           TaggitSerializer)
 from . import models
 
 User = get_user_model()
@@ -39,13 +41,14 @@ class LikeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ImageSerializer(serializers.ModelSerializer):
+class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
     comments = CommentSerializer(many = True)
     user = FeedUserSerializer()
+    tags = TagListSerializerField()
 
     class Meta:
         model = models.Image
-        fields = ['id', 'user', 'image', 'location', 'description', 'comments', 'like_count', 'created_at']
+        fields = ['id', 'user', 'image', 'location', 'description', 'comments', 'like_count', 'tags', 'created_at']
 
 
 class InputImageSerializer(serializers.ModelSerializer):
