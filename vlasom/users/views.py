@@ -138,9 +138,9 @@ class ChangePassword(APIView):
                 if password_match:
                     new_password = request.data.get('new_password', None)
                     if new_password is not None:
-                    user.set_password(new_password)
-                    user.save()
-                    return Response(status = status.HTTP_200_OK)
+                        user.set_password(new_password)
+                        user.save()
+                        return Response(status = status.HTTP_200_OK)
                     else:
                         return Response(status = status.HTTP_400_BAD_REQUEST)
                 else:
