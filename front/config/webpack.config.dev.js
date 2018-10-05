@@ -165,7 +165,8 @@ module.exports = {
                 options: {
                   importLoaders: 1,
                   modules: true,
-                  localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                  localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                  camelCase: 'dashes'
                 },
               },
               {
@@ -186,14 +187,14 @@ module.exports = {
                       flexbox: 'no-2009',
                     }),
                   ],
-                  sourcemap: true,
-                  data: `@import "${paths.appSrc}/config/_variables.scss";`
+                  sourcemap: true
                 },
               },
               {
                 loader: require.resolve('sass-loader'),
                 options: {
-                  sourcemap: true
+                  sourcemap: true,
+                  data: `@import '${paths.appSrc.replace(/\\/g,'/')}/config/_variables.scss';`
                 }
               }
             ],
