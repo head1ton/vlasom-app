@@ -186,7 +186,8 @@ module.exports = {
                       flexbox: 'no-2009',
                     }),
                   ],
-                  sourcemap: true
+                  sourcemap: true,
+                  data: `@import "${paths.appSrc}/config/_variables.scss";`
                 },
               },
               {
