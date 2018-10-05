@@ -24,4 +24,6 @@ const reducer = combineReducers({
 
 let store = initialState =>  createStore(reducer, applyMiddleware(...middlewares)); //unpack the list
 
+export { history };
+
 export default store();
