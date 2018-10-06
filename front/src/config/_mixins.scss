@@ -25,3 +25,34 @@
         }
     }
 }
+
+@mixin inputBox($top, $right, $bottom, $left){
+    background-color: #fff;
+    @if $top == y{
+        border-top: 1px solid $main-color;
+    }
+    @if $right == y{
+        border-right: 1px solid $main-color;
+    }
+    @if $bottom == y{
+        border-bottom: 1px solid $main-color;
+    }
+    @if $left == y{
+        border-left: 1px solid $main-color;
+    }
+}
+
+@mixin borderRadius($top-left, $top-right, $bottom-right, $bottom-left){
+    @if $top-left != 0{
+        border-top-left-radius: $top-left
+    }
+    @if $top-right != 0{
+        border-top-right-radius: $top-right
+    }
+    @if $bottom-right != 0{
+        border-bottom-right-radius: $bottom-right
+    }
+    @if $bottom-left != 0{
+        border-bottom-left-radius: $bottom-left
+    }
+}
