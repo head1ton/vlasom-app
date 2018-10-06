@@ -31,14 +31,26 @@
     @if $top == y{
         border-top: 1px solid $main-color;
     }
+    @else{
+        border-top: none;
+    }
     @if $right == y{
         border-right: 1px solid $main-color;
+    }
+    @else{
+        border-right: none;
     }
     @if $bottom == y{
         border-bottom: 1px solid $main-color;
     }
+    @else{
+        border-bottom: none;
+    }
     @if $left == y{
         border-left: 1px solid $main-color;
+    }
+    @else{
+        border-left: none;
     }
 }
 

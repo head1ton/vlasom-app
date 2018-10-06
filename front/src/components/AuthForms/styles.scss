@@ -1,0 +1,125 @@
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.input-box-top-bottom{
+    @include inputBox(y,n,y,n);
+    padding: 10px 20px;
+    height: 40px;
+    width: 300px;
+}
+.input-box-top-right-bottom{
+    @include inputBox(y,y,y,n);
+    padding: 10px 20px;
+    height: 40px;
+    width: 300px;
+}
+.input-box-top-right-bottom-lg{
+    @include inputBox(y,y,y,n);
+    padding: 10px 20px;
+    height: 40px;
+    width: 452px;
+}
+.input-box-all{
+    @include inputBox(y,y,y,y);
+    padding: 10px 20px;
+    height: 40px;
+    width: 300px;
+}
+.select-box{
+    @include inputBox(y,y,y,n);
+    height: 60px;
+    width: 164px;
+}
+.input-box-all-sm{
+    @include inputBox(y,y,y,y);
+    padding: 10px 20px;
+    height: 40px;
+    width: 100px;
+    margin-left: 10px;
+
+    img{
+        margin: 0 5px;
+        height: 40px;
+        width: 40px;
+    }
+}
+.input-label{
+    @include borderRadius(25px,0,0,25px);
+    padding: 15px;
+    background-color: $sub-color;
+    margin-right: 10px;
+    color: $white;
+    font-size: $font-20;
+    text-align: center;
+
+    .img-username{
+        margin: 0 10px;
+        height: 40px;
+        width: 40px;
+    }
+    .img-pw{
+        margin: 10px;
+        height: 20px;
+        width: 40px;
+    }
+}
+.input-label-text{
+    @include borderRadius(25px,0,0,25px);
+    background-color: $sub-color;
+    margin-right: 10px;
+    color: $white;
+    font-size: $font-20;
+    text-align: center;
+    height: 70px;
+    width: 120px;
+    line-height: 70px;
+}
+.input-btn{
+    @include borderRadius(0,25px,25px,0);
+    text-align: center;
+    background-color: $sub-color;
+    padding: 70px 30px;
+    margin-left: 10px;
+    color: $white;
+    border: none;
+    font-size: $font-18;
+    font-weight: $bold;
+    cursor: pointer;
+}
+.input-btn:hover, .input-btn:active, .input-btn:focus{
+    border: none;
+}
+.margin-top-10{
+    margin-top: 10px;
+}
+.margin-top-20{
+    margin-top: 20px;
+}
+.margin-top-30{
+    margin-top: 30px;
+}
+.border-top-bottom{
+    @include inputBox(y,n,y,n);
+    padding: 20px;
+    color: $main-color;
+    font-size: $font-16;
+
+    img{
+        margin: 10px 0 0 0;
+        width: 40px;
+        height: 40px;
+    }
+}
+.submit-btn{
+    @include borderRadius(10px,10px,10px,10px);
+    background-color: $sub-color;
+    color: $main-color;
+    font-size: $font-32;
+    font-weight: $bold;
+    border: none;
+    cursor: pointer;
+    padding: 10px 25px;
+}
