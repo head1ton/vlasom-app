@@ -11,38 +11,30 @@ const Auth = (props, context) => (
         </div>
         <div className={styles.row}>
             <div className={styles.authBox}>
-                {(() => {
-                    switch(props.action){
-                        case 'login':
-                            return(
-                                <div className={styles.changeBox}>
-                                    <div className={styles.changeLink}>
-                                        <div onClick={props.changeAction} className={styles.textRight}>
-                                            <p>회원가입</p>
-                                        </div>
-                                        <div className={styles.textLeft}>
-                                            <p>아이디 / 비밀번호 찾기</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        case 'signup':
-                            return(
-                                <div className={styles.changeBox}>
-                                    <div className={styles.changeLink}>
-                                        <div onClick={props.changeAction} className={styles.textRight}>
-                                            <p>회원가입화면</p>
-                                        </div>
-                                        <div className={styles.textLeft}>
-                                            <p>아이디 / 비밀번호 찾기</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        default:
-                            return null;
-                    }
-                })()}
+            {props.action === 'login' && (
+                <div className={styles.changeBox}>
+                    <div className={styles.changeLink}>
+                        <div onClick={props.changeAction} className={styles.textRight}>
+                            <p>회원가입</p>
+                        </div>
+                        <div className={styles.textLeft}>
+                            <p>아이디 / 비밀번호 찾기</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {props.action === 'signup' && (
+                <div className={styles.changeBox}>
+                    <div className={styles.changeLink}>
+                        <div onClick={props.changeAction} className={styles.textRight}>
+                            <p>회원가입화면</p>
+                        </div>
+                        <div className={styles.textLeft}>
+                            <p>아이디 / 비밀번호 찾기</p>
+                        </div>
+                    </div>
+                </div>
+            )}
             </div>
         </div>
     </div>
