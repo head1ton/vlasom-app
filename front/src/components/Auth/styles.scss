@@ -39,7 +39,15 @@
         justify-content: space-around !important;
         flex-wrap: wrap;
         font-size: $font-18;
+    }
+    .change-link-text{
         cursor: pointer;
+
+        &:hover,
+        &:active,
+        &:focus{
+            color: $main-color;
+        }
     }
     .text-right{
         text-align: right !important;

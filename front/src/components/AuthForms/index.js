@@ -1,4 +1,5 @@
 import React from 'react';
+import Ionicons from 'react-ionicons';
 import styles from './styles.scss';
 
 export const LoginForm = props => (
@@ -24,8 +25,8 @@ export const LoginForm = props => (
         </div>
         <div className={`${styles.row} ${styles.marginTop30}`}>
             <div className={`${styles.borderTopBottom} ${styles.marginTop10}`}>
-            Login with<br/>
-            <img src={require('images/facebook.png')} />
+            Login with<br/><br/>
+            <Ionicons icon="logo-facebook" fontSize="50px" color="#4267b2" />
             </div>
         </div>
     </form>

@@ -88,9 +88,15 @@
     font-size: $font-18;
     font-weight: $bold;
     cursor: pointer;
-}
-.input-btn:hover, .input-btn:active, .input-btn:focus{
-    border: none;
+
+    &:hover,
+    &:active,
+    &:focus{
+        border: none;
+        outline: none;
+        background-color: $main-color;
+        color: $white;
+    }
 }
 .margin-top-10{
     margin-top: 10px;
@@ -122,4 +128,12 @@
     border: none;
     cursor: pointer;
     padding: 10px 25px;
+    &:hover,
+    &:active,
+    &:focus{
+        border: none;
+        outline: none;
+        background-color: $main-color;
+        color: $white;
+    }
 }

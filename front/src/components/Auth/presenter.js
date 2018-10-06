@@ -19,10 +19,10 @@ const Auth = (props, context) => (
             {props.action === 'login' && (
                 <div className={styles.changeBox}>
                     <div className={styles.changeLink}>
-                        <div onClick={props.changeAction} className={styles.textRight}>
+                        <div onClick={props.changeAction} className={`${styles.textRight} ${styles.changeLinkText}`}>
                             <p>회원가입</p>
                         </div>
-                        <div className={styles.textLeft}>
+                        <div className={`${styles.textLeft} ${styles.changeLinkText}`}>
                             <p>아이디 / 비밀번호 찾기</p>
                         </div>
                     </div>
@@ -31,7 +31,7 @@ const Auth = (props, context) => (
             {props.action === 'signup' && (
                 <div className={styles.changeBox}>
                     <div className={styles.changeLink}>
-                        <div onClick={props.changeAction} className={styles.textRight}>
+                        <div onClick={props.changeAction} className={`${styles.textRight} ${styles.changeLinkText}`}>
                             <p>로그인</p>
                         </div>
 
