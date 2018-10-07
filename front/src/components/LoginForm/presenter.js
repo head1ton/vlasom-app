@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Ionicons from 'react-ionicons';
 import formStyles from 'common/formStyles.scss';
 
-export const LoginForm = props => (
-    <form action="" method="post" className={formStyles.col12}>
+const LoginForm = props => (
+    <form action="" method="post" className={formStyles.col12} onSubmit={props.handleSubmit}>
         <div className={formStyles.row}>
             <div className={`${formStyles.colLg5} ${formStyles.offsetLg3} ${formStyles.colMd6} ${formStyles.offsetMd2} ${formStyles.colSm7} ${formStyles.offsetSm1} ${formStyles.col10} ${formStyles.mt3}`}>
                 <div className={formStyles.row}>
@@ -13,7 +14,7 @@ export const LoginForm = props => (
                         </div>
                     </div>
                     <div className={`${formStyles.col9} ${formStyles.px0}`}>
-                        <input type="text" className={`${formStyles.inputBoxTopBottom}`} placeholder='ID'></input>
+                        <input type="text" name="username" value={props.usernameValue} className={`${formStyles.inputBoxTopBottom}`} placeholder='ID' onChange={props.handleInputChange}></input>
                     </div>
                 </div>
                 <div className={`${formStyles.row} ${formStyles.mt3}`}>
@@ -23,7 +24,7 @@ export const LoginForm = props => (
                         </div>
                     </div>
                     <div className={`${formStyles.col9} ${formStyles.px0}`}>
-                        <input type="password" className={formStyles.inputBoxTopBottom} placeholder='password'></input>
+                        <input type="password" name="password" value={props.passwordValue} className={formStyles.inputBoxTopBottom} placeholder='password' onChange={props.handleInputChange}></input>
                     </div>
                 </div>
             </div>
@@ -39,5 +40,12 @@ export const LoginForm = props => (
         </div>
     </form>
 );
+
+LoginForm.propTypes = {
+    usernameValue: PropTypes.string.isRequired,
+    passwordValue: PropTypes.string.isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired
+}
 
 export default LoginForm;
