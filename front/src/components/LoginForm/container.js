@@ -9,7 +9,13 @@ class Container extends Component{
 
     render(){
         const { username, password } = this.state;
-        return <LoginForm handleInputChange={this._handleInputChange} handleSubmit={this._handleSubmit} usernameValue={username} passwordValue={password} />;
+        return <LoginForm 
+        handleInputChange={this._handleInputChange} 
+        handleSubmit={this._handleSubmit} 
+        usernameValue={username} 
+        passwordValue={password} 
+        handleFacebookLogin = {this._handleFacebookLogin} 
+        />;
     }
 
     _handleInputChange = event => {
@@ -22,6 +28,10 @@ class Container extends Component{
 
     _handleSubmit = event => {
         event.preventDefault();
+    };
+
+    _handleFacebookLogin = response => {
+        console.log(response);
     }
 }
 
