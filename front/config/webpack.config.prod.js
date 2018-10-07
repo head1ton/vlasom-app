@@ -213,7 +213,7 @@ module.exports = {
                       loader: require.resolve('sass-loader'),
                       options: {
                         sourceMap: true,
-                        data: `@import '${paths.appSrc.replace(/\\/g,'/')}/config/_variables.scss';`
+                        data: `@import '${paths.appSrc.replace(/\\/g,'/')}/config/_base.scss';`
                       }
                     }
                   ],
