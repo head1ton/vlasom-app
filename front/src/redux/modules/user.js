@@ -1,3 +1,12 @@
+ const SAVE_TOKEN = 'SAVE_TOKEN';
+
+function saveToken(token) {
+    return {
+        type: SAVE_TOKEN,
+        token
+    }
+}
+
  function facebookLogin(access_token){
      return dispatch => {
          fetch('/users/login/facebook/', {
@@ -10,20 +19,36 @@
             })
         })
         .then(response => response.json())
-        .then(json => console.log(json))
+        .then(json => {
+            if(json.token){
+                localStorage.setItem("jwt", json.token);
+                dispatch(saveToken(json.token))
+            }
+        })
         .catch(err => console.log(err));
     };
  }
  
  const initialState = {
-     isLoggedIn: localStorage.getItem('jwt') || false
+     isLoggedIn: localStorage.getItem('jwt') ? true : false
  };
 
  function reducer(state = initialState, action){
      switch(action.type){
+         case SAVE_TOKEN:
+            return applySetToken(state, action)
          default:
             return state;
      }
+ }
+
+ function applySetToken(state, action){
+     const { token } = action;
+     return {
+         ...state,
+         isLoggedIn: true,
+         token
+     };
  }
 
  const actionCreators = {
