@@ -12,7 +12,7 @@ export const SignupForm = props => (
                         </div>
                     </div>
                     <div className={`${formStyles.colSm7} ${formStyles.col8} ${formStyles.px0}`}>
-                        <input type="text" name="username" className={formStyles.inputBoxTopRightBottom}></input>
+                        <input type="text" name="username" className={formStyles.inputBoxTopRightBottom} placeholder='ID'></input>
                     </div>
                     <div className={`${formStyles.colSm3} ${formStyles.offsetSm0} ${formStyles.col10} ${formStyles.offset1} ${formStyles.pr0}`}>
                         <div className={formStyles.inputBoxAll}>
@@ -28,7 +28,7 @@ export const SignupForm = props => (
                         </div>
                     </div>
                     <div className={`${formStyles.colSm10} ${formStyles.col8} ${formStyles.px0}`}>
-                        <input type="password" name="password1" className={formStyles.inputBoxTopRightBottom}></input>
+                        <input type="password" name="password1" className={formStyles.inputBoxTopRightBottom} placeholder='password'></input>
                     </div>
                 </div>
                 <div className={`${formStyles.row} ${formStyles.mt2}`}>
@@ -38,7 +38,7 @@ export const SignupForm = props => (
                         </div>
                     </div>
                     <div className={`${formStyles.colSm10} ${formStyles.col8} ${formStyles.px0}`}>
-                        <input type="password" name="password2" className={formStyles.inputBoxTopRightBottom}></input>
+                        <input type="password" name="password2" className={formStyles.inputBoxTopRightBottom} placeholder='password confirm'></input>
                     </div>
                 </div>
                 <div className={`${formStyles.row} ${formStyles.mt2}`}>
@@ -48,7 +48,7 @@ export const SignupForm = props => (
                         </div>
                     </div>
                     <div className={`${formStyles.colSm10} ${formStyles.col8} ${formStyles.px0}`}>
-                        <input type="text" name="name" className={formStyles.inputBoxTopRightBottom}></input>
+                        <input type="text" name="name" className={formStyles.inputBoxTopRightBottom} placeholder='name'></input>
                     </div>
                 </div>
                 <div className={`${formStyles.row} ${formStyles.mt2}`}>
@@ -58,7 +58,7 @@ export const SignupForm = props => (
                         </div>
                     </div>
                     <div className={`${formStyles.colSm10} ${formStyles.col8} ${formStyles.px0}`}>
-                        <input type="text" name="nickname" className={formStyles.inputBoxTopRightBottom}></input>
+                        <input type="text" name="nickname" className={formStyles.inputBoxTopRightBottom} placeholder='nickname'></input>
                     </div>
                 </div>
                 <div className={`${formStyles.row} ${formStyles.mt2}`}>
@@ -68,7 +68,7 @@ export const SignupForm = props => (
                         </div>
                     </div>
                     <div className={`${formStyles.colSm10} ${formStyles.col8} ${formStyles.px0}`}>
-                        <input type="email" name="email" className={formStyles.inputBoxTopRightBottom}></input>
+                        <input type="email" name="email" className={formStyles.inputBoxTopRightBottom} placeholder='email'></input>
                     </div>
                 </div>
                 <div className={`${formStyles.row} ${formStyles.mt2}`}>

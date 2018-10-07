@@ -13,7 +13,7 @@ export const LoginForm = props => (
                         </div>
                     </div>
                     <div className={`${formStyles.col9} ${formStyles.px0}`}>
-                        <input type="text" className={`${formStyles.inputBoxTopBottom} `}></input>
+                        <input type="text" className={`${formStyles.inputBoxTopBottom}`} placeholder='ID'></input>
                     </div>
                 </div>
                 <div className={`${formStyles.row} ${formStyles.mt3}`}>
@@ -23,7 +23,7 @@ export const LoginForm = props => (
                         </div>
                     </div>
                     <div className={`${formStyles.col9} ${formStyles.px0}`}>
-                        <input type="password" className={formStyles.inputBoxTopBottom}></input>
+                        <input type="password" className={formStyles.inputBoxTopBottom} placeholder='password'></input>
                     </div>
                 </div>
             </div>
