@@ -266,6 +266,8 @@ JWT_AUTH = {
     'JWT_VERIFY_EXPIRATION': False
 }
 
+SOCIALACCOUNT_QUERY_EMAIL = True
+
 SOCIALACCOUNT_PROVIDERS = {  
     'facebook': {  
         'SCOPE': [  
@@ -295,4 +297,8 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERIFIED_EMAIL': True,  
         'VERSION': 'v2.4'  
     }
-}  
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'vlasom.users.serializers.SignUpSerializer'
+}
