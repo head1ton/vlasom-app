@@ -17,7 +17,7 @@ class User(AbstractUser):
     nickname = models.CharField(_('Nickname'), max_length=50, unique = True)
     description = models.CharField(_('Short Description'), max_length = 200, blank = True, null = True)
     email = models.EmailField(_('email address'), unique=True)
-    gender = models.CharField(_('Gender'), max_length=2, choices = gender_choice)
+    gender = models.CharField(_('Gender'), max_length=2, choices = gender_choice, blank = True, null = True)
     birth_year = models.PositiveIntegerField(_('Birth Year'), choices = birth_year, default = int(timezone.now().strftime("%Y")))
     birth_month = models.PositiveIntegerField(_('Birth Month'), choices = birth_month, default = int(timezone.now().strftime("%m")))
     birth_day = models.PositiveIntegerField(_('Birth Day'), choices = birth_day, default = int(timezone.now().strftime("%d")))
