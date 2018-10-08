@@ -1,0 +1,82 @@
+.container-nav{
+    width: 100%;
+    background-color: $main-color;
+    position: fixed;
+    top: 0;
+    padding: 20px;
+}
+.text-center{
+    text-align: center;
+}
+.text-right{
+    text-align: right;
+}
+.logo{
+    img{
+        height: 40px;
+    }
+    .logo-text{
+        margin-left: 15px;
+        color: $white;
+        font-family: $font-title;
+        font-weight: $bold;
+        font-size: $font-24;
+        text-decoration: none;
+        border: none;
+    }
+}
+.search-box-label{
+    @include borderRadius(25px,0,0,25px);
+    background-color: $sub-color;
+    padding: 10px;
+    text-align: center;
+
+    img{
+        height: 20px;
+    }
+}
+.search-box{
+    height: 36px;
+    width: 100%;
+    background-color: $main-color;
+    color: $white;
+    font-size: $font-18;
+    border-top: 2px solid $sub-color;
+    border-right: 2px solid $sub-color;
+    border-bottom: 2px solid $sub-color;
+    border-left: none;
+    outline: none;
+
+    &:active,
+    &:focus{
+        outline: none;
+    }
+}
+.nickname{
+    img{
+        height: 30px;
+    }
+    .nickname-text{
+        margin-left: 15px;
+        margin-left: 15px;
+        color: $white;
+        font-weight: $bold;
+        font-size: $font-20;
+        text-decoration: none;
+        border: none;
+    }
+}
+.nav-item{
+    text-align: center;
+    img{
+        height: 30px;
+    }
+}
+.mobile-none{
+    display: none;
+}
+@media (min-width: 992px){
+    .mobile-none{
+        display: block;
+    }
+}
