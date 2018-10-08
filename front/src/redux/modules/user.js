@@ -49,6 +49,35 @@ function saveToken(token) {
          .catch(err => console.log(err));
      }
  }
+
+ function createAccount(username, password, email, name, nickname, birth_year, birth_month, birth_day){
+     return function(dispatch){
+         fetch('/rest-auth/registration/', {
+            method: 'POST',
+            headers: {
+               "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username,
+                password1: password,
+                password2: password,
+                email,
+                name,
+                nickname,
+                birth_year,
+                birth_month,
+                birth_day
+            })
+         })
+         .then(response => response.json())
+         .then(json => {
+             if(json.token){
+                 dispatch(saveToken(json.token))
+             }
+         })
+         .catch(err => console.log(err));
+     }
+ }
  
  const initialState = {
      isLoggedIn: localStorage.getItem('jwt') ? true : false
@@ -75,7 +104,8 @@ function saveToken(token) {
 
  const actionCreators = {
      facebookLogin,
-     usernameLogin
+     usernameLogin,
+     createAccount
  }
 
  export { actionCreators };

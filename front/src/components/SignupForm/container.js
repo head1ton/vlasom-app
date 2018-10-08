@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SignupForm from './presenter';
 
 class Container extends Component{
@@ -12,6 +13,10 @@ class Container extends Component{
         birthYear: "",
         birthMonth: "",
         birthDay: ""
+    }
+
+    static propTypes = {
+        createAccount: PropTypes.func.isRequired
     }
 
     render(){
@@ -39,7 +44,11 @@ class Container extends Component{
     };
     
     _handleSubmit = event => {
+        const { username, password2, email, name, nickname, birthYear, birthMonth, birthDay } = this.state;
+        const password = password2
+        const { createAccount } = this.props;
         event.preventDefault();
+        createAccount(username, password, email, name, nickname, birthYear, birthMonth, birthDay);
     
     }
 }
