@@ -17,7 +17,7 @@ for i in range(31):
     birth_day_list.append(tuple((i+1, str(i+1)+'일')))
 birth_day = tuple(birth_day_list)
 
-gender_choice = (('M','남성'),('F','여성'))
+gender_choice = (('male','남성'),('female','여성'))
 
 join_channel = (('WEB', 'WEB'),('KAKAO', 'KAKAO'),('FACEBOOK','FACEBOOK'),('GOOGLE','GOOGLE'))
 
