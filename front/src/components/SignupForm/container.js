@@ -36,7 +36,6 @@ class Container extends Component{
         this.setState({
             [name]: value //[name]은 위에서 정의한 name 변수를 의미함
         });
-        console.log(this.state);
     };
     
     _handleSubmit = event => {
