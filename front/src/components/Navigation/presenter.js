@@ -30,34 +30,34 @@ const Navigation = (props, context) => (
                         <div className={`${styles.offset2} ${styles.colLg3} ${styles.nickname} ${styles.mobileNone}`}>
                             <Link to='/profile' style={{ textDecoration: 'none' }}>
                                 <div className={`${styles.row} ${styles.alignItemsCenter}`}>
-                                    <img src={require('images/nav-nickname.png')}></img>
+                                    <img src={require('images/nav-nickname.png')} alt="nickname"></img>
                                     <p className={styles.nicknameText}>nickname</p>
                                 </div>
                             </Link>
                         </div>
                         <div className={`${styles.offset1} ${styles.colLg1} ${styles.navItem} ${styles.mobileNone}`}>
                             <Link to='/'>
-                                <img src={require('images/home.png')}></img>
+                                <img src={require('images/home.png')} alt="home"></img>
                             </Link>
                         </div>
                         <div className={`${styles.colLg1} ${styles.navItem} ${styles.mobileNone}`}>
                             <Link to='/explore'>
-                                <img src={require('images/more.png')}></img>
+                                <img src={require('images/more.png')} alt="more"></img>
                             </Link>
                         </div>
                         <div className={`${styles.colLg1} ${styles.navItem} ${styles.mobileNone}`}>
                             <Link to='/history'>
-                                <img src={require('images/history.png')}></img>
+                                <img src={require('images/history.png')} alt="history"></img>
                             </Link>
                         </div>
                         <div className={`${styles.colLg1} ${styles.navItem} ${styles.mobileNone}`}>
                             <Link to='/like/list'>
-                                <img src={require('images/like-list.png')}></img>
+                                <img src={require('images/like-list.png')} alt="like-list"></img>
                             </Link>
                         </div>
                         <div className={`${styles.offset1} ${styles.colLg1} ${styles.navItem}`}>
                             <Link to='/menu'>
-                                <img src={require('images/menu-white.png')}></img>
+                                <img src={require('images/menu-white.png')} alt="menu"></img>
                             </Link>
                         </div>
                     </div>
