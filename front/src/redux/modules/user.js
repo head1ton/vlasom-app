@@ -1,4 +1,5 @@
  const SAVE_TOKEN = 'SAVE_TOKEN';
+ const LOGOUT = 'LOGOUT';
 
 function saveToken(token) {
     return {
@@ -7,7 +8,13 @@ function saveToken(token) {
     }
 }
 
- function facebookLogin(access_token){
+function logout(){
+    return {
+        type: LOGOUT
+    }
+}
+
+function facebookLogin(access_token){
      return dispatch => {
          fetch('/users/login/facebook/', {
             method: 'POST',
@@ -85,10 +92,12 @@ function saveToken(token) {
  };
 
  function reducer(state = initialState, action){
-     switch(action.type){
-         case SAVE_TOKEN:
-            return applySetToken(state, action)
-         default:
+    switch(action.type){
+        case SAVE_TOKEN:
+            return applySetToken(state, action);
+        case LOGOUT:
+            return applyLogout(state, action);
+        default:
             return state;
      }
  }
@@ -103,10 +112,18 @@ function saveToken(token) {
      };
  }
 
+ function applyLogout(state, action){
+     localStorage.removeItem("jwt");
+     return {
+         isLoggedIn: false
+     }
+ }
+
  const actionCreators = {
      facebookLogin,
      usernameLogin,
-     createAccount
+     createAccount,
+     logout
  }
 
  export { actionCreators };
