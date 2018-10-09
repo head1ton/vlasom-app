@@ -45,11 +45,21 @@ class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
     comments = CommentSerializer(many = True)
     user = FeedUserSerializer()
     tags = TagListSerializerField()
+    is_liked = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Image
-        fields = ['id', 'user', 'image', 'location', 'description', 'comments', 'like_count', 'comment_count', 'tags', 'natural_time']
+        fields = ['id', 'user', 'image', 'location', 'description', 'comments', 'like_count', 'comment_count', 'tags', 'natural_time', 'is_liked']
 
+    def get_is_liked(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            try:
+                models.Like.objects.get(user__id = request.user.id, image__id = obj.id)
+                return True
+            except models.Like.DoesNotExist:
+                return False
+        return False
 
 class InputImageSerializer(serializers.ModelSerializer):
     class Meta:
