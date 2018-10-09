@@ -7,6 +7,9 @@ const Feed = props => {
     if(props.loading){
         return <LoadingFeed />
     }
+    else if(props.feed){
+        return <RenderFeed {...props} />
+    }
 };
 
 const LoadingFeed = props => (
@@ -16,6 +19,12 @@ const LoadingFeed = props => (
         </div>
     </div>
 );
+
+const RenderFeed = props => (
+    <div className={styles.container}>
+        {props.feed.map(post => post.description)}
+    </div>
+)
 
 Feed.propTypes = {
     loading: PropTypes.bool.isRequired
