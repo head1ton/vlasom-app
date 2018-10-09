@@ -31,7 +31,7 @@ const FeedPhoto = (props, context) => {
                     </div>
                     <div className={`${styles.row} ${styles.mt1} ${styles.px5}`}>
                         <div className={styles.col12}>
-                            <PhotoActions like_count={props.like_count} comment_count={props.comment_count} />
+                            <PhotoActions like_count={props.like_count} comment_count={props.comment_count} isLiked={props.is_liked} photoId={props.id} />
                             <PhotoComments 
                             description={props.description} 
                             user={props.user.username} 
@@ -67,7 +67,8 @@ FeedPhoto.propTypes = {
             message: PropTypes.string.isRequired
         })
     ).isRequired,
-    natural_time: PropTypes.string.isRequired
+    natural_time: PropTypes.string.isRequired,
+    is_liked: PropTypes.bool.isRequired
 }
 
 export default FeedPhoto;
