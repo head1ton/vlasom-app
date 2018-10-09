@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
+import PhotoActions from 'components/PhotoActions';
 
 const FeedPhoto = (props, context) => {
     return (
@@ -23,6 +24,11 @@ const FeedPhoto = (props, context) => {
                     <div className={styles.row}>
                         <div className={`${styles.col12} ${styles.textCenter}`}>
                             <img src={props.image} alt={props.description}></img>
+                        </div>
+                    </div>
+                    <div className={`${styles.row} ${styles.mt1} ${styles.px5}`}>
+                        <div className={styles.col12}>
+                            <PhotoActions number={props.like_count} />
                         </div>
                     </div>
                 </div>
