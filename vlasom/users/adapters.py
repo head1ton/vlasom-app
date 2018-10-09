@@ -8,7 +8,7 @@ from django.http import HttpRequest
 
 class AccountAdapter(DefaultAccountAdapter):
 
-    def is_open_for_signup(self, request: HttpRequest):
+    def is_open_for_signup(self, request):
         return getattr(settings, "ACCOUNT_ALLOW_REGISTRATION", True)
 
         def save_user(self, request, user, form):
