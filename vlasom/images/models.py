@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.encoding import python_2_unicode_compatible
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from taggit.managers import TaggableManager
 
 from vlasom.common.models import TimeStampedModel
@@ -24,6 +25,10 @@ class Image(TimeStampedModel):
     @property
     def comment_count(self):
         return self.comments.all().count()
+
+    @property
+    def natural_time(self):
+        return naturaltime(self.created_at)
 
     def __str__(self):
         return '{}-{}'.format(self.location, self.description)

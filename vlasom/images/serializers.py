@@ -48,7 +48,7 @@ class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
 
     class Meta:
         model = models.Image
-        fields = ['id', 'user', 'image', 'location', 'description', 'comments', 'like_count', 'tags', 'created_at']
+        fields = ['id', 'user', 'image', 'location', 'description', 'comments', 'like_count', 'comment_count', 'tags', 'natural_time']
 
 
 class InputImageSerializer(serializers.ModelSerializer):
