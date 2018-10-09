@@ -3,20 +3,18 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
 const PhotoComments = props => (
-    <div>
-        <ul>
-            <Comment username={props.user} comment={props.description} />
-            {props.comments.map(comment => (
-                <Comment username={comment.user.username} comment={comment.message} key={comment.id} />
-            ))}
-        </ul>
+    <div className={`${styles.row} ${styles.alignItemsCenter}`}>
+        <Comment username={props.user} comment={props.description} />
+        {props.comments.map(comment => (
+            <Comment username={comment.user.username} comment={comment.message} key={comment.id} />
+        ))}
     </div>
 );
 
 const Comment = props => (
-    <li>
-        <span>{props.username}</span> <span>{props.comment}</span>
-    </li>
+    <div className={`${styles.col12} ${styles.commentBox}`}>
+        <span className={styles.commentUsername}>{props.username}</span> <span className={styles.commentText}>{props.comment}</span>
+    </div>
 )
 
 PhotoComments.propTypes = {

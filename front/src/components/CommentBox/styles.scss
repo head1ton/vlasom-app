@@ -1,0 +1,21 @@
+.add-comment-box{
+    border-top: 1px solid $grey;
+
+    .add-comment{
+        border: 0;
+        padding: 10px;
+        resize: none;
+        font-size: $font-18;
+        font-family: "Noto Sans KR", Roboto, sans-serif;
+
+        &:focus,
+        &:active,
+        &:hover{
+            outline: none;
+        }
+        &::placeholder{
+            font-weight: $medium;
+            font-family: "Noto Sans KR", Roboto, sans-serif;
+        }
+    }
+}

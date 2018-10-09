@@ -4,7 +4,7 @@ import Ionicon from 'react-ionicons';
 import styles from './styles.scss';
 
 const PhotoActions = (props, context) => (
-<div>
+<div className={styles.mb2}>
     <div className={`${styles.row} ${styles.alignItemsCenter}`}>
         <div className={`${styles.col1} ${styles.colSm1} ${styles.textCenter}`}>
             <Ionicon icon='ios-heart-outline' fontSize='35px' color='black' />

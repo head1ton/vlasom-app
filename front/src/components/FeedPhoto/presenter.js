@@ -37,7 +37,9 @@ const FeedPhoto = (props, context) => {
                             user={props.user.username} 
                             comments={props.comments}
                             />
-                            <TimeStamp time={props.natural_time} />
+                            <div className={styles.mt3}>
+                                <TimeStamp time={props.natural_time} />
+                            </div>
                             <CommentBox />
                         </div>
                     </div>
