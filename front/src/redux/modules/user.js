@@ -80,7 +80,8 @@ function saveToken(token) {
  }
  
  const initialState = {
-     isLoggedIn: localStorage.getItem('jwt') ? true : false
+     isLoggedIn: localStorage.getItem('jwt') ? true : false,
+     token: localStorage.getItem('jwt')
  };
 
  function reducer(state = initialState, action){
