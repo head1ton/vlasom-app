@@ -25,7 +25,7 @@ urlpatterns = [
         include('vlasom.notifications.urls', namespace = 'notifications')), 
     path("accounts/", include("allauth.urls")), 
     # Your stuff: custom urls includes go here
-    re_path(r'^', views.ReactAppView.as_view()), #catch all url, 맨 마지막에 넣기
+    path('', views.ReactAppView.as_view()), #catch all url, 맨 마지막에 넣기
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
