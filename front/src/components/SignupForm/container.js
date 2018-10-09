@@ -32,7 +32,7 @@ class Container extends Component{
         birthMonthValue={birthMonth} 
         birthDayValue={birthDay} 
         handleInputChange={this._handleInputChange} 
-        handleSUbmit={this._handleSubmit} 
+        handleSubmit={this._handleSubmit} 
         />
     }
 
@@ -49,7 +49,6 @@ class Container extends Component{
         const { createAccount } = this.props;
         event.preventDefault();
         createAccount(username, password, email, name, nickname, birthYear, birthMonth, birthDay);
-    
     }
 }
 

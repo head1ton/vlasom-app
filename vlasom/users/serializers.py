@@ -30,9 +30,9 @@ class SignUpSerializer(RegisterSerializer):
     
     name = serializers.CharField(required=True, write_only=True)
     nickname = serializers.CharField(required=True, write_only=True)
-    birth_year = serializers.CharField(required=True, write_only=True)
-    birth_month = serializers.CharField(required=True, write_only=True)
-    birth_day = serializers.CharField(required=True, write_only=True)
+    birthYear = serializers.CharField(required=True, write_only=True)
+    birthMonth = serializers.CharField(required=True, write_only=True)
+    birthDay = serializers.CharField(required=True, write_only=True)
 
     def get_cleaned_data(self):
         return {
@@ -42,9 +42,9 @@ class SignUpSerializer(RegisterSerializer):
             'password2': self.validated_data.get('password2', ''),
             'email': self.validated_data.get('email', ''),
             'nickname': self.validated_data.get('nickname', ''),
-            'birth_year': int(self.validated_data.get('birthYear', '')),
-            'birth_month': int(self.validated_data.get('birthMonth', '')),
-            'birth_day': int(self.validated_data.get('birthDay', '')),
+            'birthYear': self.validated_data.get('birthYear', ''),
+            'birthMonth': self.validated_data.get('birthMonth', ''),
+            'birthDay': self.validated_data.get('birthDay', ''),
         }
     
     def save(self, request):
@@ -53,11 +53,11 @@ class SignUpSerializer(RegisterSerializer):
         self.cleaned_data = self.get_cleaned_data()
         adapter.save_user(request, user, self)
         setup_user_email(request, user, [])
-        user.name = self.get_cleand_data['name']
-        user.email = self.get_cleand_data['email']
-        user.nickname = self.get_cleand_data['nickname']
-        user.birth_year = self.get_cleand_data['birth_year']
-        user.birth_month = self.get_cleand_data['birth_month']
-        user.birth_day = self.get_cleand_data['birth_day']
+        user.name = self.cleaned_data['name']
+        user.email = self.cleaned_data['email']
+        user.nickname = self.cleaned_data['nickname']
+        user.birth_year = self.cleaned_data['birthYear']
+        user.birth_month = self.cleaned_data['birthMonth']
+        user.birth_day = self.cleaned_data['birthDay']
         user.save()
         return user

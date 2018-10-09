@@ -57,12 +57,13 @@ function facebookLogin(access_token){
      }
  }
 
- function createAccount(username, password, email, name, nickname, birth_year, birth_month, birth_day){
+ function createAccount(username, password, email, name, nickname, birthYear, birthMonth, birthDay){
      return function(dispatch){
+         console.log(username, password, email, name, nickname, birthYear, birthMonth, birthDay);
          fetch('/rest-auth/registration/', {
             method: 'POST',
             headers: {
-               "Content-Type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 username,
@@ -71,9 +72,9 @@ function facebookLogin(access_token){
                 email,
                 name,
                 nickname,
-                birth_year,
-                birth_month,
-                birth_day
+                birthYear,
+                birthMonth,
+                birthDay
             })
          })
          .then(response => response.json())

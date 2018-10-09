@@ -82,21 +82,21 @@ const SignupForm = props => (
                         <div className={`${formStyles.row} ${formStyles.mx0} ${formStyles.px0}`}>
                             <div className={`${formStyles.col4} ${formStyles.px0}`}>
                                 <select className={formStyles.inputBoxTopRightBottom} name="birthYear" value={props.birthYearValue} onChange={props.handleInputChange}>
-                                    <option>4165</option>
-                                    <option>646564</option>
-                                    <option>125436</option>
+                                    <option>2018</option>
+                                    <option>2017</option>
+                                    <option>2016</option>
                                 </select>
                             </div>
                             <div className={`${formStyles.col4} ${formStyles.px0}`}>
                                 <select className={formStyles.inputBoxTopRightBottom} name="birthMonth" value={props.birthMonthValue} onChange={props.handleInputChange}>
-                                    <option>4165</option>
-                                    <option>f51</option>
+                                    <option>01</option>
+                                    <option>02</option>
                                 </select>
                             </div>
                             <div className={`${formStyles.col4} ${formStyles.px0}`}>
                                 <select className={formStyles.inputBoxTopRightBottom} name="birthDay" value={props.birthDayValue} onChange={props.handleInputChange}>
-                                    <option>4165</option>
-                                    <option>12</option>
+                                    <option>01</option>
+                                    <option>02</option>
                                 </select>
                             </div>
                         </div>
