@@ -3,6 +3,7 @@ import { actionCreators as userActions } from 'redux/modules/user';
 const SET_FEED = 'SET_FEED';
 const LIKE_PHOTO = 'LIKE_PHOTO';
 const UNLIKE_PHOTO = 'UNLIKE_PHOTO';
+const ADD_COMMENT = 'ADD_COMMENT';
 
 function setFeed(feed){
     return {
@@ -22,6 +23,14 @@ function doUnlikePhoto(photoId){
     return {
         type: UNLIKE_PHOTO,
         photoId
+    }
+}
+
+function addComment(photoId, comment){
+    return {
+        type: ADD_COMMENT,
+        photoId,
+        comment
     }
 }
 
@@ -85,6 +94,33 @@ function unlikePhoto(photoId){
     }
 }
 
+function commentPhoto(photoId, message){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`/images/${photoId}/comments/`, {
+            method: "POST",
+            headers: {
+                Authorization: `JWT ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            return response.json()
+        })
+        .then(json => {
+            if(json.message){
+                dispatch(addComment(photoId, json));
+            }
+        })
+    }
+}
+
 const initialState = {
 
 };
@@ -97,6 +133,8 @@ function reducer(state = initialState, action){
             return applyLikePhoto(state, action);
         case UNLIKE_PHOTO:
             return applyUnlikePhoto(state, action);
+        case ADD_COMMENT:
+            return applyAddComment(state, action);
         default:
             return state;
     }
@@ -134,10 +172,27 @@ function applyUnlikePhoto(state, action){
     return {...state, feed: updatedFeed};
 }
 
+function applyAddComment(state, action){
+    const { photoId, comment } = action;
+    const { feed } = state;
+    const updatedFeed = feed.map(photo => {
+        if(photo.id === photoId){
+            return {
+                ...photo,
+                comments: [...photo.comments, comment],
+                comment_count: photo.comment_count+1
+            }
+        }
+        return photo;
+    });
+    return {...state, feed: updatedFeed};
+}
+
 const actionCreators = {
     getFeed,
     likePhoto,
-    unlikePhoto
+    unlikePhoto,
+    commentPhoto
 };
 
 export { actionCreators }
