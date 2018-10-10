@@ -14,7 +14,7 @@ class ExploreUsers(APIView):
     def get(self, request, format = None):
         last_five = User.objects.all().order_by('-date_joined')[:5] #원래는 머신러닝
 
-        serializer = serializers.ListUserSerializer(last_five, many = True)
+        serializer = serializers.ListUserSerializer(last_five, many = True, context = {"request": request})
 
         return Response(data = serializer.data, status = status.HTTP_200_OK)
 
@@ -94,7 +94,7 @@ class UserFollower(APIView):
         
         user_follower = found_user.follower.all()
         
-        serializer = serializers.ListUserSerializer(user_follower, many = True)
+        serializer = serializers.ListUserSerializer(user_follower, many = True, context = {"request": request})
 
         return Response(data = serializer.data, status = status.HTTP_200_OK)
 
@@ -108,7 +108,7 @@ class UserFollowing(APIView):
         
         user_following = found_user.following.all()
         
-        serializer = serializers.ListUserSerializer(user_following, many = True)
+        serializer = serializers.ListUserSerializer(user_following, many = True, context = {"request": request})
 
         return Response(data = serializer.data, status = status.HTTP_200_OK)
 
@@ -120,7 +120,7 @@ class Search(APIView):
         if username is not None:
             users = User.objects.filter(username__icontains = username)
 
-            serializer = serializers.ListUserSerializer(users, many = True)
+            serializer = serializers.ListUserSerializer(users, many = True, context = {"request": request})
 
             return Response(data = serializer.data, status = status.HTTP_200_OK)
         else:
