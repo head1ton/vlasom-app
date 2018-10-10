@@ -10,7 +10,7 @@ const PhotoActions = (props, context) => (
             {props.isLiked ? <Ionicon icon='ios-heart' fontSize='35px' color='#d5264a' /> : <Ionicon icon='ios-heart-outline' fontSize='35px' color='black' />}
         </div>
         <div className={`${styles.col9} ${styles.offset1} ${styles.colSm10} ${styles.offsetSm0} ${styles.likeText}`}>
-            <p>{props.like_count} {props.like_count === 1 ? context.t('like') : context.t('likes')}</p>
+            <p onClick={props.openLikes}>{props.like_count} {props.like_count === 1 ? context.t('like') : context.t('likes')}</p>
         </div>
     </div>
     <div className={`${styles.row} ${styles.alignItemsCenter}`}>
@@ -33,7 +33,8 @@ PhotoActions.propTypes = {
     comment_count: PropTypes.number.isRequired,
     isLiked: PropTypes.bool.isRequired,
     photoId: PropTypes.number.isRequired,
-    handleHeartClick: PropTypes.func.isRequired
+    handleHeartClick: PropTypes.func.isRequired,
+    openLikes: PropTypes.func.isRequired
 };
 
 export default PhotoActions;
