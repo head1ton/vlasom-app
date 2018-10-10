@@ -1,0 +1,31 @@
+.profile-img{
+    margin: 5px auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    text-align: center;
+    overflow: hidden;
+
+    img{
+        height: 50px;
+    }
+}
+.profile-text-bold{
+    font-weight: $bold;
+}
+.btn{
+    @include borderRadius(5px,5px,5px,5px);
+    background-color: $main-color;
+    padding: 10px;
+    font-weight: $bold;
+    color: $white;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover,
+    &:active,
+    &:focus{
+        background-color: $sub-color;
+        color: $main-color;
+    }
+}

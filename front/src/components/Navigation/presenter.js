@@ -31,7 +31,7 @@ const Navigation = (props, context) => (
                             <Link to='/profile' style={{ textDecoration: 'none' }}>
                                 <div className={`${styles.row} ${styles.alignItemsCenter}`}>
                                     <img src={require('images/nav-nickname.png')} alt="nickname"></img>
-                                    <p className={styles.nicknameText}>nickname</p>
+                                    <p className={styles.nicknameText}>{props.user.nickname}</p>
                                 </div>
                             </Link>
                         </div>
@@ -69,6 +69,10 @@ const Navigation = (props, context) => (
 
 Navigation.contextTypes = {
     t: PropTypes.func.isRequired
+}
+
+Navigation.propTypes = {
+    nickname: PropTypes.string.isRequired
 }
 
 export default Navigation;
