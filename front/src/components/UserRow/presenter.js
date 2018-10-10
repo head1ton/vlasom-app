@@ -14,7 +14,7 @@ const UserRow = (props, context) => (
             <p className={styles.profileText}>{props.user.name}</p>
         </div>
         <div className={`${styles.col5} ${styles.offset0} ${styles.colSm4} ${styles.offsetSm2} ${styles.colMd3} ${styles.offsetMd3} ${styles.colLg2} ${styles.offsetLg4}`}>
-            <p className={styles.btn}>{context.t("follow")}</p>
+            <p className={styles.btn} onClick={props.handleClick}>{props.user.following ? context.t("unfollow") : context.t("follow")}</p>
         </div>
     </div>
 
@@ -30,9 +30,11 @@ UserRow.propTypes = {
         name: PropTypes.string.isRequired,
         nickname: PropTypes.string.isRequired,
         profile_image: PropTypes.string,
-        username: PropTypes.string.isRequired
+        username: PropTypes.string.isRequired,
+        following: PropTypes.bool.isRequired
     }).isRequired,
-    big: PropTypes.bool
+    big: PropTypes.bool,
+    handleClick: PropTypes.func.isRequired
 };
 
 UserRow.defaultProps = {
