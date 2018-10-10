@@ -173,6 +173,25 @@ function facebookLogin(access_token){
          })
      }
  }
+
+ function getExplore(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`/users/explore/`, {
+            method: 'GET',
+            headers: {
+                "Authorization": `JWT ${token}`,
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(logout());
+            }
+            return response.json()
+        })
+        .then(json => dispatch(setUserList(json)))
+    }
+ }
  
  const initialState = {
      isLoggedIn: localStorage.getItem('jwt') ? true : false,
@@ -264,7 +283,8 @@ function facebookLogin(access_token){
      logout,
      getPhotoLikes,
      followUser,
-     unfollowUser
+     unfollowUser,
+     getExplore
  }
 
  export { actionCreators };
