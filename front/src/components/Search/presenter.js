@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import Loading from 'components/Loading';
 import UserRow from 'components/UserRow';
+import ImageRow from 'components/ImageRow';
 
 const Search = (props, context) => {
     return (
@@ -24,7 +25,7 @@ const Search = (props, context) => {
                 </div>
             </div>
             <div className={`${styles.row} ${styles.mt3}`}>
-                <div className={`${styles.col12} ${styles.pl5} ${styles.searchTitle}`}>
+                <div className={`${styles.col12} ${styles.pl5} ${styles.searchTitle} ${styles.mb2}`}>
                     <p className={styles.searchTitleText}>{context.t("Images")}</p>
                 </div>
                 <div className={styles.col12}>
@@ -33,7 +34,9 @@ const Search = (props, context) => {
                         <NotFound text={context.t('Nothing was found.')} />
                     )}
                     {!props.loading && props.imageList.length > 0 && (
-                        <RenderImageSearch imageList={props.imageList} />
+                        <div className={`${styles.row} ${styles.alignItemsCenter}`}>
+                            <RenderImageSearch imageList={props.imageList} />
+                        </div>
                     )}
                 </div>   
             </div>
@@ -57,7 +60,9 @@ const RenderUserSearch = props => props.userList.map(user => (
     <UserRow vertical={true} user={user} key={user.id} />
 ));
 
-const RenderImageSearch = props => props.imageList.map(image => image.description)
+const RenderImageSearch = props => props.imageList.map(image => (
+    <ImageRow image={image} key={image.id} />
+))
 
 Search.contextTypes = {
     t: PropTypes.func.isRequired

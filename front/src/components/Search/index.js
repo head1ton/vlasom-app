@@ -4,6 +4,7 @@ import { actionCreators as userAactions } from 'redux/modules/user';
 
 const mapStateToProps = (state, ownProps) => {
     const { user: { userList, imageList } } = state;
+    console.log(imageList)
     return {
         imageList,
         userList
