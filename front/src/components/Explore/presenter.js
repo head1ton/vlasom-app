@@ -30,7 +30,8 @@ const RenderExplore = props => (
 )
 
 Explore.propTypes = {
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    userList: PropTypes.array
 }
 
 export default Explore;

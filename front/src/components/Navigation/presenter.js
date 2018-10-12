@@ -16,14 +16,11 @@ const Navigation = (props, context) => (
                     </Link>
                 </div>
                 <div className={`${styles.colLg3} ${styles.offsetLg0} ${styles.col4} ${styles.offset1}`}>
-                    <div className={`${styles.row} ${styles.alignItemsCenter}`}>
-                        <div className={`${styles.searchBoxLabel} ${styles.colLg3} ${styles.col3}`}>
-                            <img src={require('images/search.png')} alt="search"></img>
+                    <form onSubmit={props.onSubmit} className={`${styles.row} ${styles.alignItemsCenter}`}>
+                        <div className={`${styles.col12} ${styles.pl1}`}>
+                            <input type="text" placeholder={context.t("Search")} value={props.value} onChange={props.onInputChange} className={styles.searchBox} ></input>
                         </div>
-                        <div className={`${styles.colLg9} ${styles.col9} ${styles.pl1}`}>
-                            <input type="text" name="q" className={styles.searchBox} ></input>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div className={`${styles.colLg7} ${styles.offsetLg0} ${styles.col1} ${styles.offset1} ${styles.textRight}`}>
                     <div className={`${styles.row} ${styles.alignItemsCenter}`}>
@@ -69,6 +66,12 @@ const Navigation = (props, context) => (
 
 Navigation.contextTypes = {
     t: PropTypes.func.isRequired
+}
+
+Navigation.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    onInputChange: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired
 }
 
 export default Navigation;

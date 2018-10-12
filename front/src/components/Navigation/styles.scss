@@ -45,13 +45,19 @@
     border-top: 2px solid $sub-color;
     border-right: 2px solid $sub-color;
     border-bottom: 2px solid $sub-color;
-    border-left: none;
+    border-left: 2px solid $sub-color;
     outline: none;
+    padding-left: 15px;
 
     &:active,
     &:focus{
         outline: none;
     }
+
+    &::placeholder{
+        color: $white;
+    }
+
 }
 .nickname{
     img{

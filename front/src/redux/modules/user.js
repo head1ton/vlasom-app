@@ -3,6 +3,7 @@
  const SET_USER_LIST = 'SET_USER_LIST';
  const FOLLOW_USER = 'FOLLOW_USER';
  const UNFOLLOW_USER = 'UNFOLLOW_USER';
+ const SET_IMAGE_LIST = 'SET_IMAGE_LIST';
 
 function saveToken(token) {
     return {
@@ -21,6 +22,13 @@ function setUserList(userList){
     return {
         type: SET_USER_LIST,
         userList
+    }
+}
+
+function setImageList(imageList){
+    return {
+        type: SET_IMAGE_LIST,
+        imageList
     }
 }
 
@@ -192,10 +200,53 @@ function facebookLogin(access_token){
         .then(json => dispatch(setUserList(json)))
     }
  }
+
+ function searchByTerm(searchTerm){
+     return async(dispatch, getState) => {
+         const { user : { token } } = getState();
+         const userList = await searchUsers(token, searchTerm);
+         const imageList = await searchImages(token, searchTerm);
+         if(userList === 401 || imageList === 401){
+             dispatch(logout());
+         }
+         dispatch(setUserList(userList));
+         dispatch(setImageList(imageList));
+     }
+ }
+
+ function searchUsers(token, searchTerm){
+     return fetch(`/users/search/?username=${searchTerm}`, {
+         headers: {
+             "Authorization": `JWT ${token}`
+         }
+     })
+     .then(response => {
+         if(response.status === 401){
+             return 401
+         }
+         return response.json()
+     })
+     .then(json => json);
+ }
+
+ function searchImages(token, searchTerm){
+    return fetch(`/images/search/?tags=${searchTerm}`, {
+        headers: {
+            "Authorization": `JWT ${token}`
+        }
+    })
+    .then(response => {
+        if(response.status === 401){
+            return 401
+        }
+        return response.json()
+    })
+    .then(json => json);
+}
  
  const initialState = {
      isLoggedIn: localStorage.getItem('jwt') ? true : false,
-     token: localStorage.getItem('jwt')
+     token: localStorage.getItem('jwt'),
  };
 
  function reducer(state = initialState, action){
@@ -210,6 +261,8 @@ function facebookLogin(access_token){
             return applyFollowUser(state, action);
         case UNFOLLOW_USER:
             return applyUnfollowUser(state, action);
+        case SET_IMAGE_LIST:
+            return applySetImageList(state, action);
         default:
             return state;
      }
@@ -239,6 +292,14 @@ function facebookLogin(access_token){
          userList
      };
  };
+
+ function applySetImageList(state, action){
+     const { imageList } = action;
+     return {
+         ...state,
+         imageList
+     }
+ }
 
  function applyFollowUser(state, action){
     const { userId } = action;
@@ -284,7 +345,8 @@ function facebookLogin(access_token){
      getPhotoLikes,
      followUser,
      unfollowUser,
-     getExplore
+     getExplore,
+     searchByTerm
  }
 
  export { actionCreators };

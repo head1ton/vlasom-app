@@ -1,0 +1,17 @@
+.loading-search{
+    text-align: center;
+    min-height: 60vh;
+    font-weight: $bold;
+    font-family: $font-title;
+    font-size: $font-24;
+}
+.search-title{
+    text-align: center;
+    border-bottom: 2px solid $main-color;
+    padding: 30px;
+}
+.search-title-text{
+    font-weight: $bold;
+    font-family: $font-title;
+    font-size: $font-24;
+}

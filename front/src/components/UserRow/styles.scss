@@ -10,6 +10,18 @@
         height: 50px;
     }
 }
+.profile-img-vertical{
+    margin: 5px auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    text-align: center;
+    overflow: hidden;
+
+    img{
+        height: 150px;
+    }
+}
 .profile-text-bold{
     font-weight: $bold;
 }
@@ -59,4 +71,7 @@
     img{
         height: 100px;
     }
+}
+.text-center{
+    text-align: center;
 }
