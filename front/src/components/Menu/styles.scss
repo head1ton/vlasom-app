@@ -1,0 +1,83 @@
+.container-menu{
+    height: 100vh;
+    background-color: $font-color;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 200000;
+    width: 100%;
+    color: $white; 
+    animation: menu-open 0.5s;
+}
+@media (min-width: 576px){
+    .container-menu{
+        width: 75%;
+    }
+}
+@media (min-width: 768px){
+    .container-menu{
+        width: 50%;
+    }
+}
+@media (min-width: 992px){
+    .container-menu{
+        width: 28%;
+    }
+}
+@keyframes menu-open{
+    from{
+        right: -60%;
+    }
+    to{
+        right: 0;
+    }
+}
+@keyframes menu-close{
+    from{
+        right: 0;
+    }
+    to{
+        right: -100%;
+    }
+}
+.text-center{
+    text-align: center;
+}
+.title{
+    font-weight: $bold;
+    font-size: $font-24;
+    font-family: $font-title;
+    cursor: pointer;
+    &:hover,
+    &:active,
+    &:focus{
+        color: $sub-color;
+    }
+}
+.border-bottom{
+    border-bottom: 2px solid $white;
+}
+.close{
+    cursor: pointer;
+}
+.menu-item{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+
+    &:hover,
+    &:active,
+    &:focus{
+        color: $sub-color;
+    }
+}
+.menu-bottom{
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+.close-btn{
+    cursor: pointer;
+}

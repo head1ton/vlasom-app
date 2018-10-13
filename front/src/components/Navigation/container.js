@@ -8,10 +8,11 @@ class Container extends Component {
     }
 
     static propTypes = {
-        goToSearch: PropTypes.func.isRequired
+        goToSearch: PropTypes.func.isRequired,
+        openMenu: PropTypes.func.isRequired
     }
     render() {
-        return <Navigation onSubmit={this._onSubmit} onInputChange={this._onInputChange} value={this.state.term} />;
+        return <Navigation onSubmit={this._onSubmit} onInputChange={this._onInputChange} openMenu={this._openMenu} value={this.state.term} />;
     }
 
     _onInputChange = event => {
@@ -29,6 +30,11 @@ class Container extends Component {
         this.setState({
             term: ""
         })
+    }
+
+    _openMenu = event => {
+        const { openMenu } = this.props;
+        openMenu();
     }
 }
 

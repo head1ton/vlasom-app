@@ -8,11 +8,13 @@ import Navigation from 'components/Navigation';
 import Feed from 'components/Feed';
 import Explore from 'components/Explore';
 import Search from 'components/Search';
+import Menu from 'components/Menu';
 
 const App = props => [
     props.isLoggedIn ? <Navigation key={1} /> : null,
     props.isLoggedIn ? <PrivateRoutes key={2} /> : <PublickRoutes key={2} />,
-    <Footer key={3} />
+    props.show_menu ? <Menu key={3} /> : null ,
+    <Footer key={4} />
 ]
 
 App.propTypes = {

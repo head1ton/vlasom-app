@@ -52,10 +52,8 @@ const Navigation = (props, context) => (
                                 <img src={require('images/like-list.png')} alt="like-list"></img>
                             </Link>
                         </div>
-                        <div className={`${styles.offset1} ${styles.colLg1} ${styles.navItem}`}>
-                            <Link to='/menu'>
-                                <img src={require('images/menu-white.png')} alt="menu"></img>
-                            </Link>
+                        <div className={`${styles.offset1} ${styles.colLg1} ${styles.navItem} ${styles.menuBtn}`}>
+                            <img onClick={props.openMenu} src={require('images/menu-white.png')} alt="menu"></img>
                         </div>
                     </div>
                 </div>
@@ -71,7 +69,8 @@ Navigation.contextTypes = {
 Navigation.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onInputChange: PropTypes.func.isRequired,
-    value: PropTypes.string.isRequired
+    value: PropTypes.string.isRequired,
+    openMenu: PropTypes.func.isRequired
 }
 
 export default Navigation;
