@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils.encoding import python_2_unicode_compatible
 from vlasom.common.utils import type_choices
 from vlasom.common.models import TimeStampedModel
-from vlasom.images.models import Image
+from vlasom.images.models import Image, Category
 
 User = get_user_model()
 
@@ -13,6 +13,7 @@ class Notification(TimeStampedModel):
     notification_type = models.CharField(max_length = 20, choices = type_choices)
     image = models.ForeignKey(Image, on_delete = models.CASCADE, blank = True, null = True)
     comment = models.TextField(null = True, blank = True)
+    category = models.ForeignKey(Category, on_delete = models.CASCADE, blank = True, null = True)
 
     class Meta:
         ordering = ['-created_at']

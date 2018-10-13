@@ -18,3 +18,15 @@ class LikeAdmin(admin.ModelAdmin):
 @admin.register(models.Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['user', 'message', 'image', 'created_at', 'updated_at']
+
+
+@admin.register(models.Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name']
+
+
+@admin.register(models.Interest)
+class InterestAdmin(admin.ModelAdmin):
+    list_display = ['user', 'image', 'category']
+    search_fields = ['image', 'category']
+    list_filter = ['category']

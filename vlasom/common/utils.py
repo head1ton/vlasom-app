@@ -21,7 +21,7 @@ gender_choice = (('male','남성'),('female','여성'))
 
 join_channel = (('WEB', 'WEB'),('KAKAO', 'KAKAO'),('FACEBOOK','FACEBOOK'),('GOOGLE','GOOGLE'))
 
-type_choices = (('like', 'Like'),('comment','Comment'),('follow','Follow'))
+type_choices = (('like', 'Like'),('comment','Comment'),('follow','Follow'), ('interest','Interest'))
 
 def get_image_filename(instance, filename):
     return '/'.join([instance.category_1.name, instance.user.nickname, filename])

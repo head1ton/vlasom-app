@@ -188,3 +188,61 @@ class ImageDetail(APIView):
         
         image.delete()
         return Response(status = status.HTTP_204_NO_CONTENT)
+
+
+class InterestImage(APIView):
+    def post(self, request, image_id, format = None):
+        try:
+            found_image = models.Image.objects.get(id = image_id)
+        except models.Image.DoesNotExist:
+            return Response(status = status.HTTP_404_NOT_FOUND)
+        try:
+            pre_existing_interest = models.Interest.objects.get(user = request.user, image = found_image)
+            return Response(status = status.HTTP_304_NOT_MODIFIED)
+        except models.Interest.DoesNotExist:
+            new_interest = models.Interest.objects.create(user = request.user, image = found_image)
+            new_interest.save()
+
+            create_notification(request.user, found_image.user, 'interest', found_image)
+            return Response(status=status.HTTP_201_CREATED)
+    
+    def delete(self, request, image_id, format = None):
+        try:
+            found_image = models.Image.objects.get(id = image_id)
+        except models.Image.DoesNotExist:
+            return Response(status = status.HTTP_404_NOT_FOUND)
+        try:
+            pre_existing_interest = models.Interest.objects.get(user = request.user, image = found_image)
+            pre_existing_interest.delete()
+            return Response(status = status.HTTP_204_NO_CONTENT)
+        except models.Interest.DoesNotExist:
+            return Response(status = status.HTTP_304_NOT_MODIFIED)
+
+
+class InterestCategory(APIView):
+    def post(self, request, category_id, format = None):
+        try:
+            found_category = models.Category.objects.get(id = category_id)
+        except models.Category.DoesNotExist:
+            return Response(status = status.HTTP_404_NOT_FOUND)
+        try:
+            pre_existing_interest = models.Interest.objects.get(user = request.user, category = found_category)
+            return Response(status = status.HTTP_304_NOT_MODIFIED)
+        except models.Interest.DoesNotExist:
+            new_interest = models.Interest.objects.create(user = request.user, category = found_category)
+            new_interest.save()
+
+            create_notification(request.user, request.user, 'interest', category = found_category)
+            return Response(status = status.HTTP_201_CREATED)
+    
+    def delete(self, request, category_id, format = None):
+        try:
+            found_category = models.Category.objects.get(id = category_id)
+        except models.Category.DoesNotExist:
+            return Response(status = status.HTTP_404_NOT_FOUND)
+        try:
+            pre_existing_interest = models.Interest.objects.get(user = request.user, category = found_category)
+            pre_existing_interest.delete()
+            return Response(status = status.HTTP_204_NO_CONTENT)
+        except models.Interest.DoesNotExist:
+            return Response(status = status.HTTP_304_NOT_MODIFIED)

@@ -12,4 +12,6 @@ urlpatterns = [
     path('comments/<int:comment_id>/', views.Comment.as_view(), name = 'comment'),
     path('search/', views.Search.as_view(), name = 'tag_search'),
     path('<int:image_id>/comments/<int:comment_id>/', views.ModerateComment.as_view(), name = 'moderate_comment'),
+    path('interest/image/<int:image_id>/', views.InterestImage.as_view(), name = 'interest_image'),
+    path('interest/category/<int:category_id>/', views.InterestCategory.as_view(), name = 'interest_category'),
 ]
