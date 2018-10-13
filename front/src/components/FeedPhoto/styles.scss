@@ -34,3 +34,33 @@
 .text-center{
     text-align: center;
 }
+.interest-btn{
+    color: $white;
+    font-weight: $bold;
+    text-align: center;
+    background-color: $main-color;
+    @include borderRadius(5px,5px,5px,5px);
+    padding: 15px;
+    cursor: pointer;
+
+    &:hover,
+    &:active,
+    &:focus{
+        background-color: $sub-color;
+        color: $main-color;
+    }
+}
+.category-name{
+    font-weight: $bold;
+    font-size: $font-20;
+    color: $tag;
+    cursor: pointer;
+}
+.text-right{
+    text-align: right;
+}
+@media (max-width: 575px){
+    .text-left-sm{
+        text-align: left !important;
+    }
+}

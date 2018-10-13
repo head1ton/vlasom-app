@@ -18,9 +18,12 @@ const FeedPhoto = (props, context) => {
                                 <img src={props.user.profile_image || require('images/profile-red.png')} alt={props.user.username}></img>
                             </div>
                         </div>
-                        <div className={`${styles.col9} ${styles.offset1} ${styles.colSm10} ${styles.offsetSm0}`}>
+                        <div className={`${styles.col4} ${styles.offset1} ${styles.colSm5} ${styles.offsetSm1} ${styles.colMd8} ${styles.offsetMd0}`}>
                             <p className={styles.feedProfileText}>{props.user.username}</p>
                             <p className={styles.feedText}>{props.location}</p>
+                        </div>
+                        <div className={`${styles.col4} ${styles.offset1} ${styles.colSm4} ${styles.offestSm1} ${styles.colMd2} ${styles.offsetMd1}`}>
+                            <p className={styles.interestBtn}>찜하기</p>
                         </div>
                     </div>
                 </div>
@@ -32,7 +35,14 @@ const FeedPhoto = (props, context) => {
                     </div>
                     <div className={`${styles.row} ${styles.mt1} ${styles.px5}`}>
                         <div className={styles.col12}>
-                            <PhotoActions like_count={props.like_count} comment_count={props.comment_count} isLiked={props.is_liked} photoId={props.id} openLikes={props.openLikes} />
+                            <div className={`${styles.row} ${styles.alignItemsCenter} ${styles.mb3}`}>
+                                <div className={`${styles.col12} ${styles.colSm8}`}>
+                                    <PhotoActions like_count={props.like_count} comment_count={props.comment_count} isLiked={props.is_liked} photoId={props.id} openLikes={props.openLikes} />
+                                </div>
+                                <div className={`${styles.col12} ${styles.colSm4} ${styles.textRight} ${styles.textLeftSm}`}>
+                                    <span className={styles.categoryName}>#{props.category.name}</span>
+                                </div>
+                            </div>
                             <PhotoComments 
                             description={props.description} 
                             user={props.user.username} 
@@ -75,6 +85,10 @@ FeedPhoto.propTypes = {
             message: PropTypes.string.isRequired
         })
     ).isRequired,
+    comment_count: PropTypes.number.isRequired,
+    category: PropTypes.shape({
+        name: PropTypes.string.isRequired
+    }).isRequired,
     natural_time: PropTypes.string.isRequired,
     is_liked: PropTypes.bool.isRequired,
     seeingLikes: PropTypes.bool.isRequired,
