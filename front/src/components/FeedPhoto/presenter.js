@@ -22,9 +22,6 @@ const FeedPhoto = (props, context) => {
                             <p className={styles.feedProfileText}>{props.user.username}</p>
                             <p className={styles.feedText}>{props.location}</p>
                         </div>
-                        <div className={`${styles.col4} ${styles.offset1} ${styles.colSm4} ${styles.offestSm1} ${styles.colMd2} ${styles.offsetMd1}`}>
-                            <p className={styles.interestBtn}>찜하기</p>
-                        </div>
                     </div>
                 </div>
                 <div className={styles.feedBody}>
@@ -37,7 +34,7 @@ const FeedPhoto = (props, context) => {
                         <div className={styles.col12}>
                             <div className={`${styles.row} ${styles.alignItemsCenter} ${styles.mb3}`}>
                                 <div className={`${styles.col12} ${styles.colSm8}`}>
-                                    <PhotoActions like_count={props.like_count} comment_count={props.comment_count} isLiked={props.is_liked} photoId={props.id} openLikes={props.openLikes} />
+                                    <PhotoActions like_count={props.like_count} comment_count={props.comment_count} interest_count_image={props.interest_count_image} isInterestedImage={props.is_interested_image} isLiked={props.is_liked} photoId={props.id} openLikes={props.openLikes} />
                                 </div>
                                 <div className={`${styles.col12} ${styles.colSm4} ${styles.textRight} ${styles.textLeftSm}`}>
                                     <span className={styles.categoryName}>#{props.category.name}</span>
@@ -87,10 +84,14 @@ FeedPhoto.propTypes = {
     ).isRequired,
     comment_count: PropTypes.number.isRequired,
     category: PropTypes.shape({
-        name: PropTypes.string.isRequired
+        name: PropTypes.string.isRequired,
+        is_interested_category: PropTypes.bool.isRequired,
+        interest_count_category: PropTypes.number.isRequired
     }).isRequired,
     natural_time: PropTypes.string.isRequired,
     is_liked: PropTypes.bool.isRequired,
+    is_interested_image: PropTypes.bool.isRequired,
+    interest_count_image: PropTypes.number.isRequired,
     seeingLikes: PropTypes.bool.isRequired,
     closeLikes: PropTypes.func.isRequired,
     openLikes: PropTypes.func.isRequired

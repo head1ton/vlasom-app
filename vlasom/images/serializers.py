@@ -27,9 +27,20 @@ class FeedUserSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    is_interested_category = serializers.SerializerMethodField()
     class Meta:
         model = models.Category
-        fields = ['name']
+        fields = ['name', 'is_interested_category', 'interest_count_category']
+
+    def get_is_interested_category(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            try:
+                models.Interest.objects.get(user__id = request.user.id, category__id = obj.id)
+                return True
+            except models.Interest.DoesNotExist:
+                return False
+        return False
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -52,11 +63,12 @@ class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
     user = FeedUserSerializer()
     tags = TagListSerializerField()
     is_liked = serializers.SerializerMethodField()
-    category = CategorySerializer()
+    is_interested_image = serializers.SerializerMethodField()
+    category = CategorySerializer() 
 
     class Meta:
         model = models.Image
-        fields = ['id', 'user', 'image', 'location', 'category', 'description', 'comments', 'like_count', 'comment_count', 'tags', 'natural_time', 'is_liked']
+        fields = ['id', 'user', 'image', 'location', 'category', 'description', 'comments', 'like_count', 'comment_count', 'interest_count_image', 'tags', 'natural_time', 'is_liked', 'is_interested_image']
 
     def get_is_liked(self, obj):
         if 'request' in self.context:
@@ -65,6 +77,16 @@ class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
                 models.Like.objects.get(user__id = request.user.id, image__id = obj.id)
                 return True
             except models.Like.DoesNotExist:
+                return False
+        return False
+
+    def get_is_interested_image(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            try:
+                models.Interest.objects.get(user__id = request.user.id, image__id = obj.id)
+                return True
+            except models.Interest.DoesNotExist:
                 return False
         return False
 

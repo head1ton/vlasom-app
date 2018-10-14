@@ -4,6 +4,8 @@ const SET_FEED = 'SET_FEED';
 const LIKE_PHOTO = 'LIKE_PHOTO';
 const UNLIKE_PHOTO = 'UNLIKE_PHOTO';
 const ADD_COMMENT = 'ADD_COMMENT';
+const INTEREST_PHOTO = 'INTEREST_PHOTO'
+const UNINTEREST_PHOTO = 'UNINTEREST_PHOTO'
 
 function setFeed(feed){
     return {
@@ -31,6 +33,20 @@ function addComment(photoId, comment){
         type: ADD_COMMENT,
         photoId,
         comment
+    }
+}
+
+function doInterestPhoto(photoId){
+    return {
+        type: INTEREST_PHOTO,
+        photoId
+    }
+}
+
+function doUninterestPhoto(photoId){
+    return {
+        type: UNINTEREST_PHOTO,
+        photoId
     }
 }
 
@@ -94,6 +110,48 @@ function unlikePhoto(photoId){
     }
 }
 
+function interestPhoto(photoId){
+    return (dispatch, getState) => {
+        dispatch(doInterestPhoto(photoId));
+        const { user : { token } } = getState();
+        fetch(`/images/interest/image/${photoId}/`, {
+            method: 'POST',
+            headers: {
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            else if(!response.ok){
+                dispatch(doUninterestPhoto(photoId));
+            }
+        })
+    }
+}
+
+function uninterestPhoto(photoId){
+    return (dispatch, getState) => {
+        dispatch(doUninterestPhoto(photoId));
+        const { user : { token } } = getState();
+        fetch(`/images/interest/image/${photoId}/`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            else if(!response.ok){
+                dispatch(doInterestPhoto(photoId));
+            }
+        })
+    }
+}
+
 function commentPhoto(photoId, message){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
@@ -135,6 +193,10 @@ function reducer(state = initialState, action){
             return applyUnlikePhoto(state, action);
         case ADD_COMMENT:
             return applyAddComment(state, action);
+        case INTEREST_PHOTO:
+            return applyInterestPhoto(state, action);
+        case UNINTEREST_PHOTO:
+            return applyuninterestPhoto(state, action);
         default:
             return state;
     }
@@ -188,11 +250,37 @@ function applyAddComment(state, action){
     return {...state, feed: updatedFeed};
 }
 
+function applyInterestPhoto(state, action){
+    const { photoId } = action;
+    const { feed } = state;
+    const updatedFeed = feed.map(photo => {
+        if(photo.id === photoId){
+            return {...photo, is_interested_image: true, interest_count_image: photo.interest_count_image +1}
+        }
+        return photo;
+    });
+    return {...state, feed: updatedFeed}
+}
+
+function applyuninterestPhoto(state, action){
+    const { photoId } = action;
+    const { feed } = state;
+    const updatedFeed = feed.map(photo => {
+        if(photo.id === photoId){
+            return {...photo, is_interested_image: false, interest_count_image: photo.interest_count_image -1}
+        }
+        return photo;
+    });
+    return {...state, feed: updatedFeed}
+}
+
 const actionCreators = {
     getFeed,
     likePhoto,
     unlikePhoto,
-    commentPhoto
+    commentPhoto,
+    interestPhoto,
+    uninterestPhoto
 };
 
 export { actionCreators }

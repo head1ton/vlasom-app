@@ -15,6 +15,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    @property
+    def interest_count_category(self):
+        return self.categorys.all().count()
 
 
 @python_2_unicode_compatible
@@ -33,6 +37,10 @@ class Image(TimeStampedModel):
     @property
     def comment_count(self):
         return self.comments.all().count()
+
+    @property
+    def interest_count_image(self):
+        return self.interests.all().count()
 
     @property
     def natural_time(self):

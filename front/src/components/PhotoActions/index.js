@@ -11,6 +11,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             else{
                 dispatch(photoActions.likePhoto(ownProps.photoId));
             }
+        },
+        handleInterestClick: () => {
+            if(ownProps.isInterestedImage){
+                dispatch(photoActions.uninterestPhoto(ownProps.photoId));
+            }
+            else{
+                dispatch(photoActions.interestPhoto(ownProps.photoId));
+            }
         }
     }
 }
