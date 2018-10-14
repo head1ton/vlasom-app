@@ -4,8 +4,9 @@ const SET_FEED = 'SET_FEED';
 const LIKE_PHOTO = 'LIKE_PHOTO';
 const UNLIKE_PHOTO = 'UNLIKE_PHOTO';
 const ADD_COMMENT = 'ADD_COMMENT';
-const INTEREST_PHOTO = 'INTEREST_PHOTO'
-const UNINTEREST_PHOTO = 'UNINTEREST_PHOTO'
+const INTEREST_PHOTO = 'INTEREST_PHOTO';
+const UNINTEREST_PHOTO = 'UNINTEREST_PHOTO';
+const GET_ALL_CATEGORY = 'GET_ALL_CATEGORY';
 
 function setFeed(feed){
     return {
@@ -47,6 +48,13 @@ function doUninterestPhoto(photoId){
     return {
         type: UNINTEREST_PHOTO,
         photoId
+    }
+}
+
+function getAllCategory(categoryImageList){
+    return {
+        type: GET_ALL_CATEGORY,
+        categoryImageList
     }
 }
 
@@ -177,6 +185,26 @@ function commentPhoto(photoId, message){
             }
         })
     }
+};
+
+function allCategory(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`/images/category/all/`, {
+            headers: {
+                Authorization: `JWT ${token}`,
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            return response.json()
+        })
+        .then(json => {
+            dispatch(getAllCategory(json));
+        })
+    }
 }
 
 const initialState = {
@@ -197,6 +225,8 @@ function reducer(state = initialState, action){
             return applyInterestPhoto(state, action);
         case UNINTEREST_PHOTO:
             return applyuninterestPhoto(state, action);
+        case GET_ALL_CATEGORY:
+            return applyGetAllCategory(state, action);
         default:
             return state;
     }
@@ -274,13 +304,22 @@ function applyuninterestPhoto(state, action){
     return {...state, feed: updatedFeed}
 }
 
+function applyGetAllCategory(state, action){
+    const { categoryImageList } = action;
+    return {
+        ...state,
+        categoryImageList
+    }
+}
+
 const actionCreators = {
     getFeed,
     likePhoto,
     unlikePhoto,
     commentPhoto,
     interestPhoto,
-    uninterestPhoto
+    uninterestPhoto,
+    allCategory
 };
 
 export { actionCreators }

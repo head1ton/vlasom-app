@@ -14,4 +14,6 @@ urlpatterns = [
     path('<int:image_id>/comments/<int:comment_id>/', views.ModerateComment.as_view(), name = 'moderate_comment'),
     path('interest/image/<int:image_id>/', views.InterestImage.as_view(), name = 'interest_image'),
     path('interest/category/<int:category_id>/', views.InterestCategory.as_view(), name = 'interest_category'),
+    path('category/all/', views.CategoryAll.as_view(), name = 'category_all'),
+    path('category/all/name/', views.CategoryAllName.as_view(), name = 'category_all_name'),
 ]

@@ -6,26 +6,6 @@ from . import models
 
 User = get_user_model()
 
-
-class SmallImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Image
-        fields = ['image']
-
-
-class CountImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Image
-        fields = ['id', 'image','comment_count', 'like_count']
-
-
-class FeedUserSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = User
-        fields = ['username', 'profile_image']
-
-
 class CategorySerializer(serializers.ModelSerializer):
     is_interested_category = serializers.SerializerMethodField()
     class Meta:
@@ -41,6 +21,26 @@ class CategorySerializer(serializers.ModelSerializer):
             except models.Interest.DoesNotExist:
                 return False
         return False
+
+
+class SmallImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Image
+        fields = ['image']
+
+
+class CountImageSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+    class Meta:
+        model = models.Image
+        fields = ['id', 'image', 'category', 'comment_count', 'like_count', 'interest_count_image']
+
+
+class FeedUserSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User
+        fields = ['username', 'profile_image']
 
 
 class CommentSerializer(serializers.ModelSerializer):

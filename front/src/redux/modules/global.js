@@ -1,7 +1,10 @@
+import { actionCreators as userActions } from 'redux/modules/user';
+
 const CLOSE_MENU = 'CLOSE_MENU';
 const OPEN_MENU = 'OPEN_MENU';
 const HANDLE_PROFILE = 'HANDLE_PROFILE';
 const HANDLE_CATEGORY = 'HANDLE_CATEGORY';
+const GET_CATEGORY_ALL_NAME = 'GET_CATEGORY_ALL_NAME';
 
 function setCloseMenu(show_menu){
     return {
@@ -31,6 +34,13 @@ function setHandleCategory(show_category){
     }
 }
 
+function getAllCategoryName(category_name){
+    return {
+        type: GET_CATEGORY_ALL_NAME,
+        category_name
+    }
+}
+
 function closeMenu(){
     return (dispatch, getState) => {
         const { global : { show_menu } } = getState();
@@ -57,12 +67,30 @@ function handleCategory(){
         const { global : { show_category } } = getState();
         dispatch(setHandleCategory(show_category));
     }
+};
+
+function allCategoryName(){
+    return (dispatch, getState) => {
+        const { user : {token} } = getState();
+        fetch('images/category/all/name/', {
+            headers: {
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            return response.json();
+        })
+        .then(json => dispatch(getAllCategoryName(json)));
+    }
 }
 
 const initialState = {
     show_menu: false,
     show_profile: false,
-    show_category: false
+    show_category: false,
 };
 
 function reducer(state = initialState, action){
@@ -75,6 +103,8 @@ function reducer(state = initialState, action){
             return applyHandleProfile(state, action);
         case HANDLE_CATEGORY:
             return applyHandleCategory(state, action);
+        case GET_CATEGORY_ALL_NAME:
+            return applyGetAllCategoryName(state, action);
         default:
             return state;
     };
@@ -116,13 +146,22 @@ function applyHandleCategory(state, action){
         ...state,
         show_category: !show_category
     }
+};
+
+function applyGetAllCategoryName(state, action){
+    const { category_name } = action;
+    return {
+        ...state,
+        category_name
+    }
 }
 
 const actionCreators = {
     closeMenu,
     openMenu,
     handleProfile,
-    handleCategory
+    handleCategory,
+    allCategoryName
 };
 
 export { actionCreators };

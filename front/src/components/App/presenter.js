@@ -9,6 +9,7 @@ import Feed from 'components/Feed';
 import Explore from 'components/Explore';
 import Search from 'components/Search';
 import Menu from 'components/Menu';
+import CategoryList from 'components/CategoryList';
 
 const App = props => [
     props.isLoggedIn ? <Navigation key={1} /> : null,
@@ -26,6 +27,7 @@ const PrivateRoutes = props => (
         <Route exact path='/' component={Feed} />
         <Route exact path='/explore' component={Explore} />
         <Route exact path='/search/:searchTerm' component={Search} />
+        <Route exact path='/category/list/' component={CategoryList} />
     </Switch>
 )
 

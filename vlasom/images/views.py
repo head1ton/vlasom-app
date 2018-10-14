@@ -152,7 +152,7 @@ class ImageDetail(APIView):
         except models.Image.DoesNotExist:
             return None
 
-    def get(slef, request, image_id, format = None):
+    def get(self, request, image_id, format = None):
 
         try:
             image = models.Image.objects.get(id = image_id)
@@ -246,3 +246,29 @@ class InterestCategory(APIView):
             return Response(status = status.HTTP_204_NO_CONTENT)
         except models.Interest.DoesNotExist:
             return Response(status = status.HTTP_304_NOT_MODIFIED)
+
+
+class CategoryAll(APIView):
+    def get(self, request, format = None):
+        categorys = models.Category.objects.all()
+
+        image_list = []
+
+        for category in categorys:
+            category_images = category.image_set.all()[:6]
+
+            for image in category_images:
+                image_list.append(image)
+        
+        sorted_list = sorted(image_list, key=lambda x: x.category.id)
+        serializer = serializers.CountImageSerializer(image_list, many = True)
+
+        return Response(serializer.data)
+
+
+class CategoryAllName(APIView):
+    def get(self, request, format = None):
+        categorys = models.Category.objects.all()
+
+        serializer = serializers.CategorySerializer(categorys, many = True, context={'request': request})
+        return Response(data = serializer.data)

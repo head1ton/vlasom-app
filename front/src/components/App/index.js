@@ -4,11 +4,12 @@ import { actionCreators as globalActions } from 'redux/modules/global';
 
 const mapStateToProps = (state, ownProps) => {
     const { user, routing: { location } } = state;
-    const { global : { show_menu } } = state;
+    const { global : { show_menu, category_name } } = state;
     return {
         isLoggedIn: user.isLoggedIn,
         pathname: location.pathname,
-        show_menu
+        show_menu,
+        category_name
     };
 };
 
@@ -19,6 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         openMenu: () => {
             dispatch(globalActions.openMenu())
+        },
+        allCategoryName: () => {
+            dispatch(globalActions.allCategoryName())
         }
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styles from './styles.scss';
 import Ionicon from 'react-ionicons';
 
@@ -38,6 +39,9 @@ const Menu = (props, context) => (
             </div>
             {props.show_category ? (
             <div className={styles.col12}>
+                <Link to='/category/list/' style={{ textDecoration: 'none' }}>
+                    <p className={styles.menuItem}>{context.t("category All")}</p>
+                </Link>
                 <p className={styles.menuItem}>{context.t("category 1")}</p>
                 <p className={styles.menuItem}>{context.t("category 2")}</p>
                 <p className={styles.menuItem}>{context.t("category 3")}</p>
