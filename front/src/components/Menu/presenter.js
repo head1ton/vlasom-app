@@ -42,9 +42,9 @@ const Menu = (props, context) => (
                 <Link to='/category/list/' style={{ textDecoration: 'none' }}>
                     <p className={styles.menuItem}>{context.t("category All")}</p>
                 </Link>
-                <p className={styles.menuItem}>{context.t("category 1")}</p>
-                <p className={styles.menuItem}>{context.t("category 2")}</p>
-                <p className={styles.menuItem}>{context.t("category 3")}</p>
+                {props.category_name.map(category => (
+                    <p className={styles.menuItem}>{context.t(category.name)}</p>
+                ))}
             </div>) : null}
         </div>
         <div className={styles.menuBottom}>
@@ -62,7 +62,8 @@ Menu.propTypes = {
     show_profile: PropTypes.bool.isRequired,
     show_category: PropTypes.bool.isRequired,
     handleProfile: PropTypes.func.isRequired,
-    handleCategory: PropTypes.func.isRequired
+    handleCategory: PropTypes.func.isRequired,
+    category_name: PropTypes.array
 }
 
 export default Menu;

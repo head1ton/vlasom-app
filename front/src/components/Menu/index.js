@@ -3,10 +3,11 @@ import Container from './container';
 import { actionCreators as globalActions } from 'redux/modules/global';
 
 const mapStateToProps = (state, ownProps) => {
-    const { global : { show_profile, show_category } } = state;
+    const { global : { show_profile, show_category, category_name } } = state;
     return {
         show_profile,
-        show_category
+        show_category,
+        category_name
     }
 }
 

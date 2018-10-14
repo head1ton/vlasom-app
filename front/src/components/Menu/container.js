@@ -8,11 +8,12 @@ class Container extends Component{
         show_profile: PropTypes.bool.isRequired,
         show_category: PropTypes.bool.isRequired,
         handleProfile: PropTypes.func.isRequired,
-        handleCategory: PropTypes.func.isRequired
+        handleCategory: PropTypes.func.isRequired,
+        category_name: PropTypes.array
     }
 
     render(){
-        return <Menu closeMenu={this._closeMenu} show_profile={this.props.show_profile} show_category={this.props.show_category} handleProfile={this._handleProfile} handleCategory={this._handleCategory} />
+        return <Menu category_name={this.props.category_name} closeMenu={this._closeMenu} show_profile={this.props.show_profile} show_category={this.props.show_category} handleProfile={this._handleProfile} handleCategory={this._handleCategory} />
     }
 
     _closeMenu = () => {

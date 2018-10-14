@@ -71,8 +71,9 @@ function handleCategory(){
 
 function allCategoryName(){
     return (dispatch, getState) => {
+        console.log('got');
         const { user : {token} } = getState();
-        fetch('images/category/all/name/', {
+        fetch('/images/category/all/name/', {
             headers: {
                 "Authorization": `JWT ${token}`
             }

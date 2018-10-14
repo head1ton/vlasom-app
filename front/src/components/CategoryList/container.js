@@ -14,7 +14,7 @@ class Container extends Component{
     };
 
     componentDidMount(){
-        const { allCategory, allCategoryName } = this.props;
+        const { allCategory } = this.props;
         allCategory();
     }
 
