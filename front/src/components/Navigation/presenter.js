@@ -48,7 +48,7 @@ const Navigation = (props, context) => (
                             </Link>
                         </div>
                         <div className={`${styles.colLg1} ${styles.navItem} ${styles.mobileNone}`}>
-                            <Link to='/like/list'>
+                            <Link to='/interest/list/'>
                                 <img src={require('images/like-list.png')} alt="like-list"></img>
                             </Link>
                         </div>

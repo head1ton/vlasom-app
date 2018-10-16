@@ -12,6 +12,7 @@ import Menu from 'components/Menu';
 import CategoryList from 'components/CategoryList';
 import Category from 'components/Category';
 import Loading from 'components/Loading';
+import InterestList from 'components/InterestList';
 import styles from 'components/Feed/styles.scss';
 
 const App = props => [
@@ -39,6 +40,7 @@ const PrivateRoutes = props => (
         <Route exact path='/search/:searchTerm' component={Search} />
         <Route exact path='/category/list/' component={CategoryList} />
         <Route exact path='/category/:categoryName/' component={Category} />
+        <Route exact path='/interest/list/' component={InterestList} />
     </Switch>
 )
 

@@ -10,6 +10,7 @@ const INTEREST_CATEGORY = 'INTEREST_CATEGORY';
 const UNINTEREST_CATEGORY = 'UNINTEREST_CATEGORY';
 const GET_ALL_CATEGORY = 'GET_ALL_CATEGORY';
 const CATEGORY_IMAGE = 'CATEGORY_IMAGE';
+const INTEREST_LIST = 'INTEREST_LIST';
 
 function setFeed(feed){
     return {
@@ -79,6 +80,13 @@ function getCategoryImage(categoryImages){
     return {
         type: CATEGORY_IMAGE,
         categoryImages
+    }
+}
+
+function setInterestList(interestList){
+    return {
+        type: INTEREST_LIST,
+        interestList
     }
 }
 
@@ -293,6 +301,26 @@ function categoryImage(categoryName){
     }
 }
 
+function getInterestList(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch('/images/interest/list/', {
+            headers: {
+                'Authorization': `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            return response.json()
+        })
+        .then(json => {
+            dispatch(setInterestList(json));
+        })
+    }
+}
+
 const initialState = {
 
 };
@@ -319,6 +347,8 @@ function reducer(state = initialState, action){
             return applyInterestCategory(state, action);
         case UNINTEREST_CATEGORY:
             return applyUninterestCategory(state, action);
+        case INTEREST_LIST:
+            return applyGetInterestList(state, action);
         default:
             return state;
     }
@@ -434,6 +464,14 @@ function applyGetCategoryImage(state, action){
         ...state,
         feed: categoryImages
     }
+};
+
+function applyGetInterestList(state, action){
+    const { interestList } = action;
+    return {
+        ...state,
+        interestList
+    }
 }
 
 const actionCreators = {
@@ -446,7 +484,8 @@ const actionCreators = {
     allCategory,
     categoryImage,
     interestCategory,
-    uninterestCategory
+    uninterestCategory,
+    getInterestList
 };
 
 export { actionCreators }

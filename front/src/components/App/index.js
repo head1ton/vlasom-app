@@ -5,8 +5,6 @@ import { actionCreators as globalActions } from 'redux/modules/global';
 const mapStateToProps = (state, ownProps) => {
     const { user, routing: { location } } = state;
     const { global : { show_menu, category_name, loginUser } } = state;
-    console.log('1');
-    console.log(loginUser)
     return {
         isLoggedIn: user.isLoggedIn,
         pathname: location.pathname,
