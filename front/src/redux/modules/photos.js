@@ -7,6 +7,7 @@ const ADD_COMMENT = 'ADD_COMMENT';
 const INTEREST_PHOTO = 'INTEREST_PHOTO';
 const UNINTEREST_PHOTO = 'UNINTEREST_PHOTO';
 const GET_ALL_CATEGORY = 'GET_ALL_CATEGORY';
+const CATEGORY_IMAGE = 'CATEGORY_IMAGE';
 
 function setFeed(feed){
     return {
@@ -55,6 +56,13 @@ function getAllCategory(categoryImageList){
     return {
         type: GET_ALL_CATEGORY,
         categoryImageList
+    }
+}
+
+function getCategoryImage(categoryImages){
+    return {
+        type: CATEGORY_IMAGE,
+        categoryImages
     }
 }
 
@@ -205,6 +213,26 @@ function allCategory(){
             dispatch(getAllCategory(json));
         })
     }
+};
+
+function categoryImage(categoryName){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`/images/category/images/${categoryName}`, {
+            headers: {
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            return response.json()
+        })
+        .then(json => {
+            dispatch(getCategoryImage(json));
+        })
+    }
 }
 
 const initialState = {
@@ -227,6 +255,8 @@ function reducer(state = initialState, action){
             return applyuninterestPhoto(state, action);
         case GET_ALL_CATEGORY:
             return applyGetAllCategory(state, action);
+        case CATEGORY_IMAGE:
+            return applyGetCategoryImage(state, action);
         default:
             return state;
     }
@@ -310,6 +340,14 @@ function applyGetAllCategory(state, action){
         ...state,
         categoryImageList
     }
+};
+
+function applyGetCategoryImage(state, action){
+    const { categoryImages } = action;
+    return {
+        ...state,
+        categoryImages
+    }
 }
 
 const actionCreators = {
@@ -319,7 +357,8 @@ const actionCreators = {
     commentPhoto,
     interestPhoto,
     uninterestPhoto,
-    allCategory
+    allCategory,
+    categoryImage
 };
 
 export { actionCreators }

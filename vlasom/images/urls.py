@@ -16,4 +16,5 @@ urlpatterns = [
     path('interest/category/<int:category_id>/', views.InterestCategory.as_view(), name = 'interest_category'),
     path('category/all/', views.CategoryAll.as_view(), name = 'category_all'),
     path('category/all/name/', views.CategoryAllName.as_view(), name = 'category_all_name'),
+    path('category/images/<str:category_name>/', views.CategoryImage.as_view(), name = 'category_image'),
 ]

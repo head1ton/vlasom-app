@@ -255,7 +255,7 @@ class CategoryAll(APIView):
         image_list = []
 
         for category in categorys:
-            category_images = category.image_set.all()[:6]
+            category_images = category.image_set.all().order_by('-likes')[:6]
 
             for image in category_images:
                 image_list.append(image)
@@ -263,7 +263,7 @@ class CategoryAll(APIView):
         sorted_list = sorted(image_list, key=lambda x: x.category.id)
         serializer = serializers.CountImageSerializer(image_list, many = True)
 
-        return Response(serializer.data)
+        return Response(data = serializer.data, status = status.HTTP_200_OK)
 
 
 class CategoryAllName(APIView):
@@ -271,4 +271,14 @@ class CategoryAllName(APIView):
         categorys = models.Category.objects.all()
 
         serializer = serializers.CategorySerializer(categorys, many = True, context={'request': request})
-        return Response(data = serializer.data)
+        return Response(data = serializer.data, status = status.HTTP_200_OK)
+
+
+class CategoryImage(APIView):
+    def get(self, request, category_name, format = None):
+        category = models.Category.objects.get(name = category_name)
+
+        images = models.Image.objects.filter(category = category).order_by('-created_at')
+
+        serializer = serializers.ImageSerializer(images, many = True)
+        return Response(data = serializer.data, status = status.HTTP_200_OK)

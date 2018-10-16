@@ -43,7 +43,7 @@ const Menu = (props, context) => (
                     <p className={styles.menuItem}>{context.t("category All")}</p>
                 </Link>
                 {props.category_name.map(category => (
-                    <p className={styles.menuItem}>{context.t(category.name)}</p>
+                    <Link to={`/category/${category.name}/`} style={{ textDecoration: 'none' }} ><p key={category.id} className={styles.menuItem}>{context.t(category.name)}</p></Link>
                 ))}
             </div>) : null}
         </div>

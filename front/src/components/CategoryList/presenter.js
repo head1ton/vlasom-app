@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Ionicon from 'react-ionicons';
+import { Link } from 'react-router-dom';
 import styles from './styles.scss';
 import Loading from 'components/Loading';
 
@@ -27,13 +28,13 @@ const NotFound = props => (
 )
 
 const RenderCategory = (props, context) => props.category_name.map(category => (
-    <div className={`${styles.col12} ${styles.mt3}`}>
+    <div key={category.id} className={`${styles.col12} ${styles.mt3}`}>
         <div className={`${styles.col12} ${styles.pl5} ${styles.categoryName} ${styles.mb2}`}>
-            <p className={styles.categoryNameText}>{context.t(category.name)}</p>
+            <Link to={`/category/${category.name}/`} style={{ textDecoration: 'none' }}><p className={styles.categoryNameText}>{context.t(category.name)}</p></Link>
         </div>
         <div className={`${styles.row} ${styles.alignItemsCenter} ${styles.mt3} ${styles.mx0}`}>
         {props.categoryImageList.map(image => (
-            <div className={category.name === image.category.name ? `${styles.col12} ${styles.colSm6} ${styles.colMd4} ${styles.imageBox} ${styles.px0} ${styles.mb3}` : styles.none}>
+            <div key={image.id} className={category.name === image.category.name ? `${styles.col12} ${styles.colSm6} ${styles.colMd4} ${styles.imageBox} ${styles.px0} ${styles.mb3}` : styles.none}>
                 {category.name === image.category.name ? 
                 <span>
                     <img src={image.image} className={styles.image} alt={image.description}></img>
