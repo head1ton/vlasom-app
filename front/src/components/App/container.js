@@ -9,7 +9,13 @@ class Container extends Component{
         show_menu: PropTypes.bool.isRequired,
         closeMenu: PropTypes.func.isRequired,
         openMenu: PropTypes.func.isRequired,
-        allCategoryName: PropTypes.func.isRequired
+        allCategoryName: PropTypes.func.isRequired,
+        getMyProfile: PropTypes.func.isRequired,
+    }
+    
+    componentWillMount(){
+        const { getMyProfile } = this.props;
+        getMyProfile();
     }
 
     componentDidMount(){

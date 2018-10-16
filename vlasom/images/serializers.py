@@ -94,3 +94,12 @@ class InputImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Image
         fields = ['image', 'location', 'category', 'description', 'tags']
+
+
+class InterestSerializer(serializers.ModelSerializer):
+    user = FeedUserSerializer()
+    image = ImageSerializer()
+    category = CategorySerializer()
+    class Meta:
+        model = models.Interest
+        fields = ['id', 'user', 'image', 'category']

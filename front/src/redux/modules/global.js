@@ -5,6 +5,7 @@ const OPEN_MENU = 'OPEN_MENU';
 const HANDLE_PROFILE = 'HANDLE_PROFILE';
 const HANDLE_CATEGORY = 'HANDLE_CATEGORY';
 const GET_CATEGORY_ALL_NAME = 'GET_CATEGORY_ALL_NAME';
+const GET_USER = 'GET_USER';
 
 function setCloseMenu(show_menu){
     return {
@@ -41,6 +42,13 @@ function getAllCategoryName(category_name){
     }
 }
 
+function getUser(loginUser){
+    return {
+        type: GET_USER,
+        loginUser
+    }
+}
+
 function closeMenu(){
     return (dispatch, getState) => {
         const { global : { show_menu } } = getState();
@@ -71,7 +79,6 @@ function handleCategory(){
 
 function allCategoryName(){
     return (dispatch, getState) => {
-        console.log('got');
         const { user : {token} } = getState();
         fetch('/images/category/all/name/', {
             headers: {
@@ -85,6 +92,24 @@ function allCategoryName(){
             return response.json();
         })
         .then(json => dispatch(getAllCategoryName(json)));
+    }
+};
+
+function getMyProfile(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch('/users/my/profile/', {
+            headers: {
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            return response.json();
+        })
+        .then(json => dispatch(getUser(json)));
     }
 }
 
@@ -106,6 +131,8 @@ function reducer(state = initialState, action){
             return applyHandleCategory(state, action);
         case GET_CATEGORY_ALL_NAME:
             return applyGetAllCategoryName(state, action);
+        case GET_USER:
+            return applyGetUser(state, action);
         default:
             return state;
     };
@@ -155,6 +182,14 @@ function applyGetAllCategoryName(state, action){
         ...state,
         category_name
     }
+};
+
+function applyGetUser(state, action){
+    const { loginUser } = action;
+    return {
+        ...state,
+        loginUser
+    }
 }
 
 const actionCreators = {
@@ -162,7 +197,8 @@ const actionCreators = {
     openMenu,
     handleProfile,
     handleCategory,
-    allCategoryName
+    allCategoryName,
+    getMyProfile
 };
 
 export { actionCreators };

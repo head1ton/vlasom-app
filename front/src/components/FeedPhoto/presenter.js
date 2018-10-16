@@ -103,7 +103,7 @@ FeedPhoto.propTypes = {
     seeingLikes: PropTypes.bool.isRequired,
     closeLikes: PropTypes.func.isRequired,
     openLikes: PropTypes.func.isRequired,
-    category: PropTypes.bool.isRequired
+    category: PropTypes.object.isRequired
 }
 
 export default FeedPhoto;

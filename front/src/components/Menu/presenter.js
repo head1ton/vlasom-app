@@ -16,7 +16,7 @@ const Menu = (props, context) => (
                 </span>
             </div>
             <div onClick={props.handleProfile} className={`${styles.col8} ${styles.offset2} ${styles.mt5}`}>
-                <p className={`${styles.title} ${styles.mb3}`}>NickName</p>
+                <p className={`${styles.title} ${styles.mb3}`}>{props.loginUser.username}</p>
             </div>
             <div onClick={props.handleProfile} className={`${styles.col2} ${styles.mb3} ${styles.mt5}`}>
                 <span className={`${styles.close}`}>

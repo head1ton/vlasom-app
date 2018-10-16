@@ -289,3 +289,13 @@ class CategoryImage(APIView):
 
         serializer = serializers.ImageSerializer(images, many = True, context={'request': request})
         return Response(data = serializer.data, status = status.HTTP_200_OK)
+
+
+class InterestedList(APIView):
+    def get(self, request, format = None):
+        user = request.user
+
+        interested_list = models.Interest.objects.filter(user = user)
+
+        serializer = serializers.InterestSerializer(interested_list, many = True)
+        return Response(data = serializer.data, status = status.HTTP_200_OK)

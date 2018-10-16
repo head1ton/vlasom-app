@@ -155,3 +155,12 @@ class ChangePassword(APIView):
 
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
+
+
+class MyProfile(APIView):
+    def get(self, request, format = None):
+        user = request.user
+
+        serializer = serializers.UserProfileSerializer(user)
+
+        return Response(data = serializer.data, status = status.HTTP_200_OK)

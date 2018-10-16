@@ -28,7 +28,7 @@ const Navigation = (props, context) => (
                             <Link to='/profile' style={{ textDecoration: 'none' }}>
                                 <div className={`${styles.row} ${styles.alignItemsCenter}`}>
                                     <img src={require('images/nav-nickname.png')} alt="nickname"></img>
-                                    <p className={styles.nicknameText}>nickname</p>
+                                    <p className={styles.nicknameText}>{props.loginUser.nickname}</p>
                                 </div>
                             </Link>
                         </div>
@@ -70,7 +70,18 @@ Navigation.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onInputChange: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
-    openMenu: PropTypes.func.isRequired
+    openMenu: PropTypes.func.isRequired,
+    loginUser: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        nickname: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        images: PropTypes.array,
+        profile_image: PropTypes.string,
+        description: PropTypes.string,
+        follower_count: PropTypes.number.isRequired,
+        following_count: PropTypes.number.isRequired,
+        post_count: PropTypes.number.isRequired
+    })
 }
 
 export default Navigation;

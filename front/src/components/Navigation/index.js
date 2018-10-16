@@ -3,6 +3,13 @@ import Container from './container';
 import { push } from 'react-router-redux';
 import { actionCreators as globalActions } from 'redux/modules/global';
 
+const mapStateToProps = (state, ownProps) => {
+    const { global : { loginUser } } = state;
+    return {
+        loginUser
+    }
+}
+
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         goToSearch: (searchTerm) => {
@@ -14,4 +21,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Container);
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

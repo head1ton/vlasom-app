@@ -11,10 +11,11 @@ import Search from 'components/Search';
 import Menu from 'components/Menu';
 import CategoryList from 'components/CategoryList';
 import Category from 'components/Category';
+import Loading from 'components/Loading';
+import styles from 'components/Feed/styles.scss';
 
 const App = props => [
-    props.isLoggedIn ? <Navigation key={1} /> : null,
-    props.isLoggedIn ? <PrivateRoutes key={2} /> : <PublickRoutes key={2} />,
+    props.isLoggedIn ? (props.loginUser ? [<Navigation key={1} />,<PrivateRoutes key={2} />]: <AppLoading />) : <PublickRoutes key={2} />,
     props.show_menu ? <Menu key={3} /> : null ,
     <Footer key={4} />
 ]
@@ -22,6 +23,14 @@ const App = props => [
 App.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired
 }
+
+const AppLoading = props => (
+    <div className={`${styles.row} ${styles.alignItemsCenter}`}>
+        <div className={`${styles.col12} ${styles.row} ${styles.feed} ${styles.alignItemsCenter}`}>
+            <Loading />
+        </div>
+    </div>
+)
 
 const PrivateRoutes = props => (
     <Switch>

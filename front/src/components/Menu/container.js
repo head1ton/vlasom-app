@@ -9,11 +9,22 @@ class Container extends Component{
         show_category: PropTypes.bool.isRequired,
         handleProfile: PropTypes.func.isRequired,
         handleCategory: PropTypes.func.isRequired,
-        category_name: PropTypes.array
+        category_name: PropTypes.array,
+        loginUser: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            nickname: PropTypes.string.isRequired,
+            username: PropTypes.string.isRequired,
+            images: PropTypes.array,
+            profile_image: PropTypes.string,
+            description: PropTypes.string,
+            follower_count: PropTypes.number.isRequired,
+            following_count: PropTypes.number.isRequired,
+            post_count: PropTypes.number.isRequired
+        })
     }
 
     render(){
-        return <Menu category_name={this.props.category_name} closeMenu={this._closeMenu} show_profile={this.props.show_profile} show_category={this.props.show_category} handleProfile={this._handleProfile} handleCategory={this._handleCategory} />
+        return <Menu loginUser={this.props.loginUser} category_name={this.props.category_name} closeMenu={this._closeMenu} show_profile={this.props.show_profile} show_category={this.props.show_category} handleProfile={this._handleProfile} handleCategory={this._handleCategory} />
     }
 
     _closeMenu = () => {

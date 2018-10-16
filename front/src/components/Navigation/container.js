@@ -9,10 +9,21 @@ class Container extends Component {
 
     static propTypes = {
         goToSearch: PropTypes.func.isRequired,
-        openMenu: PropTypes.func.isRequired
+        openMenu: PropTypes.func.isRequired,
+        loginUser: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            nickname: PropTypes.string.isRequired,
+            username: PropTypes.string.isRequired,
+            images: PropTypes.array,
+            profile_image: PropTypes.string,
+            description: PropTypes.string,
+            follower_count: PropTypes.number.isRequired,
+            following_count: PropTypes.number.isRequired,
+            post_count: PropTypes.number.isRequired
+        })
     }
     render() {
-        return <Navigation onSubmit={this._onSubmit} onInputChange={this._onInputChange} openMenu={this._openMenu} value={this.state.term} />;
+        return <Navigation onSubmit={this._onSubmit} onInputChange={this._onInputChange} openMenu={this._openMenu} value={this.state.term} loginUser={this.props.loginUser} />;
     }
 
     _onInputChange = event => {
