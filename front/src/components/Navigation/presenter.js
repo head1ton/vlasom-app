@@ -25,7 +25,7 @@ const Navigation = (props, context) => (
                 <div className={`${styles.colLg7} ${styles.offsetLg0} ${styles.col1} ${styles.offset1} ${styles.textRight}`}>
                     <div className={`${styles.row} ${styles.alignItemsCenter}`}>
                         <div className={`${styles.offset2} ${styles.colLg3} ${styles.nickname} ${styles.mobileNone}`}>
-                            <Link to='/profile' style={{ textDecoration: 'none' }}>
+                            <Link to='/my/profile/' style={{ textDecoration: 'none' }}>
                                 <div className={`${styles.row} ${styles.alignItemsCenter}`}>
                                     <img src={require('images/nav-nickname.png')} alt="nickname"></img>
                                     <p className={styles.nicknameText}>{props.loginUser.nickname}</p>

@@ -11,6 +11,7 @@ class Container extends Component {
         goToSearch: PropTypes.func.isRequired,
         openMenu: PropTypes.func.isRequired,
         loginUser: PropTypes.shape({
+            id: PropTypes.number.isRequired,
             name: PropTypes.string.isRequired,
             nickname: PropTypes.string.isRequired,
             username: PropTypes.string.isRequired,

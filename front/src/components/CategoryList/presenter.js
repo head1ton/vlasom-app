@@ -21,12 +21,6 @@ const LoadingCategory = props => (
     </div>
 )
 
-const NotFound = props => (
-    <div className={`${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.loadingSearch}`}>
-        {props.text}
-    </div>
-)
-
 const RenderCategory = (props, context) => props.category_name.map(category => (
     <div key={category.id} className={`${styles.col12} ${styles.mt3}`}>
         <div className={`${styles.col12} ${styles.pl5} ${styles.categoryName} ${styles.mb2}`}>

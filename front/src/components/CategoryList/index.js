@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import Container from './container';
 import { actionCreators as photoActions } from 'redux/modules/photos';
-import { actionCreators as globalActions } from 'redux/modules/global';
 
 const mapStateToProps = (state, ownProps) => {
     const { photos : { categoryImageList } } = state;

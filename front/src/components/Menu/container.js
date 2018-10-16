@@ -11,6 +11,7 @@ class Container extends Component{
         handleCategory: PropTypes.func.isRequired,
         category_name: PropTypes.array,
         loginUser: PropTypes.shape({
+            id: PropTypes.number.isRequired,
             name: PropTypes.string.isRequired,
             nickname: PropTypes.string.isRequired,
             username: PropTypes.string.isRequired,
