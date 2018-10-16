@@ -6,6 +6,8 @@ const UNLIKE_PHOTO = 'UNLIKE_PHOTO';
 const ADD_COMMENT = 'ADD_COMMENT';
 const INTEREST_PHOTO = 'INTEREST_PHOTO';
 const UNINTEREST_PHOTO = 'UNINTEREST_PHOTO';
+const INTEREST_CATEGORY = 'INTEREST_CATEGORY';
+const UNINTEREST_CATEGORY = 'UNINTEREST_CATEGORY';
 const GET_ALL_CATEGORY = 'GET_ALL_CATEGORY';
 const CATEGORY_IMAGE = 'CATEGORY_IMAGE';
 
@@ -49,6 +51,20 @@ function doUninterestPhoto(photoId){
     return {
         type: UNINTEREST_PHOTO,
         photoId
+    }
+}
+
+function doInterestCategory(categoryId){
+    return {
+        type: INTEREST_CATEGORY,
+        categoryId
+    }
+}
+
+function doUninterestCategory(categoryId){
+    return {
+        type: UNINTEREST_CATEGORY,
+        categoryId
     }
 }
 
@@ -168,6 +184,48 @@ function uninterestPhoto(photoId){
     }
 }
 
+function interestCategory(categoryId){
+    return (dispatch, getState) => {
+        dispatch(doInterestCategory(categoryId));
+        const { user : { token } } = getState();
+        fetch(`/images/interest/category/${categoryId}/`,{
+            method: 'POST',
+            headers: {
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            else if(!response.ok){
+                dispatch(doUninterestCategory(categoryId));
+            }
+        })
+    }
+}
+
+function uninterestCategory(categoryId){
+    return (dispatch, getState) => {
+        dispatch(doUninterestCategory(categoryId));
+        const { user : { token } } = getState();
+        fetch(`/images/interest/category/${categoryId}/`,{
+            method: 'DELETE',
+            headers: {
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            else if(!response.ok){
+                dispatch(doInterestCategory(categoryId));
+            }
+        })
+    }
+}
+
 function commentPhoto(photoId, message){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
@@ -252,11 +310,15 @@ function reducer(state = initialState, action){
         case INTEREST_PHOTO:
             return applyInterestPhoto(state, action);
         case UNINTEREST_PHOTO:
-            return applyuninterestPhoto(state, action);
+            return applyUninterestPhoto(state, action);
         case GET_ALL_CATEGORY:
             return applyGetAllCategory(state, action);
         case CATEGORY_IMAGE:
             return applyGetCategoryImage(state, action);
+        case INTEREST_CATEGORY:
+            return applyInterestCategory(state, action);
+        case UNINTEREST_CATEGORY:
+            return applyUninterestCategory(state, action);
         default:
             return state;
     }
@@ -322,12 +384,36 @@ function applyInterestPhoto(state, action){
     return {...state, feed: updatedFeed}
 }
 
-function applyuninterestPhoto(state, action){
+function applyUninterestPhoto(state, action){
     const { photoId } = action;
     const { feed } = state;
     const updatedFeed = feed.map(photo => {
         if(photo.id === photoId){
             return {...photo, is_interested_image: false, interest_count_image: photo.interest_count_image -1}
+        }
+        return photo;
+    });
+    return {...state, feed: updatedFeed}
+};
+
+function applyInterestCategory(state, action){
+    const { categoryId } = action;
+    const { feed } = state;
+    const updatedFeed = feed.map(photo => {
+        if(photo.category.id === categoryId){
+            return {...photo, category: {...photo.category, is_interested_category: true, interest_count_category: photo.category.interest_count_category +1}}
+        }
+        return photo;
+    });
+    return {...state, feed: updatedFeed}
+}
+
+function applyUninterestCategory(state, action){
+    const { categoryId } = action;
+    const { feed } = state;
+    const updatedFeed = feed.map(photo => {
+        if(photo.category.id === categoryId){
+            return {...photo, category: {...photo.category, is_interested_category: false, interest_count_category: photo.category.interest_count_category -1}}
         }
         return photo;
     });
@@ -358,7 +444,9 @@ const actionCreators = {
     interestPhoto,
     uninterestPhoto,
     allCategory,
-    categoryImage
+    categoryImage,
+    interestCategory,
+    uninterestCategory
 };
 
 export { actionCreators }

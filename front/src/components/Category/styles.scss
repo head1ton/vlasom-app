@@ -13,3 +13,34 @@
     font-size: $font-24;
     color: $font-color;
 }
+.text-btn{
+    padding: 15px;
+    font-weight: bold;
+    color: $white;
+    background-color: $main-color;
+    @include borderRadius(5px,5px,5px,5px);
+    cursor: pointer;
+
+    &:hover{
+        color: $main-color;
+        background-color: $sub-color;
+    }
+}
+.text-btn-grey{
+    padding: 15px;
+    font-weight: bold;
+    color: $white;
+    background-color: $grey;
+    @include borderRadius(5px,5px,5px,5px);
+    cursor: pointer;
+
+    &:hover{
+        color: $main-color;
+        background-color: $sub-color;
+    }
+}
+@media (max-width: 575px){
+    .mt-3-mobile{
+        margin-top: 1em;
+    }
+}

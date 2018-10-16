@@ -8,7 +8,10 @@ class Container extends Component{
     }
 
     static propTypes = {
-        categoryImage: PropTypes.func.isRequired
+        categoryImage: PropTypes.func.isRequired,
+        feed: PropTypes.array,
+        interestCategory: PropTypes.func.isRequired,
+        uninterestCategory: PropTypes.func.isRequired
     }
 
     componentDidMount(){
@@ -31,10 +34,21 @@ class Container extends Component{
         }
     }
 
+    _handleInterestClick = event => {
+        const { feed, interestCategory, uninterestCategory } = this.props;
+        const categoryId = feed[0].category.id
+        if(feed[0].category.is_interested_category){
+            uninterestCategory(categoryId);
+        }
+        else{
+            interestCategory(categoryId);
+        }
+    }
+
     
     render(){
         const { feed } = this.props;
-        return <Category {...this.props} {...this.state} feed={feed} />;
+        return <Category {...this.props} {...this.state} feed={feed} handleInterestClick={this._handleInterestClick} />;
     }
 };
 

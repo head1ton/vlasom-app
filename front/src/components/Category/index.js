@@ -11,10 +11,15 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { match: { params: { categoryName } } } = ownProps;
-    console.log(categoryName);
     return{
         categoryImage: () => {
             dispatch(photoActions.categoryImage(categoryName));
+        },
+        interestCategory: (categoryId) => {
+            dispatch(photoActions.interestCategory(categoryId));
+        },
+        uninterestCategory: (categoryId) => {
+            dispatch(photoActions.uninterestCategory(categoryId));
         }
     }
 }

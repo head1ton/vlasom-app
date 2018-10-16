@@ -10,7 +10,7 @@ class CategorySerializer(serializers.ModelSerializer):
     is_interested_category = serializers.SerializerMethodField()
     class Meta:
         model = models.Category
-        fields = ['name', 'is_interested_category', 'interest_count_category']
+        fields = ['id', 'name', 'is_interested_category', 'interest_count_category']
 
     def get_is_interested_category(self, obj):
         if 'request' in self.context:
