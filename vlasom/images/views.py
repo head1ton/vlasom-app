@@ -25,7 +25,14 @@ class Images(APIView):
         my_images = user.images.all()[:2]
 
         for image in my_images:
-            image_list.append(image)
+            if image not in image_list:
+                image_list.append(image)
+        interested_category = models.Interest.objects.filter(user = user, image__isnull = True)
+        for category in interested_category:
+            category_images = models.Image.objects.filter(category = category.category)
+            for image in category_images:
+                if image not in image_list:
+                    image_list.append(image)
 
         sorted_list = sorted(image_list,key=lambda x: x.created_at, reverse=True)
         serializer = serializers.ImageSerializer(sorted_list, many = True, context = {'request': request})
