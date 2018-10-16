@@ -346,7 +346,7 @@ function applyGetCategoryImage(state, action){
     const { categoryImages } = action;
     return {
         ...state,
-        categoryImages
+        feed: categoryImages
     }
 }
 

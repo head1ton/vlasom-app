@@ -34,7 +34,15 @@ const FeedPhoto = (props, context) => {
                         <div className={styles.col12}>
                             <div className={`${styles.row} ${styles.alignItemsCenter} ${styles.mb3}`}>
                                 <div className={`${styles.col12} ${styles.colSm8}`}>
-                                    <PhotoActions like_count={props.like_count} comment_count={props.comment_count} interest_count_image={props.interest_count_image} isInterestedImage={props.is_interested_image} isLiked={props.is_liked} photoId={props.id} openLikes={props.openLikes} />
+                                    <PhotoActions 
+                                    like_count={props.like_count} 
+                                    comment_count={props.comment_count} 
+                                    interest_count_image={props.interest_count_image} 
+                                    isInterestedImage={props.is_interested_image} 
+                                    isLiked={props.is_liked} 
+                                    photoId={props.id} 
+                                    openLikes={props.openLikes} 
+                                    />
                                 </div>
                                 <div className={`${styles.col12} ${styles.colSm4} ${styles.textRight} ${styles.textLeftSm}`}>
                                     <span className={styles.categoryName}>#{props.category.name}</span>
@@ -94,7 +102,8 @@ FeedPhoto.propTypes = {
     interest_count_image: PropTypes.number.isRequired,
     seeingLikes: PropTypes.bool.isRequired,
     closeLikes: PropTypes.func.isRequired,
-    openLikes: PropTypes.func.isRequired
+    openLikes: PropTypes.func.isRequired,
+    category: PropTypes.bool.isRequired
 }
 
 export default FeedPhoto;

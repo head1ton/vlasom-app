@@ -280,5 +280,5 @@ class CategoryImage(APIView):
 
         images = models.Image.objects.filter(category = category).order_by('-created_at')
 
-        serializer = serializers.ImageSerializer(images, many = True)
+        serializer = serializers.ImageSerializer(images, many = True, context={'request': request})
         return Response(data = serializer.data, status = status.HTTP_200_OK)

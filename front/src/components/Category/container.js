@@ -24,7 +24,7 @@ class Container extends Component{
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.categoryImages){
+        if(nextProps.feed){
             this.setState({
                 loading: false
             })
@@ -33,8 +33,8 @@ class Container extends Component{
 
     
     render(){
-        const { categoryImages } = this.props;
-        return <Category {...this.props} {...this.state} categoryImages={categoryImages} />;
+        const { feed } = this.props;
+        return <Category {...this.props} {...this.state} feed={feed} />;
     }
 };
 

@@ -3,9 +3,9 @@ import Container from './container';
 import { actionCreators as photoActions } from 'redux/modules/photos';
 
 const mapStateToProps = (state, ownProps) => {
-    const { photos : { categoryImages } } = state;
+    const { photos : { feed } } = state;
     return {
-        categoryImages
+        feed
     }
 }
 

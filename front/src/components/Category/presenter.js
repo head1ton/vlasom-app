@@ -8,13 +8,13 @@ const Category = (props) => {
     if(props.loading){
         return <LoadingFeed />
     }
-    else if(props.categoryImages){
+    else if(props.feed){
         return <RenderFeed {...props} />
     }
 };
 
 Category.propTypes = {
-    categoryImages: PropTypes.array,
+    feed: PropTypes.array,
     loading: PropTypes.bool.isRequired
 }
 
@@ -29,9 +29,9 @@ const LoadingFeed = props => (
 const RenderFeed = props => (
     <div className={styles.container}>
     <div className={`${styles.col12} ${styles.title}`}>
-        <p className={styles.titleText}>{props.categoryImages[0].category.name}</p>
+        <p className={styles.titleText}>{props.feed[0].category.name}</p>
     </div>
-        {props.categoryImages.map(photo => <FeedPhoto {...photo} key={photo.id} />)}
+        {props.feed.map(photo => <FeedPhoto {...photo} key={photo.id} />)}
     </div>
 )
 
