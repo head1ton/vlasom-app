@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Ionicon from 'react-ionicons';
 import styles from './styles.scss';
 import Loading from 'components/Loading';
-import ImageRow from 'components/ImageRow';
 
 const CategoryList = (props, context) => (
     <div className={styles.container}>
         {props.loading && <LoadingCategory />}
         {!props.loading && 
         <div className={`${styles.row} ${styles.alignItemsCenter}`}>
-            <RenderCategoryImage category_name={props.category_name} categoryImageList={props.categoryImageList} />
+            <RenderCategory category_name={props.category_name} categoryImageList={props.categoryImageList} />
         </div>}
     </div>
 );
@@ -26,20 +26,41 @@ const NotFound = props => (
     </div>
 )
 
-const RenderCategoryImage = (props, context) => props.category_name.map(category => (
-    <div className={`${styles.row} ${styles.mt3}`}>
+const RenderCategory = (props, context) => props.category_name.map(category => (
+    <div className={`${styles.col12} ${styles.mt3}`}>
         <div className={`${styles.col12} ${styles.pl5} ${styles.categoryName} ${styles.mb2}`}>
             <p className={styles.categoryNameText}>{context.t(category.name)}</p>
         </div>
+        <div className={`${styles.row} ${styles.alignItemsCenter} ${styles.mt3} ${styles.mx0}`}>
         {props.categoryImageList.map(image => (
-            <span>
-                {category.name === image.category.name ? <ImageRow image={image} key={image.id} /> : null}
-            </span>
+            <div className={category.name === image.category.name ? `${styles.col12} ${styles.colSm6} ${styles.colMd4} ${styles.imageBox} ${styles.px0} ${styles.mb3}` : styles.none}>
+                {category.name === image.category.name ? 
+                <span>
+                    <img src={image.image} className={styles.image} alt={image.description}></img>
+                    <div className={`${styles.row} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`}>
+                        <div className={`${styles.overlay} ${styles.col12} `}>
+                            <div className={`${styles.row} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.overlayBox}`}>
+                                <div className={`${styles.col12} ${styles.overlayText}`}>
+                                    <div className={`${styles.row} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`}>
+                                        <Ionicon icon="ios-heart" fontSize="22px" color="white" />
+                                        <span className={styles.ml2}>{image.like_count}</span>
+                                    </div>
+                                    <div className={`${styles.row} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`}>
+                                        <Ionicon icon="ios-text" fontSize="22px" color="white" />
+                                        <span className={styles.ml2}>{image.comment_count}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span> : null}
+            </div>
         ))}
+        </div>
     </div>
 ))
 
-RenderCategoryImage.contextTypes = {
+RenderCategory.contextTypes = {
     t: PropTypes.func.isRequired
 }
 
