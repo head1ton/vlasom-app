@@ -18,6 +18,10 @@
     font-size: $font-20;
     color: $tag;
     cursor: pointer;
+
+    &:hover{
+        color: $main-color;
+    }
 }
 .text-center{
     text-align: center;

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styles from './styles.scss';
 import PhotoActions from 'components/PhotoActions';
 import PhotoComments from 'components/PhotoComments';
@@ -45,7 +46,7 @@ const FeedPhoto = (props, context) => {
                                     />
                                 </div>
                                 <div className={`${styles.col12} ${styles.colSm4} ${styles.textRight} ${styles.textLeftSm}`}>
-                                    <span className={styles.categoryName}>#{props.category.name}</span>
+                                    <Link to={`/category/${props.category.name}/`} style={{textDecoration: 'none'}}><span className={styles.categoryName}>#{props.category.name}</span></Link>
                                 </div>
                             </div>
                             <PhotoComments 

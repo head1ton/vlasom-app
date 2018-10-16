@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Ionicon from 'react-ionicons';
+import { Link } from 'react-router-dom';
 import styles from './styles.scss';
 import Loading from 'components/Loading';
 
@@ -44,7 +45,7 @@ const LoadingFeed = props => (
 );
 
 const RenderCategoryName = props => (
-    <span className={`${styles.categoryName} ${styles.mx3}`}># {props.category.name}</span>
+    <Link to={`/category/${props.category.name}/`} style={{ textDecoration: 'none' }}><span className={`${styles.categoryName} ${styles.mx3}`}># {props.category.name}</span></Link>
 );
 
 const RenderInterestImage = props => (
