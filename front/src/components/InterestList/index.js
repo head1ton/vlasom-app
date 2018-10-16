@@ -4,10 +4,12 @@ import { actionCreators as photoActions } from 'redux/modules/photos';
 
 const mapStateToProps = (state, ownProps) => {
     const { photos : { interestList } } = state;
-    console.log('hihi')
+    const { global : { loginUser : { username } } } = state;
+    console.log('fnwekf')
     console.log(interestList);
     return {
-        interestList
+        interestList,
+        username
     }
 }
 

@@ -8,7 +8,8 @@ class Container extends Component{
     }
 
     static propTypes = {
-        getInterestList: PropTypes.func.isRequired
+        getInterestList: PropTypes.func.isRequired,
+        interestList: PropTypes.array
     }
 
     componentDidMount(){
@@ -17,7 +18,7 @@ class Container extends Component{
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.feed){
+        if(nextProps.interestList){
             this.setState({
                 loading: false
             })
@@ -25,7 +26,7 @@ class Container extends Component{
     }
 
     render(){
-        return <InterestList {...this.props} />
+        return <InterestList {...this.props} {...this.state} />
     }
 };
 
