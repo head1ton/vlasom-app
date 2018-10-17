@@ -134,6 +134,12 @@ function facebookLogin(access_token){
      }
  }
 
+ function getLogout(){
+     return (dispatch) => {
+         dispatch(logout());
+     }
+ }
+
  function getPhotoLikes(photoId){
      return (dispatch, getState) => {
          const { user : { token } } = getState();
@@ -440,7 +446,8 @@ function getNotifications(){
      getExplore,
      searchByTerm,
      getUserProfile,
-     getNotifications
+     getNotifications,
+     getLogout
  }
 
  export { actionCreators };

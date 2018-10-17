@@ -47,7 +47,7 @@ const Menu = (props, context) => (
                 ))}
             </div>) : null}
         </div>
-        <div className={styles.menuBottom}>
+        <div className={styles.menuBottom} onClick={props.handleLogout}>
             <p className={styles.title}>{context.t("Logout")}</p>
         </div>
     </div>
@@ -63,6 +63,7 @@ Menu.propTypes = {
     show_category: PropTypes.bool.isRequired,
     handleProfile: PropTypes.func.isRequired,
     handleCategory: PropTypes.func.isRequired,
+    handleLogout: PropTypes.func.isRequired,
     category_name: PropTypes.array
 }
 

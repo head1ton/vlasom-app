@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Container from './container';
 import { actionCreators as globalActions } from 'redux/modules/global';
+import { actionCreators as userActions } from 'redux/modules/user';
 
 const mapStateToProps = (state, ownProps) => {
     const { global : { show_profile, show_category, category_name, loginUser } } = state;
@@ -22,7 +23,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         handleCategory: () => {
             dispatch(globalActions.handleCategory());
-        }
+        },
+        getLogout: () => {
+            dispatch(userActions.getLogout());
+        },
     }
 }
 
