@@ -14,13 +14,16 @@ class Container extends Component{
             id: PropTypes.number.isRequired,
             name: PropTypes.string.isRequired,
             nickname: PropTypes.string.isRequired,
-            username: PropTypes.string.isRequired,
             images: PropTypes.array,
+            email: PropTypes.string.isRequired,
             profile_image: PropTypes.string,
             description: PropTypes.string,
             follower_count: PropTypes.number.isRequired,
             following_count: PropTypes.number.isRequired,
-            post_count: PropTypes.number.isRequired
+            post_count: PropTypes.number.isRequired,
+            birth_year: PropTypes.string.isRequired,
+            birth_month: PropTypes.string.isRequired,
+            birth_day: PropTypes.string.isRequired
         })
     }
 

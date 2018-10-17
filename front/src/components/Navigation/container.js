@@ -18,9 +18,13 @@ class Container extends Component {
             images: PropTypes.array,
             profile_image: PropTypes.string,
             description: PropTypes.string,
+            email: PropTypes.string.isRequired,
             follower_count: PropTypes.number.isRequired,
             following_count: PropTypes.number.isRequired,
-            post_count: PropTypes.number.isRequired
+            post_count: PropTypes.number.isRequired,
+            birth_year: PropTypes.string.isRequired,
+            birth_month: PropTypes.string.isRequired,
+            birth_day: PropTypes.string.isRequired
         })
     }
     render() {

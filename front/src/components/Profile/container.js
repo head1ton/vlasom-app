@@ -10,11 +10,15 @@ class Container extends Component{
             following_count: PropTypes.number.isRequired,
             id: PropTypes.number.isRequired,
             images: PropTypes.array,
+            email: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired,
             nickname: PropTypes.string.isRequired,
             post_count: PropTypes.number.isRequired,
             profile_image: PropTypes.string,
-            username: PropTypes.string.isRequired
+            username: PropTypes.string.isRequired,
+            birth_year: PropTypes.string.isRequired,
+            birth_month: PropTypes.string.isRequired,
+            birth_day: PropTypes.string.isRequired
         })
     }
 

@@ -1,0 +1,29 @@
+.profile-image{
+    text-align: center;
+    img{
+        width: 100%;
+    }
+}
+.text-box{
+    @include inputBox(y,y,y,y);
+    padding: 50px;
+}
+.text-center{
+    text-align: center;
+}
+.count{
+    font-size: $font-24;
+    font-weight: $bold;
+}
+.count-text{
+    font-size: $font-18;
+    margin-top: 0.5em;
+}
+.title-text{
+    font-weight: $bold;
+    font-family: $font-title;
+    font-size: $font-24;
+    text-align: center;
+    border-bottom: 2px solid $main-color;
+    padding: 30px;
+}
