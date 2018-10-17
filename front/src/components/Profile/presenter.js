@@ -27,7 +27,8 @@ Profile.propTypes = {
         username: PropTypes.string.isRequired,
         birth_year: PropTypes.string.isRequired,
         birth_month: PropTypes.string.isRequired,
-        birth_day: PropTypes.string.isRequired
+        birth_day: PropTypes.string.isRequired,
+        notification_count: PropTypes.number.isRequired
     })
 }
 

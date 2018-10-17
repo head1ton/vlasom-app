@@ -1,19 +1,19 @@
 import { connect } from 'react-redux';
 import Container from './container';
-import { actionCreators as photoActions } from 'redux/modules/photos';
+import { actionCreators as userActions } from 'redux/modules/user';
 import { actionCreators as globalActions } from 'redux/modules/global';
 
-const mapStateToProps = (state, ownProps) => {
-    const { photos: { feed } } = state;
+const mapStateToProps = (state, owmProps) => {
+    const { user : { notifications } } = state;
     return {
-        feed
+        notifications
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getFeed: () => {
-            dispatch(photoActions.getFeed());
+        getNotifications: () => {
+            dispatch(userActions.getNotifications());
         },
         getMyProfile: () => {
             dispatch(globalActions.getMyProfile());

@@ -8,13 +8,15 @@ class Container extends Component{
     }
 
     static propTypes = {
-        getFeed: PropTypes.func.isRequired
+        getFeed: PropTypes.func.isRequired,
+        getMyProfile: PropTypes.func.isRequired
     };
 
     componentDidMount(){
-        const { getFeed } = this.props;
+        const { getFeed, getMyProfile } = this.props;
         this.props.feed
         getFeed();
+        getMyProfile();
     }
 
     componentWillReceiveProps = (nextProps) => {

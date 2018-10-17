@@ -5,6 +5,7 @@
  const UNFOLLOW_USER = 'UNFOLLOW_USER';
  const SET_IMAGE_LIST = 'SET_IMAGE_LIST';
  const USER_PROFILE = 'USER_PROFILE';
+ const NOTIFICATIONS = 'NOTIFICATIONS';
 
 function saveToken(token) {
     return {
@@ -51,6 +52,13 @@ function setUserProfile(user){
     return {
         type: USER_PROFILE,
         user
+    }
+}
+
+function setNotifications(notifications){
+    return {
+        type: NOTIFICATIONS,
+        notifications
     }
 }
 
@@ -273,6 +281,40 @@ function getUserProfile(username){
         })
     }
 }
+
+function getNotifications(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch('/notifications/', {
+            headers: {
+                'Authorization': `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(logout());
+            }
+            return response.json()
+        })
+        .then(json => {
+            dispatch(setNotifications(json))
+        })
+        .then(
+            fetch('/notifications/update/', {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `JWT ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if(response.status === 401){
+                    dispatch(logout());
+                }
+            })
+        )
+    }
+}
  
  const initialState = {
      isLoggedIn: localStorage.getItem('jwt') ? true : false,
@@ -295,6 +337,8 @@ function getUserProfile(username){
             return applySetImageList(state, action);
         case USER_PROFILE:
             return applySetUserProfile(state, action);
+        case NOTIFICATIONS:
+            return applySetNotifications(state, action);
         default:
             return state;
      }
@@ -375,6 +419,14 @@ function getUserProfile(username){
          ...state,
          user
      }
+ };
+
+ function applySetNotifications(state, action){
+     const { notifications } = action;
+     return {
+         ...state,
+         notifications
+     }
  }
 
  const actionCreators = {
@@ -387,7 +439,8 @@ function getUserProfile(username){
      unfollowUser,
      getExplore,
      searchByTerm,
-     getUserProfile
+     getUserProfile,
+     getNotifications
  }
 
  export { actionCreators };

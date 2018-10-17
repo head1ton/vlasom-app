@@ -1,0 +1,46 @@
+.feed{
+    text-align: center;
+    min-height: 60vh;
+}
+.profile-img{
+    margin: 5px auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    text-align: center;
+    overflow: hidden;
+
+    img{
+        height: 50px;
+    }
+}
+@media (min-width: 576px){
+    .profile-img{
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+
+        img{
+            height: 80px;
+        }
+    }
+}
+.notification-box{
+    padding: 10px;
+    @include inputBox(y,y,y,y);
+}
+.notification-box-grey{
+    padding: 10px;
+    @include inputBox(y,y,y,y);
+    background-color: #eaeaea;
+}
+.notification-img{
+    width: 100%;
+}
+.text-bold{
+    font-weight: $bold;
+}
+.message{
+    font-size: $font-20;
+    font-weight: $bold;
+}

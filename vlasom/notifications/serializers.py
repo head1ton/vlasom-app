@@ -9,6 +9,8 @@ User = get_user_model()
 class NotificationSerializer(serializers.ModelSerializer):
     from_user = user_serializers.ListUserSerializer()
     image = image_serializers.SmallImageSerializer()
+    to_user = user_serializers.ListUserSerializer()
+    category = image_serializers.CategorySerializer()
 
     class Meta:
         model = models.Notification

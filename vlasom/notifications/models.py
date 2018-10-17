@@ -14,6 +14,7 @@ class Notification(TimeStampedModel):
     image = models.ForeignKey(Image, on_delete = models.CASCADE, blank = True, null = True)
     comment = models.TextField(null = True, blank = True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE, blank = True, null = True)
+    is_viewed = models.BooleanField(default = False)
 
     class Meta:
         ordering = ['-created_at']

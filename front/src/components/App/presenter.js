@@ -16,6 +16,7 @@ import InterestList from 'components/InterestList';
 import Profile from 'components/Profile';
 import UserUploaded from 'components/UserUploaded';
 import OtherProfile from 'components/OtherProfile';
+import Notifications from 'components/Notifications';
 import styles from 'components/Feed/styles.scss';
 
 const App = props => [
@@ -47,6 +48,7 @@ const PrivateRoutes = props => (
         <Route exact path='/my/profile/' component={Profile} />
         <Route exact path='/my/upload/' component={UserUploaded} />
         <Route exact path='/profile/:username/' component={OtherProfile} />
+        <Route exact path='/notifications/' component={Notifications} />
     </Switch>
 )
 

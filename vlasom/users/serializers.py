@@ -4,6 +4,7 @@ from rest_auth.registration.serializers import RegisterSerializer
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 from . import models
+from vlasom.notifications.models import Notification
 from vlasom.images import serializers as images_serializers
 
 User = get_user_model()
@@ -18,6 +19,24 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'name', 'nickname', 'email', 'profile_image', 'description', 'post_count', 'follower_count', 'following_count', 'images', 'birth_year', 'birth_month', 'birth_day']
+
+
+class MyProfileSerializer(serializers.ModelSerializer):
+    images = images_serializers.CountImageSerializer(many = True, read_only = True)
+    post_count = serializers.ReadOnlyField()
+    follower_count = serializers.ReadOnlyField()
+    following_count = serializers.ReadOnlyField()
+    notification_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'name', 'nickname', 'email', 'profile_image', 'description', 'post_count', 'follower_count', 'following_count', 'images', 'birth_year', 'birth_month', 'birth_day', 'notification_count']
+    
+    def get_notification_count(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            return Notification.objects.filter(to_user = request.user, is_viewed = False).count()
+        return 0
 
 
 class ListUserSerializer(serializers.ModelSerializer):

@@ -161,6 +161,6 @@ class MyProfile(APIView):
     def get(self, request, format = None):
         user = request.user
 
-        serializer = serializers.UserProfileSerializer(user)
+        serializer = serializers.MyProfileSerializer(user, context={'request': request})
 
         return Response(data = serializer.data, status = status.HTTP_200_OK)

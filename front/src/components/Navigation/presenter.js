@@ -43,8 +43,11 @@ const Navigation = (props, context) => (
                             </Link>
                         </div>
                         <div className={`${styles.colLg1} ${styles.navItem} ${styles.mobileNone}`}>
-                            <Link to='/history'>
+                            <Link to='/notifications/' style={{textDecoration: 'none'}}>
                                 <img src={require('images/history.png')} alt="history"></img>
+                                {props.loginUser.notification_count > 0 ? 
+                                    <p className={styles.notificationCount}>{props.loginUser.notification_count}</p>
+                                    : null}
                             </Link>
                         </div>
                         <div className={`${styles.colLg1} ${styles.navItem} ${styles.mobileNone}`}>
@@ -84,7 +87,8 @@ Navigation.propTypes = {
         post_count: PropTypes.number.isRequired,
         birth_year: PropTypes.string.isRequired,
         birth_month: PropTypes.string.isRequired,
-        birth_day: PropTypes.string.isRequired
+        birth_day: PropTypes.string.isRequired,
+        notification_count: PropTypes.number.isRequired
     })
 }
 
