@@ -14,6 +14,7 @@ import Category from 'components/Category';
 import Loading from 'components/Loading';
 import InterestList from 'components/InterestList';
 import Profile from 'components/Profile';
+import UserUploaded from 'components/UserUploaded';
 import styles from 'components/Feed/styles.scss';
 
 const App = props => [
@@ -43,6 +44,7 @@ const PrivateRoutes = props => (
         <Route exact path='/category/:categoryName/' component={Category} />
         <Route exact path='/interest/list/' component={InterestList} />
         <Route exact path='/my/profile/' component={Profile} />
+        <Route exact path='/my/upload/' component={UserUploaded} />
     </Switch>
 )
 

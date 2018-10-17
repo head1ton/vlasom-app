@@ -6,6 +6,7 @@ import ImageRow from 'components/ImageRow';
 
 const UserProfile = props => (
     <div className={styles.container}>
+    {props.userInfo ? 
         <div className={`${styles.row} ${styles.alignItemsCenter}`}>
             <div className={`${styles.col12} ${styles.colMd4} ${styles.profileImage} ${styles.mt3}`}>
                 <img src={props.user.profile_image || require('images/profile-red.png')} alt={props.user.username}></img>
@@ -93,9 +94,10 @@ const UserProfile = props => (
                     {props.user.description ? props.user.description : <p className={styles.textCenter}>아직 소개글이 없습니다.</p> }
                 </div>
             </div>
-        </div>
-        <div className={`${styles.col12} ${styles.mt3}`}>
-        <p className={styles.titleText}>업로드한 게시물</p>
+        </div> : null }
+        {props.userUpload ? 
+        <div className={`${styles.col12}`}>
+        <p className={styles.titleText}>{props.user.username} 님이 업로드한 게시물</p>
             {props.user.images.length > 0 ? 
             <div className={`${styles.row} ${styles.alignItemsCenter} ${styles.mt3}`}>
             {props.user.images.map(image => <ImageRow image={image} key={image.id} />)}
@@ -105,7 +107,7 @@ const UserProfile = props => (
                     <p>업로드한 게시물이 없습니다.</p>
                 </div>
             </div>}
-        </div>
+        </div> : null }
     </div>
 );
 
@@ -125,7 +127,9 @@ UserProfile.propTypes = {
         birth_year: PropTypes.string.isRequired,
         birth_month: PropTypes.string.isRequired,
         birth_day: PropTypes.string.isRequired
-    })
+    }).isRequired,
+    userInfo: PropTypes.bool.isRequired,
+    userUpload: PropTypes.bool.isRequired
 }
 
 export default UserProfile;

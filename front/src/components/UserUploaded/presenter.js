@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import UserProfile from 'components/UserProfile';
 
-const Profile = props => (
+const UserUploaded = props => (
     <div className={styles.container}>
-    <div className={`${styles.textCenter} ${styles.mb3}`}>
-        <p className={styles.titleText}>{props.user.nickname} 님의 프로필</p>
+    <UserProfile user={props.user} userInfo={false} userUpload={true} />
     </div>
-    <UserProfile user={props.user} userInfo={true} userUpload={true} />
-    </div>
-)
+);
 
-Profile.propTypes = {
+UserUploaded.propTypes = {
     user: PropTypes.shape({
         description: PropTypes.string,
         follower_count: PropTypes.number.isRequired,
@@ -31,4 +28,4 @@ Profile.propTypes = {
     })
 }
 
-export default Profile;
+export default UserUploaded;

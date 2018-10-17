@@ -27,7 +27,7 @@ const Menu = (props, context) => (
             <div className={styles.col12}>
                 <Link to='/my/profile/' style={{ textDecoration: 'none' }}><p className={styles.menuItem}>{context.t("My Profile")}</p></Link>
                 <Link to='/interest/list/' style={{ textDecoration: 'none' }}><p className={styles.menuItem}>{context.t("My Interests")}</p></Link>
-                <p className={styles.menuItem}>{context.t("My Uploads")}</p>
+                <Link to='/my/upload/' style={{ textDecoration: 'none' }}><p className={styles.menuItem}>{context.t("My Uploads")}</p></Link>
             </div>) : null}
             <div onClick={props.handleCategory} className={`${styles.col8} ${styles.offset2} ${styles.mt5}`}>
                 <p className={`${styles.title} ${styles.mb3}`}>{context.t("Categorys")}</p>
