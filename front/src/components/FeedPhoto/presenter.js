@@ -53,6 +53,7 @@ const FeedPhoto = (props, context) => {
                             description={props.description} 
                             user={props.user.username} 
                             comments={props.comments}
+                            photoId={props.id} 
                             />
                             <div className={styles.mt3}>
                                 <TimeStamp time={props.natural_time} />
@@ -92,6 +93,7 @@ FeedPhoto.propTypes = {
         })
     ).isRequired,
     comment_count: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
     category: PropTypes.shape({
         name: PropTypes.string.isRequired,
         is_interested_category: PropTypes.bool.isRequired,

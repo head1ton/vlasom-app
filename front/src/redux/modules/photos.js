@@ -4,6 +4,7 @@ const SET_FEED = 'SET_FEED';
 const LIKE_PHOTO = 'LIKE_PHOTO';
 const UNLIKE_PHOTO = 'UNLIKE_PHOTO';
 const ADD_COMMENT = 'ADD_COMMENT';
+const DELETE_COMMNET = 'DELETE_COMMENT';
 const INTEREST_PHOTO = 'INTEREST_PHOTO';
 const UNINTEREST_PHOTO = 'UNINTEREST_PHOTO';
 const INTEREST_CATEGORY = 'INTEREST_CATEGORY';
@@ -38,6 +39,14 @@ function addComment(photoId, comment){
         type: ADD_COMMENT,
         photoId,
         comment
+    }
+}
+
+function setDeleteComment(commentId, photoId){
+    return {
+        type: DELETE_COMMNET,
+        commentId,
+        photoId
     }
 }
 
@@ -261,6 +270,25 @@ function commentPhoto(photoId, message){
     }
 };
 
+function deleteComment(commentId, photoId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`/images/comments/${commentId}/`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `JWT ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            dispatch(setDeleteComment(commentId, photoId))
+        })
+    }
+}
+
 function allCategory(){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
@@ -335,6 +363,8 @@ function reducer(state = initialState, action){
             return applyUnlikePhoto(state, action);
         case ADD_COMMENT:
             return applyAddComment(state, action);
+        case DELETE_COMMNET:
+            return applyDeleteComment(state, action);
         case INTEREST_PHOTO:
             return applyInterestPhoto(state, action);
         case UNINTEREST_PHOTO:
@@ -400,6 +430,31 @@ function applyAddComment(state, action){
         return photo;
     });
     return {...state, feed: updatedFeed};
+}
+
+function applyDeleteComment(state, action){
+    console.log('1')
+    const { commentId, photoId } = action;
+    const { feed } = state;
+    const updatedFeed = feed.map(photo => {
+        console.log('2')
+        if(photo.id === photoId){
+            console.log('3')
+            const updatedComments = photo.comments.map(comment => {
+                if(comment.id === commentId){
+                    return null;
+                }
+                return comment;
+            });
+            return {
+                ...photo,
+                comments: updatedComments,
+                comment_count: photo.comment_count-1
+            }
+        }
+        return photo;
+    });
+    return {...state, feed: updatedFeed}
 }
 
 function applyInterestPhoto(state, action){
@@ -485,7 +540,8 @@ const actionCreators = {
     categoryImage,
     interestCategory,
     uninterestCategory,
-    getInterestList
+    getInterestList,
+    deleteComment
 };
 
 export { actionCreators }
