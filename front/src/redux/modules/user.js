@@ -4,6 +4,7 @@
  const FOLLOW_USER = 'FOLLOW_USER';
  const UNFOLLOW_USER = 'UNFOLLOW_USER';
  const SET_IMAGE_LIST = 'SET_IMAGE_LIST';
+ const USER_PROFILE = 'USER_PROFILE';
 
 function saveToken(token) {
     return {
@@ -38,10 +39,18 @@ function setFollowUser(userId){
         userId
     }
 }
+
 function setUnfollowUser(userId){
     return {
         type: UNFOLLOW_USER,
         userId
+    }
+}
+
+function setUserProfile(user){
+    return {
+        type: USER_PROFILE,
+        user
     }
 }
 
@@ -243,6 +252,27 @@ function facebookLogin(access_token){
     })
     .then(json => json);
 }
+
+function getUserProfile(username){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`/users/${username}/`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(logout());
+            }
+            return response.json()
+        })
+        .then(json => {
+            dispatch(setUserProfile(json));
+        })
+    }
+}
  
  const initialState = {
      isLoggedIn: localStorage.getItem('jwt') ? true : false,
@@ -263,6 +293,8 @@ function facebookLogin(access_token){
             return applyUnfollowUser(state, action);
         case SET_IMAGE_LIST:
             return applySetImageList(state, action);
+        case USER_PROFILE:
+            return applySetUserProfile(state, action);
         default:
             return state;
      }
@@ -337,6 +369,14 @@ function facebookLogin(access_token){
     }
  };
 
+ function applySetUserProfile(state, action){
+     const { user } = action;
+     return {
+         ...state,
+         user
+     }
+ }
+
  const actionCreators = {
      facebookLogin,
      usernameLogin,
@@ -346,7 +386,8 @@ function facebookLogin(access_token){
      followUser,
      unfollowUser,
      getExplore,
-     searchByTerm
+     searchByTerm,
+     getUserProfile
  }
 
  export { actionCreators };

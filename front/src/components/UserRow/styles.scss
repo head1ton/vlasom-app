@@ -22,8 +22,12 @@
         height: 150px;
     }
 }
+.profile-text{
+    color: $font-color;
+}
 .profile-text-bold{
     font-weight: $bold;
+    color: $font-color;
 }
 .btn{
     @include borderRadius(5px,5px,5px,5px);
