@@ -117,6 +117,7 @@ const initialState = {
     show_menu: false,
     show_profile: false,
     show_category: false,
+    show_nav_btm: true,
 };
 
 function reducer(state = initialState, action){
