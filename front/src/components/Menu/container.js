@@ -29,6 +29,14 @@ class Container extends Component{
         })
     }
 
+    componentDidMount(){
+        window.addEventListener('scroll', this._handleScroll, false)
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener('scroll', this._handleScroll, false);
+    }
+
     render(){
         return <Menu loginUser={this.props.loginUser} category_name={this.props.category_name} handleLogout={this._handleLogout} closeMenu={this._closeMenu} show_profile={this.props.show_profile} show_category={this.props.show_category} handleProfile={this._handleProfile} handleCategory={this._handleCategory} />
     }
@@ -52,6 +60,10 @@ class Container extends Component{
         const { getLogout, closeMenu } = this.props;
         closeMenu();
         getLogout();
+    }
+
+    _handleScroll = () => {
+        console.log('scroll!!');
     }
 }
 

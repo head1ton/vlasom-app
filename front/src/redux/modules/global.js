@@ -136,7 +136,7 @@ function reducer(state = initialState, action){
             return applyGetUser(state, action);
         default:
             return state;
-    };
+    }
 };
 
 function applyCloseMenu(state, action){

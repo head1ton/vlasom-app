@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styles from './styles.scss';
-import { format } from 'util';
 
 const UserRow = (props, context) => (
     <div className={props.vertical ? `${styles.col12} ${styles.colSm6} ${styles.colMd4}` : null}>

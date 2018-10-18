@@ -14,7 +14,6 @@ class Container extends Component{
 
     componentDidMount(){
         const { getFeed, getMyProfile } = this.props;
-        this.props.feed
         getFeed();
         getMyProfile();
     }
