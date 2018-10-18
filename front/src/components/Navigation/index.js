@@ -4,9 +4,10 @@ import { push } from 'react-router-redux';
 import { actionCreators as globalActions } from 'redux/modules/global';
 
 const mapStateToProps = (state, ownProps) => {
-    const { global : { loginUser } } = state;
+    const { global : { loginUser, show_nav_btm } } = state;
     return {
-        loginUser
+        loginUser,
+        show_nav_btm
     }
 }
 

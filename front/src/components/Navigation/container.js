@@ -10,6 +10,7 @@ class Container extends Component {
     static propTypes = {
         goToSearch: PropTypes.func.isRequired,
         openMenu: PropTypes.func.isRequired,
+        show_nav_btm: PropTypes.bool.isRequired,
         loginUser: PropTypes.shape({
             id: PropTypes.number.isRequired,
             name: PropTypes.string.isRequired,
@@ -29,7 +30,7 @@ class Container extends Component {
         })
     }
     render() {
-        return <Navigation onSubmit={this._onSubmit} onInputChange={this._onInputChange} openMenu={this._openMenu} value={this.state.term} loginUser={this.props.loginUser} />;
+        return <Navigation show_nav_btm={this.props.show_nav_btm} onSubmit={this._onSubmit} onInputChange={this._onInputChange} openMenu={this._openMenu} value={this.state.term} loginUser={this.props.loginUser} />;
     }
 
     _onInputChange = event => {

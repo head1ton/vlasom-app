@@ -64,6 +64,7 @@ const Navigation = (props, context) => (
                 </div>
             </div>
         </div>
+        {props.show_nav_btm ? 
         <div className={`${styles.containerNavBtm} ${styles.mobileOnly}`}>
             <div className={`${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                 <div className={`${styles.col3} ${styles.navItem}`}>
@@ -90,7 +91,7 @@ const Navigation = (props, context) => (
                     </Link>
                 </div>
             </div>
-        </div>
+        </div> : null }
     </div>
 )
 
@@ -103,6 +104,7 @@ Navigation.propTypes = {
     onInputChange: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
     openMenu: PropTypes.func.isRequired,
+    show_nav_btm: PropTypes.bool.isRequired,
     loginUser: PropTypes.shape({
         name: PropTypes.string.isRequired,
         nickname: PropTypes.string.isRequired,

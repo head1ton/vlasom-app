@@ -6,6 +6,7 @@ const HANDLE_PROFILE = 'HANDLE_PROFILE';
 const HANDLE_CATEGORY = 'HANDLE_CATEGORY';
 const GET_CATEGORY_ALL_NAME = 'GET_CATEGORY_ALL_NAME';
 const GET_USER = 'GET_USER';
+const HANDLE_NAV_BTM = 'HANDLE_NAV_BTM';
 
 function setCloseMenu(show_menu){
     return {
@@ -32,6 +33,13 @@ function setHandleCategory(show_category){
     return {
         type: HANDLE_CATEGORY,
         show_category
+    }
+}
+
+function setHandleNavBtm(show_nav_btm){
+    return {
+        type: HANDLE_NAV_BTM,
+        show_nav_btm
     }
 }
 
@@ -76,6 +84,12 @@ function handleCategory(){
         dispatch(setHandleCategory(show_category));
     }
 };
+
+function handleNavBtm(show_nav_btm){
+    return (dispatch) => {
+        dispatch(setHandleNavBtm(show_nav_btm));
+    }
+}
 
 function allCategoryName(){
     return (dispatch, getState) => {
@@ -130,6 +144,8 @@ function reducer(state = initialState, action){
             return applyHandleProfile(state, action);
         case HANDLE_CATEGORY:
             return applyHandleCategory(state, action);
+        case HANDLE_NAV_BTM:
+            return applyHandleNavBtm(state, action);
         case GET_CATEGORY_ALL_NAME:
             return applyGetAllCategoryName(state, action);
         case GET_USER:
@@ -177,6 +193,14 @@ function applyHandleCategory(state, action){
     }
 };
 
+function applyHandleNavBtm(state, action){
+    const { show_nav_btm } = action;
+    return {
+        ...state,
+        show_nav_btm: !show_nav_btm
+    }
+}
+
 function applyGetAllCategoryName(state, action){
     const { category_name } = action;
     return {
@@ -199,7 +223,8 @@ const actionCreators = {
     handleProfile,
     handleCategory,
     allCategoryName,
-    getMyProfile
+    getMyProfile,
+    handleNavBtm
 };
 
 export { actionCreators };
