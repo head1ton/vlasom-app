@@ -131,7 +131,7 @@ class Search(APIView):
 
             iamges = models.Image.objects.filter(tags__name__in = tags).distinct()
 
-            serializer = serializers.CountImageSerializer(iamges, many = True)
+            serializer = serializers.ImageSerializer(iamges, many = True)
 
             return Response(data = serializer.data, status = status.HTTP_200_OK)
         else:

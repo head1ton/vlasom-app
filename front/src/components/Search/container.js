@@ -19,7 +19,7 @@ class Container extends Component{
 
     componentDidUpdate = (prevProps, prevState) => {
         const { searchByTerm } = this.props;
-        if(prevProps.match.params !== this.props.match.params){
+        if(prevProps.match.params.searchTerm !== this.props.match.params.searchTerm){
             searchByTerm();
         }
     }
@@ -31,7 +31,7 @@ class Container extends Component{
             })
         }
     }
-    
+
     render(){
         const { userList, imageList } = this.props;
         return <Search {...this.state} userList={userList} imageList={imageList} />
