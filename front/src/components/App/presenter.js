@@ -15,6 +15,7 @@ import Loading from 'components/Loading';
 import InterestList from 'components/InterestList';
 import Profile from 'components/Profile';
 import ProfileChange from 'components/ProfileChange';
+import PasswordChange from 'components/PasswordChange';
 import UserUploaded from 'components/UserUploaded';
 import OtherProfile from 'components/OtherProfile';
 import Notifications from 'components/Notifications';
@@ -48,6 +49,7 @@ const PrivateRoutes = props => (
         <Route exact path='/interest/list/' component={InterestList} />
         <Route exact path='/my/profile/' component={Profile} />
         <Route exact path='/my/profile/change/' component={ProfileChange} />
+        <Route exact path='/my/profile/change/password/' component={PasswordChange} />
         <Route exact path='/my/upload/' component={UserUploaded} />
         <Route exact path='/profile/:username/' component={OtherProfile} />
         <Route exact path='/notifications/' component={Notifications} />

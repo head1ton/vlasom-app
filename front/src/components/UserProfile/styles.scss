@@ -60,3 +60,9 @@
     font-weight: $bold;
     color: $red;
 }
+.pw-change{
+    color: $font-color;
+    &:hover{
+        color: $main-color;
+    }
+}

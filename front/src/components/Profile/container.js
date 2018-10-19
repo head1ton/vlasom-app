@@ -20,15 +20,7 @@ class Container extends Component{
             birth_month: PropTypes.string.isRequired,
             birth_day: PropTypes.string.isRequired,
             notification_count: PropTypes.number.isRequired
-        }),
-        editProfile: PropTypes.func.isRequired,
-        getMyProfile: PropTypes.func.isRequired,
-        doCheckNickname: PropTypes.func.isRequired,
-        doCheckEmail: PropTypes.func.isRequired,
-        editComplete: PropTypes.bool,
-        checkNickname: PropTypes.bool,
-        checkEmail: PropTypes.bool,
-        removeCheckNickname: PropTypes.func.isRequired
+        })
     }
 
     render(){

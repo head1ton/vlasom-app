@@ -6,6 +6,8 @@
  const SET_IMAGE_LIST = 'SET_IMAGE_LIST';
  const USER_PROFILE = 'USER_PROFILE';
  const NOTIFICATIONS = 'NOTIFICATIONS';
+ const PASSWORD_CHANGE = 'PASSWORD_CHANGE';
+ const REMOVE_PASSWORD_CHECK = 'REMOVE_PASSWORD_CHECK';
 
 function saveToken(token) {
     return {
@@ -59,6 +61,19 @@ function setNotifications(notifications){
     return {
         type: NOTIFICATIONS,
         notifications
+    }
+}
+
+function setPasswordChange(current_error){
+    return {
+        type: PASSWORD_CHANGE,
+        current_error
+    }
+}
+
+function setRemovePasswordCheck(){
+    return {
+        type: REMOVE_PASSWORD_CHECK
     }
 }
 
@@ -321,6 +336,40 @@ function getNotifications(){
         )
     }
 }
+
+function changePassword(username,current_password,new_password){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`/users/${username}/password/`, {
+            method: 'PUT',
+            headers: {
+                "Authorization": `JWT ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                current_password,
+                new_password
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(logout());
+            }
+            else if(response.status === 203){
+                dispatch(setPasswordChange(false))
+            }
+            else if(response.status === 200){
+                dispatch(setPasswordChange(true))
+            }
+        })
+    }
+}
+
+function removePasswordCheck(){
+    return (dispatch) => {
+        dispatch(setRemovePasswordCheck());
+    }
+}
  
  const initialState = {
      isLoggedIn: localStorage.getItem('jwt') ? true : false,
@@ -345,6 +394,10 @@ function getNotifications(){
             return applySetUserProfile(state, action);
         case NOTIFICATIONS:
             return applySetNotifications(state, action);
+        case PASSWORD_CHANGE:
+            return applyPasswordChange(state, action);
+        case REMOVE_PASSWORD_CHECK:
+            return applyRemovePasswordCheck(state, action);
         default:
             return state;
      }
@@ -433,7 +486,22 @@ function getNotifications(){
          ...state,
          notifications
      }
- }
+ };
+
+function applyPasswordChange(state, action){
+    const { current_error } = action;
+    return {
+        ...state,
+        current_error
+    }
+}
+
+function applyRemovePasswordCheck(state, action){
+    return {
+        ...state,
+        current_error: undefined
+    }
+}
 
  const actionCreators = {
      facebookLogin,
@@ -447,7 +515,9 @@ function getNotifications(){
      searchByTerm,
      getUserProfile,
      getNotifications,
-     getLogout
+     getLogout,
+     changePassword,
+     removePasswordCheck
  }
 
  export { actionCreators };

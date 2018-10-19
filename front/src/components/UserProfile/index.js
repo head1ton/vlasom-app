@@ -4,6 +4,7 @@ import Ionicon from 'react-ionicons';
 import styles from './styles.scss';
 import formStyles from 'common/formStyles.scss';
 import ImageRow from 'components/ImageRow';
+import Link from 'react-router-dom/Link';
 
 const UserProfile = props => {
     if(props.edit){
@@ -98,6 +99,20 @@ const UserProfile = props => {
                                 <div className={`${formStyles.inputBoxTopRightBottom} ${styles.readonly}`}>
                                     {props.user.birth_year} 년 {props.user.birth_month} 월 {props.user.birth_day} 일
                                 </div>
+                            </div>
+                        </div>
+                        <div className={`${styles.row} ${styles.mt2} ${styles.mr0}`}>
+                            <div className={`${styles.col3} ${styles.colSm3} ${styles.colLg2}`}>
+                                <div className={formStyles.inputLabel}>
+                                    PW
+                                </div>
+                            </div>
+                            <div className={`${styles.col9} ${styles.colSm9} ${styles.colLg10} ${styles.px0}`}>
+                                <Link to='/my/profile/change/password/' style={{textDecoration: 'none'}}>
+                                    <div className={`${formStyles.inputBoxTopRightBottom} ${styles.pwChange}`}>
+                                        변경하기
+                                    </div>
+                                </Link>
                             </div>
                         </div>
                     </div>

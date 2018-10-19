@@ -147,7 +147,7 @@ class ChangePassword(APIView):
                     else:
                         return Response(status = status.HTTP_400_BAD_REQUEST)
                 else:
-                    return Response(status = status.HTTP_400_BAD_REQUEST)
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
             else:
                 return Response(status = status.HTTP_400_BAD_REQUEST)
         else:
