@@ -7,6 +7,7 @@ const HANDLE_CATEGORY = 'HANDLE_CATEGORY';
 const GET_CATEGORY_ALL_NAME = 'GET_CATEGORY_ALL_NAME';
 const GET_USER = 'GET_USER';
 const HANDLE_NAV_BTM = 'HANDLE_NAV_BTM';
+const EDIT_PROFILE = 'EDIT_PROFILE';
 
 function setCloseMenu(show_menu){
     return {
@@ -53,6 +54,13 @@ function getAllCategoryName(category_name){
 function getUser(loginUser){
     return {
         type: GET_USER,
+        loginUser
+    }
+}
+
+function doEditProfile(loginUser){
+    return {
+        type: EDIT_PROFILE,
         loginUser
     }
 }
@@ -110,6 +118,7 @@ function allCategoryName(){
 };
 
 function getMyProfile(){
+    console.log('getmyprofile');
     return (dispatch, getState) => {
         const { user : { token } } = getState();
         fetch('/users/my/profile/', {
@@ -124,6 +133,35 @@ function getMyProfile(){
             return response.json();
         })
         .then(json => dispatch(getUser(json)));
+    }
+}
+
+function editProfile(nickname, email, description){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        const { global : { loginUser } } = getState();
+        fetch(`/users/${loginUser.username}/`, {
+            method: 'PUT',
+            headers: {
+                "Authorization": `JWT ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nickname,
+                email,
+                description
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            return response.json()
+        })
+        .then(json => {
+            dispatch(doEditProfile(json))
+        })
+        .catch(err => console.log(err));
     }
 }
 
@@ -150,6 +188,8 @@ function reducer(state = initialState, action){
             return applyGetAllCategoryName(state, action);
         case GET_USER:
             return applyGetUser(state, action);
+        case EDIT_PROFILE:
+            return applyEditProfile(state, action);
         default:
             return state;
     }
@@ -217,6 +257,15 @@ function applyGetUser(state, action){
     }
 }
 
+function applyEditProfile(state, action){
+    const { loginUser } = action;
+    return {
+        ...state,
+        loginUser,
+        editComplete: true
+    }
+}
+
 const actionCreators = {
     closeMenu,
     openMenu,
@@ -224,7 +273,8 @@ const actionCreators = {
     handleCategory,
     allCategoryName,
     getMyProfile,
-    handleNavBtm
+    handleNavBtm,
+    editProfile
 };
 
 export { actionCreators };

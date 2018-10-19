@@ -7,6 +7,15 @@
 .text-box{
     @include inputBox(y,y,y,y);
     padding: 50px;
+    width: 100%;
+    font-size: 100%;
+    font-family: $font-main;
+    outline: none;
+    &:hover,
+    &:focus,
+    &:active{
+        outline: none;
+    }
 }
 .text-center{
     text-align: center;
@@ -26,4 +35,7 @@
     text-align: center;
     border-bottom: 2px solid $main-color;
     padding: 30px;
+}
+.readonly{
+    background-color: $light-grey;
 }
