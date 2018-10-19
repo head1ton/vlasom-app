@@ -21,7 +21,7 @@ class Container extends Component{
 
     componentDidUpdate = (prevProps, prevState) => {
         const { categoryImage } = this.props;
-        if(prevProps.match.params !== this.props.match.params){
+        if(prevProps.match.params.categoryName !== this.props.match.params.categoryName){
             categoryImage();
         }
     }
