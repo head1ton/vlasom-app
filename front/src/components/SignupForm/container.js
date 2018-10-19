@@ -22,6 +22,7 @@ class Container extends Component{
     render(){
         const { username, password1, password2, name, nickname, email, birthYear, birthMonth, birthDay } = this.state;
         return <SignupForm 
+        {...this.props}
         usrenameValue={username} 
         password1Value={password1} 
         password2Value={password2} 

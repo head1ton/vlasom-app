@@ -26,7 +26,7 @@ class Container extends Component{
     render(){
         const { loginUser } = this.props
         return (
-            <UserUploaded user={loginUser} />
+            <UserUploaded {...this.props} user={loginUser} />
         )
     }
 };

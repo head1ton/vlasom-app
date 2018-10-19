@@ -49,6 +49,7 @@ const PrivateRoutes = props => (
         <Route exact path='/my/upload/' component={UserUploaded} />
         <Route exact path='/profile/:username/' component={OtherProfile} />
         <Route exact path='/notifications/' component={Notifications} />
+        <Route exact path='/image/:photoId/' render={() => 'image detail'} />
     </Switch>
 )
 

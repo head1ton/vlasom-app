@@ -5,8 +5,10 @@ import { actionCreators as globalActions } from 'redux/modules/global';
 
 const mapStateToProps = (state, ownProps) => {
     const { photos: { feed } } = state;
+    const { routing : { location } } = state;
     return {
-        feed
+        feed,
+        pathname: location.pathname
     }
 }
 

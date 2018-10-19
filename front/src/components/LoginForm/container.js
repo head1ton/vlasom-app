@@ -16,6 +16,7 @@ class Container extends Component{
     render(){
         const { username, password } = this.state;
         return <LoginForm 
+        {...this.props}
         handleInputChange={this._handleInputChange} 
         handleSubmit={this._handleSubmit} 
         usernameValue={username} 

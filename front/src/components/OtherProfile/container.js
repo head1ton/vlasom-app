@@ -50,7 +50,7 @@ class Container extends Component{
     render(){
         const { user } = this.props;
         return (
-            <OtherProfile {...this.state} user={user} />
+            <OtherProfile {...this.props} {...this.state} user={user} />
         )
     }
 };

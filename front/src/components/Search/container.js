@@ -34,7 +34,7 @@ class Container extends Component{
 
     render(){
         const { userList, imageList } = this.props;
-        return <Search {...this.state} userList={userList} imageList={imageList} />
+        return <Search {...this.props} {...this.state} userList={userList} imageList={imageList} />
     }
 }
 

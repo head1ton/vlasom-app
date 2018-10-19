@@ -5,8 +5,10 @@ import { actionCreators as globalActions } from 'redux/modules/global';
 
 const mapStateToProps = (state, owmProps) => {
     const { user : { notifications } } = state;
+    const { routing : { location } } = state;
     return {
-        notifications
+        notifications,
+        pathname: location.pathname
     }
 }
 

@@ -5,11 +5,13 @@ import { actionCreators as userActions } from 'redux/modules/user';
 
 const mapStateToProps = (state, ownProps) => {
     const { global : { show_profile, show_category, category_name, loginUser } } = state;
+    const { routing : { location } } = state;
     return {
         show_profile,
         show_category,
         category_name,
-        loginUser
+        loginUser,
+        pathname: location.pathname
     }
 }
 

@@ -3,8 +3,10 @@ import Container from './container';
 
 const mapStateToProps = (state, ownProps) => {
     const { global : { loginUser } } = state;
+    const { routing : { location } } = state;
     return {
-        loginUser
+        loginUser,
+        pathname: location.pathname
     }
 }
 

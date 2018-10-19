@@ -27,7 +27,7 @@ class Container extends Component{
 
     render(){
         const { userList } = this.props;
-        return <Explore {...this.state} userList={userList} />
+        return <Explore {...this.props} {...this.state} userList={userList} />
     }
 }
 

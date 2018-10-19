@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Container from './container';
 import { actionCreators as globalActions } from 'redux/modules/global';
 
@@ -35,4 +36,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Container);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Container));

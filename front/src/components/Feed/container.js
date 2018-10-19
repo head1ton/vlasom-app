@@ -28,7 +28,7 @@ class Container extends Component{
 
     render(){
         const { feed } = this.props;
-        return <Feed {...this.state} feed={feed} />
+        return <Feed {...this.props} {...this.state} feed={feed} />
     }
 }
 

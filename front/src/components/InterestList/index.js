@@ -5,11 +5,11 @@ import { actionCreators as photoActions } from 'redux/modules/photos';
 const mapStateToProps = (state, ownProps) => {
     const { photos : { interestList } } = state;
     const { global : { loginUser : { username } } } = state;
-    console.log('fnwekf')
-    console.log(interestList);
+    const { routing : { location } } = state;
     return {
         interestList,
-        username
+        username,
+        pathname: location.pathname
     }
 }
 

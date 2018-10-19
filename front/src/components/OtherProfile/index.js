@@ -4,8 +4,10 @@ import { actionCreators as userActions } from 'redux/modules/user';
 
 const mapStateToProps = (state, ownProps) => {
     const { user : { user } } = state;
+    const { routing : { location } } = state;
     return {
-        user
+        user,
+        pathname: location.pathname
     }
 }
 

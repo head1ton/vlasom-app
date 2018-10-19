@@ -5,9 +5,11 @@ import { actionCreators as photoActions } from 'redux/modules/photos';
 const mapStateToProps = (state, ownProps) => {
     const { photos : { categoryImageList } } = state;
     const { global : { category_name } } = state;
+    const { routing : { location } } = state;
     return {
         categoryImageList,
-        category_name
+        category_name,
+        pathname: location.pathname
     }
 }
 
