@@ -37,15 +37,18 @@ class Container extends Component{
         checkNickname: PropTypes.bool,
         checkEmail: PropTypes.bool,
         removeCheckNickname: PropTypes.func.isRequired,
-        removeCheckEmail: PropTypes.func.isRequired
+        removeCheckEmail: PropTypes.func.isRequired,
+        finishEditProfile: PropTypes.func.isRequired
     }
 
     componentWillReceiveProps(nextProps){
         if(nextProps.editComplete){
+            const { finishEditProfile } = this.props;
             this.setState({
                 is_duplicated_nickname: true,
                 is_duplicated_email: true
             })
+            finishEditProfile();
         }
         if(nextProps.checkNickname === true){
             this.setState({

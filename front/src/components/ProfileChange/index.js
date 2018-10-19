@@ -30,6 +30,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         removeCheckEmail: () => {
             dispatch(globalActions.removeCheckEmail());
+        },
+        finishEditProfile: () => {
+            dispatch(globalActions.finishEditProfile());
         }
     }
 }

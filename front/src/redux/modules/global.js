@@ -12,6 +12,7 @@ const CHECK_NICKNAME = 'CHECK_NICKNAME';
 const CHECK_EMAIL = 'CHECK_EMAIL';
 const REMOVE_CHECK_NICKNAME = 'REMOVE_CHECK_NICKNAME';
 const REMOVE_CHECK_EMAIL = 'REMOVE_CHECK_EMAIL';
+const FINISH_EDIT_PROFILE = 'FINISH_EDIT_PROFILE';
 
 function setCloseMenu(show_menu){
     return {
@@ -92,6 +93,12 @@ function setRemoveCheckNickname(){
 function setRemoveCheckEmail(){
     return {
         type: REMOVE_CHECK_EMAIL
+    }
+}
+
+function setFinishEditProfile(){
+    return {
+        type: FINISH_EDIT_PROFILE
     }
 }
 
@@ -260,6 +267,12 @@ function removeCheckEmail(){
     }
 }
 
+function finishEditProfile(){
+    return (dispatch) => {
+        dispatch(setFinishEditProfile())
+    }
+}
+
 const initialState = {
     show_menu: false,
     show_profile: false,
@@ -293,6 +306,8 @@ function reducer(state = initialState, action){
             return applyRemoveCheckNickname(state, action);
         case REMOVE_CHECK_EMAIL:
             return applyRemoveCheckEmail(state, action);
+        case FINISH_EDIT_PROFILE:
+            return applyFinishEditProfile(state, action);
         default:
             return state;
     }
@@ -399,6 +414,13 @@ function applyRemoveCheckEmail(state, action){
     }
 }
 
+function applyFinishEditProfile(state, action){
+    return {
+        ...state,
+        editComplete: false
+    }
+}
+
 const actionCreators = {
     closeMenu,
     openMenu,
@@ -411,7 +433,8 @@ const actionCreators = {
     doCheckNickname,
     doCheckEmail,
     removeCheckNickname,
-    removeCheckEmail
+    removeCheckEmail,
+    finishEditProfile
 };
 
 export { actionCreators };
