@@ -8,6 +8,10 @@ const GET_CATEGORY_ALL_NAME = 'GET_CATEGORY_ALL_NAME';
 const GET_USER = 'GET_USER';
 const HANDLE_NAV_BTM = 'HANDLE_NAV_BTM';
 const EDIT_PROFILE = 'EDIT_PROFILE';
+const CHECK_NICKNAME = 'CHECK_NICKNAME';
+const CHECK_EMAIL = 'CHECK_EMAIL';
+const REMOVE_CHECK_NICKNAME = 'REMOVE_CHECK_NICKNAME';
+const REMOVE_CHECK_EMAIL = 'REMOVE_CHECK_EMAIL';
 
 function setCloseMenu(show_menu){
     return {
@@ -65,6 +69,32 @@ function doEditProfile(loginUser){
     }
 }
 
+function setCheckNickname(checkNickname){
+    return {
+        type: CHECK_NICKNAME,
+        checkNickname
+    }
+}
+
+function setCheckEmail(checkEmail){
+    return {
+        type: CHECK_EMAIL,
+        checkEmail
+    }
+}
+
+function setRemoveCheckNickname(){
+    return {
+        type: REMOVE_CHECK_NICKNAME
+    }
+}
+
+function setRemoveCheckEmail(){
+    return {
+        type: REMOVE_CHECK_EMAIL
+    }
+}
+
 function closeMenu(){
     return (dispatch, getState) => {
         const { global : { show_menu } } = getState();
@@ -118,7 +148,6 @@ function allCategoryName(){
 };
 
 function getMyProfile(){
-    console.log('getmyprofile');
     return (dispatch, getState) => {
         const { user : { token } } = getState();
         fetch('/users/my/profile/', {
@@ -165,6 +194,72 @@ function editProfile(nickname, email, description){
     }
 }
 
+function doCheckNickname(nickname){
+    return (dispatch, getState) =>{
+        const { user : { token } } = getState();
+        fetch('/users/check/nickname/', {
+            method: 'POST',
+            headers: {
+                "Authorization": `JWT ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nickname
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            else if(response.status === 202){
+                dispatch(setCheckNickname(true))
+            }
+            else if(response.status === 203){
+                dispatch(setCheckNickname(false))
+            }
+        })
+    }
+}
+
+function doCheckEmail(email){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch('/users/check/email/', {
+            method: 'POST',
+            headers: {
+                "Authorization": `JWT ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            else if(response.status === 202){
+                dispatch(setCheckEmail(true))
+            }
+            else if(response.status === 203){
+                dispatch(setCheckEmail(false))
+            }
+        })
+    }
+}
+
+function removeCheckNickname(){
+    return (dispatch) => {
+        dispatch(setRemoveCheckNickname())
+    }
+}
+
+function removeCheckEmail(){
+    return (dispatch) => {
+        dispatch(setRemoveCheckEmail())
+    }
+}
+
 const initialState = {
     show_menu: false,
     show_profile: false,
@@ -190,6 +285,14 @@ function reducer(state = initialState, action){
             return applyGetUser(state, action);
         case EDIT_PROFILE:
             return applyEditProfile(state, action);
+        case CHECK_NICKNAME:
+            return applyCheckNickname(state, action);
+        case CHECK_EMAIL:
+            return applyCheckEmail(state, action);
+        case REMOVE_CHECK_NICKNAME:
+            return applyRemoveCheckNickname(state, action);
+        case REMOVE_CHECK_EMAIL:
+            return applyRemoveCheckEmail(state, action);
         default:
             return state;
     }
@@ -266,6 +369,36 @@ function applyEditProfile(state, action){
     }
 }
 
+function applyCheckNickname(state, action){
+    const { checkNickname } = action;
+    return {
+        ...state,
+        checkNickname
+    }
+}
+
+function applyCheckEmail(state, action){
+    const { checkEmail } = action;
+    return {
+        ...state,
+        checkEmail
+    }
+}
+
+function applyRemoveCheckNickname(state, action){
+    return {
+        ...state,
+        checkNickname: undefined
+    }
+}
+
+function applyRemoveCheckEmail(state, action){
+    return {
+        ...state,
+        checkEmail: undefined
+    }
+}
+
 const actionCreators = {
     closeMenu,
     openMenu,
@@ -274,7 +407,11 @@ const actionCreators = {
     allCategoryName,
     getMyProfile,
     handleNavBtm,
-    editProfile
+    editProfile,
+    doCheckNickname,
+    doCheckEmail,
+    removeCheckNickname,
+    removeCheckEmail
 };
 
 export { actionCreators };

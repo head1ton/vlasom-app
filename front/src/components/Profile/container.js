@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 import Profile from './presenter';
 
 class Container extends Component{
-    state = {
-        edit: false,
-        nickname: "",
-        email: "",
-        description: ""
-    }
     static propTypes = {
         loginUser: PropTypes.shape({
             description: PropTypes.string,
@@ -29,53 +23,24 @@ class Container extends Component{
         }),
         editProfile: PropTypes.func.isRequired,
         getMyProfile: PropTypes.func.isRequired,
-        editComplete: PropTypes.bool
-    }
-
-    componentWillReceiveProps(nextProps){
-        if(nextProps.editComplete){
-            this.setState({
-                edit: false
-            })
-        }
+        doCheckNickname: PropTypes.func.isRequired,
+        doCheckEmail: PropTypes.func.isRequired,
+        editComplete: PropTypes.bool,
+        checkNickname: PropTypes.bool,
+        checkEmail: PropTypes.bool,
+        removeCheckNickname: PropTypes.func.isRequired
     }
 
     render(){
         const { loginUser } = this.props;
-        const { nickname, email, description } = this.state;
         return (
             <Profile 
             {...this.props} 
             {...this.state} 
             user={loginUser} 
-            handleStartEdit={this._handleStartEdit} 
-            handleEndEdit={this._handleEndEdit} 
-            handleInputChange={this._handleInputChange} 
-            nicknameValue={nickname} 
-            emailValue={email} 
-            descriptionValue={description}
             />
         )
     }
-
-    _handleStartEdit = () =>{
-        this.setState({
-            edit: true
-        })
-    }
-
-    _handleEndEdit = () => {
-        const { nickname, email, description } = this.state;
-        const { editProfile } = this.props;
-        editProfile(nickname, email, description);
-    }
-
-    _handleInputChange = event => {
-        const { target : { value, name } } = event;
-        this.setState({
-            [name]: value //[name]은 위에서 정의한 name 변수를 의미함
-        });
-    };
 }
 
 export default Container;

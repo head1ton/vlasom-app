@@ -14,4 +14,6 @@ urlpatterns = [
     path('<str:username>/password/', views.ChangePassword.as_view(), name = 'change_password'),
     path('login/facebook/', views.FacebookLogin.as_view(), name = 'fb_login'),
     path('my/profile/', views.MyProfile.as_view(), name = 'my_profile'),
+    path('check/nickname/', views.CheckNickname.as_view(), name = 'check_nickname'),
+    path('check/email/', views.CheckEmail.as_view(), name = 'check_email'),
 ]

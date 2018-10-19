@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import get_user_model
+from django.core.validators import validate_email
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
 from . import models, serializers
@@ -164,3 +165,33 @@ class MyProfile(APIView):
         serializer = serializers.MyProfileSerializer(user, context={'request': request})
 
         return Response(data = serializer.data, status = status.HTTP_200_OK)
+
+
+class CheckNickname(APIView):
+    def post(self, request, format = None):
+        nickname = request.data.get('nickname', None)
+        if nickname:
+            try:
+                User.objects.get(nickname = nickname)
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+            except User.DoesNotExist:
+                return Response(status = status.HTTP_202_ACCEPTED)
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+
+
+class CheckEmail(APIView):
+    def post(self, request, format = None):
+        email = request.data.get('email', None)
+        if email:
+            try:
+                validate_email(email)
+                try:
+                    User.objects.get(email = email)
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+                except User.DoesNotExist:
+                    return Response(status = status.HTTP_202_ACCEPTED)
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
