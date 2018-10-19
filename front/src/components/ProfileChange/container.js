@@ -6,7 +6,7 @@ class Container extends Component{
     state = {
         nickname: "",
         email: "",
-        description: "",
+        description: undefined,
         is_duplicated_nickname: true,
         is_duplicated_email: true,
         error_nickname: "",
@@ -76,6 +76,15 @@ class Container extends Component{
         }
     }
 
+    componentDidMount(){
+        const { loginUser } = this.props;
+        this.setState({
+            nickname: loginUser.nickname,
+            email: loginUser.email,
+            description: loginUser.description
+        })
+    }
+
     render(){
         const { loginUser } = this.props;
         const { nickname, email, description } = this.state;
@@ -112,7 +121,32 @@ class Container extends Component{
     }
 
     _handleEndEdit = (event) => {
+        const { loginUser } = this.props;
         if((!this.state.is_duplicated_nickname) && (!this.state.is_duplicated_email)){
+            const { nickname, email, description } = this.state;
+            const { editProfile, removeCheckNickname, removeCheckEmail } = this.props;
+            event.preventDefault();
+            editProfile(nickname, email, description);
+            removeCheckNickname();
+            removeCheckEmail();
+        }
+        else if((this.state.nickname === loginUser.nickname) && (this.state.email === loginUser.email)){
+            const { nickname, email, description } = this.state;
+            const { editProfile, removeCheckNickname, removeCheckEmail } = this.props;
+            event.preventDefault();
+            editProfile(nickname, email, description);
+            removeCheckNickname();
+            removeCheckEmail();
+        }
+        else if((this.state.nickname === loginUser.nickname) && (this.state.email !== loginUser.email) && (!this.state.is_duplicated_email)){
+            const { nickname, email, description } = this.state;
+            const { editProfile, removeCheckNickname, removeCheckEmail } = this.props;
+            event.preventDefault();
+            editProfile(nickname, email, description);
+            removeCheckNickname();
+            removeCheckEmail();
+        }
+        else if((this.state.nickname !== loginUser.nickname) && (this.state.email === loginUser.email) && (!this.state.is_duplicated_nickname)){
             const { nickname, email, description } = this.state;
             const { editProfile, removeCheckNickname, removeCheckEmail } = this.props;
             event.preventDefault();

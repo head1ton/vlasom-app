@@ -62,7 +62,7 @@ ProfileChange.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
     nicknameValue: PropTypes.string.isRequired,
     emailValue: PropTypes.string.isRequired,
-    descriptionValue: PropTypes.string.isRequired,
+    descriptionValue: PropTypes.string,
     is_duplicated_nickname: PropTypes.bool,
     is_duplicated_email: PropTypes.bool,
     checkNickname: PropTypes.func,
