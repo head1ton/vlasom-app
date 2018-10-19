@@ -8,6 +8,7 @@
  const NOTIFICATIONS = 'NOTIFICATIONS';
  const PASSWORD_CHANGE = 'PASSWORD_CHANGE';
  const REMOVE_PASSWORD_CHECK = 'REMOVE_PASSWORD_CHECK';
+ const LOGIN_ERROR = 'LOGIN_ERROR';
 
 function saveToken(token) {
     return {
@@ -77,6 +78,13 @@ function setRemovePasswordCheck(){
     }
 }
 
+function setLoginError(loginError){
+    return {
+        type: LOGIN_ERROR,
+        loginError
+    }
+}
+
 function facebookLogin(access_token){
      return dispatch => {
          fetch('/users/login/facebook/', {
@@ -94,7 +102,7 @@ function facebookLogin(access_token){
                 dispatch(saveToken(json.token))
             }
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log('hi'));
     };
  }
 
@@ -110,7 +118,12 @@ function facebookLogin(access_token){
                  password
              })
          })
-         .then(response => response.json())
+         .then(response => {
+             if(!response.ok){
+                 dispatch(setLoginError(true))
+             }
+             return response.json()
+         })
          .then(json => {
              if(json.token){
                  dispatch(saveToken(json.token))
@@ -398,6 +411,8 @@ function removePasswordCheck(){
             return applyPasswordChange(state, action);
         case REMOVE_PASSWORD_CHECK:
             return applyRemovePasswordCheck(state, action);
+        case LOGIN_ERROR:
+            return applyLoginError(state, action);
         default:
             return state;
      }
@@ -500,6 +515,14 @@ function applyRemovePasswordCheck(state, action){
     return {
         ...state,
         current_error: undefined
+    }
+}
+
+function applyLoginError(state, action){
+    const { loginError } = action;
+    return {
+        ...state,
+        loginError
     }
 }
 

@@ -38,10 +38,12 @@ class Container extends Component{
 
     componentWillReceiveProps = (nextProps) => {
         if(!nextProps.current_error){
+            const { removePasswordCheck } = this.props;
             this.setState({
                 current_password_error: "현재 비밀번호가 일치하지 않습니다.",
                 check_current: false
             })
+            removePasswordCheck();
         }
         else if(nextProps.current_error){
             this.setState({

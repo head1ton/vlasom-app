@@ -155,7 +155,10 @@ class Container extends Component{
             removeCheckEmail();
         }
         else{
+            const { removeCheckNickname, removeCheckEmail } = this.props;
             event.preventDefault();
+            removeCheckNickname();
+            removeCheckEmail();
             alert('중복확인을 해주세요.')
         }
     }

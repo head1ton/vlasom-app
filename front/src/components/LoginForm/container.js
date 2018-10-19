@@ -5,18 +5,19 @@ import LoginForm from './presenter';
 class Container extends Component{
     state = {
         username: "",
-        password: ""
+        password: "",
     };
 
     static propTypes = {
         facebookLogin: PropTypes.func.isRequired,
-        usernameLogin: PropTypes.func.isRequired
+        usernameLogin: PropTypes.func.isRequired,
+        loginError: PropTypes.bool
     }
 
     render(){
         const { username, password } = this.state;
         return <LoginForm 
-        {...this.props}
+        {...this.props} 
         handleInputChange={this._handleInputChange} 
         handleSubmit={this._handleSubmit} 
         usernameValue={username} 

@@ -32,6 +32,12 @@ const LoginForm = (props, context)=> (
                 <input type="submit" className={formStyles.inputBtn} value="Go" />
             </div>
         </div>
+        {props.loginError ? 
+        <div className={`${formStyles.row} ${formStyles.alignItemsCenter} ${formStyles.justifyContentCenter} ${formStyles.mt5}`}>
+            <div className={`${formStyles.col6} ${formStyles.error}`}>
+                <p>아이디 혹은 비밀번호를 확인해주세요.</p>
+            </div>
+        </div>: null}
         <div className={`${formStyles.row} ${formStyles.marginTop30} ${formStyles.justifyContentCenter}`}>
             <div className={formStyles.mt5}>
             <FacebookLogin 
@@ -54,6 +60,7 @@ LoginForm.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     handleFacebookLogin: PropTypes.func.isRequired,
+    loginError: PropTypes.bool
 }
 
 LoginForm.contextTypes = {
