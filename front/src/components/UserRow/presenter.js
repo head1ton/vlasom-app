@@ -19,7 +19,7 @@ const UserRow = (props, context) => (
                 <p className={styles.profileText}>{props.user.name}</p>
             </Link>
         </div>
-        <div className={props.vertical ? `${styles.col6} ${styles.textCenter} ${styles.mt3}` : `${styles.col5} ${styles.offset0} ${styles.colSm4} ${styles.offsetSm2} ${styles.colMd3} ${styles.offsetMd3} ${styles.colLg2} ${styles.offsetLg4}`}>
+        <div className={props.vertical ? `${styles.col6} ${styles.textCenter} ${styles.mt3}` : `${styles.col4} ${styles.offset1} ${styles.colSm4} ${styles.offsetSm2} ${styles.colMd3} ${styles.offsetMd3} ${styles.colLg2} ${styles.offsetLg4}`}>
             <p className={props.user.following ? styles.btnGrey : styles.btn} onClick={props.handleClick}>{props.user.following ? context.t("unfollow") : context.t("follow")}</p>
         </div>
     </div>: <div className={props.vertical ? `${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3}` : `${styles.row} ${styles.alignItemsCenter}`}>

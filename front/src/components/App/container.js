@@ -18,9 +18,16 @@ class Container extends Component{
         handleNavBtm: PropTypes.func.isRequired,
         show_nav_btm: PropTypes.bool.isRequired
     }
+
+    componentWillReceiveProps(nextProps){
+        const { closeMenu, show_menu } = this.props;
+        if(show_menu === true){
+            closeMenu();
+        }
+    }
     
     componentWillMount(){
-        const { getMyProfile } = this.props;
+        const { getMyProfile, closeMenu } = this.props;
         getMyProfile();
     }
 
