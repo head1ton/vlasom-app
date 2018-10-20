@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import 'components/App/styles.scss';
 import Footer from 'components/Footer';
 import Auth from 'components/Auth';
@@ -22,7 +22,8 @@ import Notifications from 'components/Notifications';
 import styles from 'components/Feed/styles.scss';
 
 const App = props => [
-    props.isLoggedIn ? (props.loginUser ? [<Navigation key={1} />,<PrivateRoutes key={2} />]: <AppLoading />) : <PublickRoutes key={2} />,
+    !props.isLoggedIn && <Redirect to ='/' />,
+    props.isLoggedIn ? (props.loginUser ? [<Navigation key={1} />,<PrivateRoutes isLoggedIn={props.isLoggedIn} key={2} />]: <AppLoading />) : <PublickRoutes key={2} />,
     props.show_menu ? <Menu key={3} /> : null ,
     <Footer key={4} />
 ]
