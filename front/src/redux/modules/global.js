@@ -10,8 +10,10 @@ const HANDLE_NAV_BTM = 'HANDLE_NAV_BTM';
 const EDIT_PROFILE = 'EDIT_PROFILE';
 const CHECK_NICKNAME = 'CHECK_NICKNAME';
 const CHECK_EMAIL = 'CHECK_EMAIL';
+const CHECK_USERNAME = 'CHECK_USERNAME';
 const REMOVE_CHECK_NICKNAME = 'REMOVE_CHECK_NICKNAME';
 const REMOVE_CHECK_EMAIL = 'REMOVE_CHECK_EMAIL';
+const REMOVE_CHECK_USERNAME = 'REMOVE_CHECK_USERNAME';
 const FINISH_EDIT_PROFILE = 'FINISH_EDIT_PROFILE';
 
 function setCloseMenu(show_menu){
@@ -84,6 +86,13 @@ function setCheckEmail(checkEmail){
     }
 }
 
+function setCheckUsername(checkUsername){
+    return {
+        type: CHECK_USERNAME,
+        checkUsername
+    }
+}
+
 function setRemoveCheckNickname(){
     return {
         type: REMOVE_CHECK_NICKNAME
@@ -93,6 +102,12 @@ function setRemoveCheckNickname(){
 function setRemoveCheckEmail(){
     return {
         type: REMOVE_CHECK_EMAIL
+    }
+}
+
+function setRemoveCheckUsername(){
+    return {
+        type: REMOVE_CHECK_USERNAME
     }
 }
 
@@ -255,6 +270,33 @@ function doCheckEmail(email){
     }
 }
 
+function doCheckUsername(username){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch('/users/check/username/', {
+            method: 'POST',
+            headers: {
+                "Authorization": `JWT ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+            else if(response.status === 202){
+                dispatch(setCheckUsername(true))
+            }
+            else if(response.status === 203){
+                dispatch(setCheckUsername(false))
+            }
+        })
+    }
+}
+
 function removeCheckNickname(){
     return (dispatch) => {
         dispatch(setRemoveCheckNickname())
@@ -264,6 +306,12 @@ function removeCheckNickname(){
 function removeCheckEmail(){
     return (dispatch) => {
         dispatch(setRemoveCheckEmail())
+    }
+}
+
+function removeCheckUsername(){
+    return (dispatch) => {
+        dispatch(setRemoveCheckUsername())
     }
 }
 
@@ -302,10 +350,14 @@ function reducer(state = initialState, action){
             return applyCheckNickname(state, action);
         case CHECK_EMAIL:
             return applyCheckEmail(state, action);
+        case CHECK_USERNAME:
+            return applyCheckUsername(state, action);
         case REMOVE_CHECK_NICKNAME:
             return applyRemoveCheckNickname(state, action);
         case REMOVE_CHECK_EMAIL:
             return applyRemoveCheckEmail(state, action);
+        case REMOVE_CHECK_USERNAME:
+            return applyRemoveCheckUsername(state, action);
         case FINISH_EDIT_PROFILE:
             return applyFinishEditProfile(state, action);
         default:
@@ -400,6 +452,14 @@ function applyCheckEmail(state, action){
     }
 }
 
+function applyCheckUsername(state, action){
+    const { checkUsername } = action;
+    return {
+        ...state,
+        checkUsername
+    }
+}
+
 function applyRemoveCheckNickname(state, action){
     return {
         ...state,
@@ -411,6 +471,13 @@ function applyRemoveCheckEmail(state, action){
     return {
         ...state,
         checkEmail: undefined
+    }
+}
+
+function applyRemoveCheckUsername(state, action){
+    return {
+        ...state,
+        checkUsername: undefined
     }
 }
 
@@ -434,7 +501,9 @@ const actionCreators = {
     doCheckEmail,
     removeCheckNickname,
     removeCheckEmail,
-    finishEditProfile
+    removeCheckUsername,
+    finishEditProfile,
+    doCheckUsername
 };
 
 export { actionCreators };

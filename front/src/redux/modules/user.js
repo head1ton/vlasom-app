@@ -133,7 +133,7 @@ function facebookLogin(access_token){
      }
  }
 
- function createAccount(username, password, email, name, nickname, birthYear, birthMonth, birthDay){
+ function createAccount(username, password, email, name, nickname, birthYear, birthMonth, birthDay, gender){
      return function(dispatch){
          fetch('/rest-auth/registration/', {
             method: 'POST',
@@ -149,7 +149,8 @@ function facebookLogin(access_token){
                 nickname,
                 birthYear,
                 birthMonth,
-                birthDay
+                birthDay,
+                gender
             })
          })
          .then(response => response.json())

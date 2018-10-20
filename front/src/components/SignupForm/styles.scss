@@ -1,0 +1,27 @@
+.check-complete{
+    @include borderRadius(5px,5px,5px,5px);
+    background-color: $main-color;
+    padding: 15px;
+    border: none;
+    outline: none;
+    color: $white;
+    font-weight: $bold;
+    font-size: $font-24;
+    cursor: pointer;
+    &:active,
+    &:focus,
+    &:hover{
+        outline: none;
+        background-color: $grey;
+    }
+}
+.error-text{
+    font-weight: $bold;
+    color: $red;
+}
+.text-center{
+    text-align: center;
+}
+input[type=radio]{
+    display: none;
+}

@@ -16,4 +16,5 @@ urlpatterns = [
     path('my/profile/', views.MyProfile.as_view(), name = 'my_profile'),
     path('check/nickname/', views.CheckNickname.as_view(), name = 'check_nickname'),
     path('check/email/', views.CheckEmail.as_view(), name = 'check_email'),
+    path('check/username/', views.CheckUsername.as_view(), name = 'check_username'),
 ]

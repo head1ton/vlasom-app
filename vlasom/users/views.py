@@ -195,3 +195,16 @@ class CheckEmail(APIView):
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+
+
+class CheckUsername(APIView):
+    def post(self, request, format = None):
+        username = request.data.get('username', None)
+        if username:
+            try:
+                User.objects.get(username = username)
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+            except User.DoesNotExist:
+                return Response(status = status.HTTP_202_ACCEPTED)
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
