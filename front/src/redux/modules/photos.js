@@ -433,18 +433,16 @@ function applyAddComment(state, action){
 }
 
 function applyDeleteComment(state, action){
-    console.log('1')
     const { commentId, photoId } = action;
     const { feed } = state;
     const updatedFeed = feed.map(photo => {
-        console.log('2')
         if(photo.id === photoId){
-            console.log('3')
             const updatedComments = photo.comments.map(comment => {
+                if(comment !== null && comment !== undefined){
                 if(comment.id === commentId){
                     return null;
                 }
-                return comment;
+                return comment;}
             });
             return {
                 ...photo,

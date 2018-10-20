@@ -6,13 +6,15 @@ import styles from './styles.scss';
 const PhotoComments = props => (
     <div>
         <Comment username={props.user} comment={props.description} is_mine={true} />
-        {props.comments.map(comment => ( 
+        {props.comments.map(comment => {
+            if(comment !== null && comment !== undefined){
+            return(
             <span key={comment.id}>
                 {comment === null ? null :
                     <Comment username={comment.user.username} user={comment.user} photoId={props.photoId} is_mine={false} loginUser={props.loginUser} comment={comment.message} commentId={comment.id} key={comment.id} deleteComment={props.deleteComment} />
                 }
-            </span>
-        ))}
+            </span>)
+        }})}
     </div>
 );
 
