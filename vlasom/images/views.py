@@ -129,13 +129,16 @@ class Search(APIView):
         if tags is not None:
             tags = tags.split(',')
 
-            iamges = models.Image.objects.filter(tags__name__in = tags).distinct()
+            images = models.Image.objects.filter(tags__name__in = tags).distinct()
 
-            serializer = serializers.ImageSerializer(iamges, many = True)
+            serializer = serializers.ImageSerializer(images, many = True)
 
             return Response(data = serializer.data, status = status.HTTP_200_OK)
         else:
-            return Response(status = status.HTTP_400_BAD_REQUEST)
+            images = models.Image.objects.all()[:20]
+            serializer = serializers.ImageSerializer(images, many = True)
+
+            return Response(data = serializer.data, status = status.HTTP_200_OK)
 
 
 class ModerateComment(APIView):
