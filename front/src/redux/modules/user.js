@@ -102,7 +102,7 @@ function facebookLogin(access_token){
                 dispatch(saveToken(json.token))
             }
         })
-        .catch(err => console.log('hi'));
+        .catch(err => console.log(err));
     };
  }
 
