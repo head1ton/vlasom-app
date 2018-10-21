@@ -16,17 +16,22 @@ class Images(APIView):
 
         image_list = []
         #feed 노출 방식 변경 고려하기
-        for following_user in following_users:
-            user_images = following_user.images.all()[:2] #related_name = 'images'이므로 가능
+        if following_users:
+            for following_user in following_users:
+                user_images = following_user.images.all()[:2] #related_name = 'images'이므로 가능
 
+                for image in user_images:
+                    image_list.append(image)
+        else:
+            user_images = models.Image.objects.all()[:12]
             for image in user_images:
                 image_list.append(image)
         
         my_images = user.images.all()[:2]
-
-        for image in my_images:
-            if image not in image_list:
-                image_list.append(image)
+        if my_images:
+            for image in my_images:
+                if image not in image_list:
+                    image_list.append(image)
         interested_category = models.Interest.objects.filter(user = user, image__isnull = True)
         for category in interested_category:
             category_images = models.Image.objects.filter(category = category.category)
@@ -131,12 +136,12 @@ class Search(APIView):
 
             images = models.Image.objects.filter(tags__name__in = tags).distinct()
 
-            serializer = serializers.ImageSerializer(images, many = True)
+            serializer = serializers.ImageSerializer(images, many = True, context={'request': request})
 
             return Response(data = serializer.data, status = status.HTTP_200_OK)
         else:
             images = models.Image.objects.all()[:20]
-            serializer = serializers.ImageSerializer(images, many = True)
+            serializer = serializers.ImageSerializer(images, many = True, context={'request': request})
 
             return Response(data = serializer.data, status = status.HTTP_200_OK)
 

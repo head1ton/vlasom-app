@@ -40,7 +40,7 @@ class FeedUserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ['id', 'username', 'profile_image']
+        fields = ['id', 'nickname', 'profile_image']
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -68,7 +68,7 @@ class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
 
     class Meta:
         model = models.Image
-        fields = ['id', 'user', 'image', 'location', 'category', 'description', 'comments', 'like_count', 'comment_count', 'interest_count_image', 'tags', 'natural_time', 'is_liked', 'is_interested_image']
+        fields = ['id', 'user', 'image', 'location', 'category', 'description', 'comments', 'like_count', 'comment_count', 'interest_count_image', 'tags', 'natural_time', 'is_liked', 'is_interested_image', 'is_vertical']
 
     def get_is_liked(self, obj):
         if 'request' in self.context:
