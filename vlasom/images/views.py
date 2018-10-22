@@ -140,7 +140,7 @@ class Search(APIView):
 
             return Response(data = serializer.data, status = status.HTTP_200_OK)
         else:
-            images = models.Image.objects.all()[:20]
+            images = models.Image.objects.all().order_by('-created_at')[:20]
             serializer = serializers.ImageSerializer(images, many = True, context={'request': request})
 
             return Response(data = serializer.data, status = status.HTTP_200_OK)
