@@ -15,10 +15,29 @@ class UserProfileSerializer(serializers.ModelSerializer):
     post_count = serializers.ReadOnlyField()
     follower_count = serializers.ReadOnlyField()
     following_count = serializers.ReadOnlyField()
+    is_self = serializers.SerializerMethodField()
+    following = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'name', 'nickname', 'email', 'profile_image', 'description', 'post_count', 'follower_count', 'following_count', 'images', 'birth_year', 'birth_month', 'birth_day']
+        fields = ['id', 'username', 'name', 'nickname', 'email', 'profile_image', 'description', 'post_count', 'follower_count', 'following_count', 'images', 'birth_year', 'birth_month', 'birth_day', 'is_self', 'following']
+
+    def get_is_self(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            if obj.id == request.user.id:
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def get_following(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            if obj in request.user.following.all():
+                return True
+        return False
 
 
 class MyProfileSerializer(serializers.ModelSerializer):
@@ -27,16 +46,35 @@ class MyProfileSerializer(serializers.ModelSerializer):
     follower_count = serializers.ReadOnlyField()
     following_count = serializers.ReadOnlyField()
     notification_count = serializers.SerializerMethodField()
+    is_self = serializers.SerializerMethodField()
+    following = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'name', 'nickname', 'email', 'profile_image', 'description', 'post_count', 'follower_count', 'following_count', 'images', 'birth_year', 'birth_month', 'birth_day', 'notification_count']
+        fields = ['id', 'username', 'name', 'nickname', 'email', 'profile_image', 'description', 'post_count', 'follower_count', 'following_count', 'images', 'birth_year', 'birth_month', 'birth_day', 'notification_count', 'is_self', 'following']
     
     def get_notification_count(self, obj):
         if 'request' in self.context:
             request = self.context['request']
             return Notification.objects.filter(to_user = request.user, is_viewed = False).count()
         return 0
+
+    def get_is_self(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            if obj.id == request.user.id:
+                return True
+            else:
+                return False
+        else:
+            return False
+        
+    def get_following(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            if obj in request.user.following.all():
+                return True
+        return False
 
 
 class ListUserSerializer(serializers.ModelSerializer):
