@@ -9,7 +9,7 @@ class Notification(APIView):
 
         notifications = models.Notification.objects.filter(to_user = user).order_by('-created_at')
 
-        serializer = serializers.NotificationSerializer(notifications, many = True)
+        serializer = serializers.NotificationSerializer(notifications, many = True, context={'request': request})
 
         return Response(data = serializer.data, status = status.HTTP_200_OK)
 

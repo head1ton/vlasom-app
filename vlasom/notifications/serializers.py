@@ -14,4 +14,4 @@ class NotificationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Notification
-        fields = '__all__'
+        fields = ['category', 'comment', 'natural_time', 'from_user', 'id', 'image', 'is_viewed', 'notification_type', 'to_user', 'image']

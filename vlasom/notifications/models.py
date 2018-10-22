@@ -4,6 +4,8 @@ from django.utils.encoding import python_2_unicode_compatible
 from vlasom.common.utils import type_choices
 from vlasom.common.models import TimeStampedModel
 from vlasom.images.models import Image, Category
+from django.contrib.humanize.templatetags.humanize import naturaltime
+
 
 User = get_user_model()
 
@@ -15,6 +17,10 @@ class Notification(TimeStampedModel):
     comment = models.TextField(null = True, blank = True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE, blank = True, null = True)
     is_viewed = models.BooleanField(default = False)
+
+    @property
+    def natural_time(self):
+        return naturaltime(self.created_at)
 
     class Meta:
         ordering = ['-created_at']
