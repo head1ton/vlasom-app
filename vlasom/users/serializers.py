@@ -11,7 +11,7 @@ User = get_user_model()
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    images = images_serializers.CountImageSerializer(many = True, read_only = True)
+    images = images_serializers.ImageSerializer(many = True, read_only = True)
     post_count = serializers.ReadOnlyField()
     follower_count = serializers.ReadOnlyField()
     following_count = serializers.ReadOnlyField()
@@ -41,7 +41,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 class MyProfileSerializer(serializers.ModelSerializer):
-    images = images_serializers.CountImageSerializer(many = True, read_only = True)
+    images = images_serializers.ImageSerializer(many = True, read_only = True)
     post_count = serializers.ReadOnlyField()
     follower_count = serializers.ReadOnlyField()
     following_count = serializers.ReadOnlyField()
