@@ -7,9 +7,9 @@ from vlasom.images import serializers as image_serializers
 User = get_user_model()
 
 class NotificationSerializer(serializers.ModelSerializer):
-    from_user = user_serializers.ListUserSerializer()
+    from_user = image_serializers.FeedUserSerializer()
     image = image_serializers.SmallImageSerializer()
-    to_user = user_serializers.ListUserSerializer()
+    to_user = image_serializers.FeedUserSerializer()
     category = image_serializers.CategorySerializer()
 
     class Meta:

@@ -37,10 +37,32 @@ class CountImageSerializer(serializers.ModelSerializer):
 
 
 class FeedUserSerializer(serializers.ModelSerializer):
-    
+    post_count = serializers.ReadOnlyField()
+    follower_count = serializers.ReadOnlyField()
+    following_count = serializers.ReadOnlyField()
+    following = serializers.SerializerMethodField()
+    is_self = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ['id', 'nickname', 'profile_image']
+        fields = ['id', 'nickname', 'username', 'profile_image', 'name', 'description', 'post_count', 'follower_count', 'following_count', 'following', 'is_self']
+    
+    def get_following(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            if obj in request.user.following.all():
+                return True
+        return False
+
+    def get_is_self(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            if obj.id == request.user.id:
+                return True
+            else:
+                return False
+        else:
+            return False
 
 
 class CommentSerializer(serializers.ModelSerializer):

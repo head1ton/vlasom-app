@@ -48,10 +48,11 @@ class MyProfileSerializer(serializers.ModelSerializer):
     notification_count = serializers.SerializerMethodField()
     is_self = serializers.SerializerMethodField()
     following = serializers.SerializerMethodField()
+    interest_set = images_serializers.InterestSerializer(many = True, read_only = True)
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'name', 'nickname', 'email', 'profile_image', 'description', 'post_count', 'follower_count', 'following_count', 'images', 'birth_year', 'birth_month', 'birth_day', 'notification_count', 'is_self', 'following']
+        fields = ['id', 'username', 'name', 'nickname', 'email', 'profile_image', 'description', 'post_count', 'follower_count', 'following_count', 'images', 'birth_year', 'birth_month', 'birth_day', 'notification_count', 'is_self', 'following', 'interest_set']
     
     def get_notification_count(self, obj):
         if 'request' in self.context:
