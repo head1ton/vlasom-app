@@ -26,7 +26,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class SmallImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Image
-        fields = ['image']
+        fields = ['image', 'id']
 
 
 class CountImageSerializer(serializers.ModelSerializer):
