@@ -99,6 +99,15 @@ class UnLikeImage(APIView):
 
 
 class CommentOnImage(APIView):
+    def get(self,request, image_id, format = None):
+        try:
+            comments = models.Comment.objects.filter(image = image_id)
+        except models.Comment.DoesNotExist:
+            return Response(status = status.HTTP_404_NOT_FOUND)
+        
+        serializer = serializers.CommentSerializer(comments, many=True)
+        return Response(data = serializer.data, status = status.HTTP_200_OK)
+
     def post(self, request, image_id, format = None):
         user = request.user
 
