@@ -315,5 +315,5 @@ class InterestedList(APIView):
 
         interested_list = models.Interest.objects.filter(user = user)
 
-        serializer = serializers.InterestSerializer(interested_list, many = True)
+        serializer = serializers.InterestSerializer(interested_list, many = True, context={'request': request})
         return Response(data = serializer.data, status = status.HTTP_200_OK)
