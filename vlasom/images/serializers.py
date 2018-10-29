@@ -113,6 +113,8 @@ class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
         return False
 
 class InputImageSerializer(serializers.ModelSerializer):
+    tags = TagListSerializerField()
+
     class Meta:
         model = models.Image
         fields = ['image', 'location', 'category', 'description', 'tags']
