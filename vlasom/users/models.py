@@ -13,14 +13,14 @@ class User(AbstractUser):
 
     # First Name and Last Name do not cover name patterns
     # around the globe.
-    name = CharField(_("Name of User"), max_length=255)
+    name = CharField(_("Name of User"), max_length=255, blank = True, null = True)
     nickname = models.CharField(_('Nickname'), max_length=50, unique = True)
     description = models.CharField(_('Short Description'), max_length = 200, blank = True, null = True)
     email = models.EmailField(_('email address'), unique=True)
     gender = models.CharField(_('Gender'), max_length=2, choices = gender_choice, blank = True, null = True)
-    birth_year = models.CharField(_('Birth Year'), choices = birth_year, default = str(timezone.now().strftime("%Y")), max_length = 10)
-    birth_month = models.CharField(_('Birth Month'), choices = birth_month, default = str(timezone.now().strftime("%m")), max_length = 10)
-    birth_day = models.CharField(_('Birth Day'), choices = birth_day, default = str(timezone.now().strftime("%d")), max_length = 10)
+    birth_year = models.CharField(_('Birth Year'), choices = birth_year, default = str(timezone.now().strftime("%Y")), max_length = 10, blank = True, null = True)
+    birth_month = models.CharField(_('Birth Month'), choices = birth_month, default = str(timezone.now().strftime("%m")), max_length = 10, blank = True, null = True)
+    birth_day = models.CharField(_('Birth Day'), choices = birth_day, default = str(timezone.now().strftime("%d")), max_length = 10, blank = True, null = True)
     is_verified = models.BooleanField(_('Is Verified'), default=False, help_text='사용자의 이메일 인증 여부를 나타냅니다.')
     profile_image = models.ImageField(_('Profile Image'), upload_to = profile_image_upload_to, blank = True, null = True)
     join_channel = models.CharField(_('Join Channel'), max_length = 10,choices = join_channel, default = 'WEB')

@@ -93,13 +93,13 @@ class ListUserSerializer(serializers.ModelSerializer):
 
 
 class SignUpSerializer(RegisterSerializer):
-    
+    '''
     name = serializers.CharField(required=True, write_only=True)
     nickname = serializers.CharField(required=True, write_only=True)
     birthYear = serializers.CharField(required=True, write_only=True)
     birthMonth = serializers.CharField(required=True, write_only=True)
     birthDay = serializers.CharField(required=True, write_only=True)
-
+    '''
     def get_cleaned_data(self):
         return {
             'name': self.validated_data.get('name', ''),
@@ -107,7 +107,7 @@ class SignUpSerializer(RegisterSerializer):
             'password1': self.validated_data.get('password1', ''),
             'password2': self.validated_data.get('password2', ''),
             'email': self.validated_data.get('email', ''),
-            'nickname': self.validated_data.get('nickname', ''),
+            'nickname': self.validated_data.get('username', ''),
             'birthYear': self.validated_data.get('birthYear', ''),
             'birthMonth': self.validated_data.get('birthMonth', ''),
             'birthDay': self.validated_data.get('birthDay', ''),

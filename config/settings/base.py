@@ -250,7 +250,7 @@ TAGGIT_CASE_INSENSITIVE = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated', #All request needs authentication
+        'vlasom.common.permissions.AllowCheckAuthenticated', #All request needs authentication
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
