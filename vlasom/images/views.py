@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth import get_user_model
 from . import models, serializers
 from vlasom.notifications.views import create_notification
@@ -40,7 +41,9 @@ class Images(APIView):
                     image_list.append(image)
 
         sorted_list = sorted(image_list,key=lambda x: x.created_at, reverse=True)
-        serializer = serializers.ImageSerializer(sorted_list, many = True, context = {'request': request})
+        paginator = PageNumberPagination()
+        result_page = paginator.paginate_queryset(sorted_list, request)
+        serializer = serializers.ImageSerializer(result_page, many = True, context = {'request': request})
         return Response(serializer.data)
     
     def post(self, request, format = None):
