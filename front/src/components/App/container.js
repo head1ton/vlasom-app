@@ -27,7 +27,7 @@ class Container extends Component{
     }
     
     componentWillMount(){
-        const { getMyProfile, closeMenu } = this.props;
+        const { getMyProfile } = this.props;
         getMyProfile();
     }
 
